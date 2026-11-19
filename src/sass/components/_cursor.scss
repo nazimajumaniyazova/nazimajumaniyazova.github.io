@@ -1,0 +1,76 @@
+@use '../abstracts/mixins' as *;
+
+// Follower ring. It stays hidden on touch devices and until cursor.js has
+// seen the first mouse move. The system cursor is kept: the ring is an
+// addition to it, not a replacement.
+.cursor {
+  display: none;
+}
+
+@include fine-pointer {
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: var(--z-cursor);
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    pointer-events: none;
+    border: 1px solid var(--c-accent);
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate3d(var(--x, 0), var(--y, 0), 0) translate(-50%, -50%);
+    transition:
+      width 0.3s var(--ease-out),
+      height 0.3s var(--ease-out),
+      border-radius 0.3s var(--ease-out),
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  .cursor.is-active {
+    opacity: 1;
+  }
+
+  // Over plain links and buttons.
+  .cursor.is-link {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: rgba(227, 175, 0, 0.25);
+  }
+
+  // Snapped around a magnetic element. cursor.js sets the size inline.
+  .cursor.is-stuck {
+    background-color: rgba(227, 175, 0, 0.08);
+  }
+
+  // Over elements with data-cursor="Text".
+  .cursor.is-label {
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--c-accent);
+  }
+
+  .cursor__label {
+    font-size: var(--fs-small);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-on-accent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .cursor.is-label .cursor__label {
+    opacity: 1;
+  }
+}
+
+@include reduced-motion {
+  .cursor {
+    display: none;
+  }
+}

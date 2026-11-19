@@ -1,0 +1,213 @@
+@use '../abstracts/mixins' as *;
+
+// Slide-in navigation panel.
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  width: min(22rem, 86vw);
+  height: 100%;
+  padding: 5rem 2.5rem 2rem;
+  overflow-y: auto;
+  background: var(--c-surface);
+  transform: translateX(100%);
+  // visibility keeps the hidden links out of the tab order.
+  visibility: hidden;
+  transition:
+    transform 0.45s var(--ease-out),
+    visibility 0s linear 0.45s;
+}
+
+.menu-open .header {
+  transform: none;
+  visibility: visible;
+  transition:
+    transform 0.45s var(--ease-out),
+    visibility 0s;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  counter-reset: menu;
+}
+
+.menu__link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding: 0.4rem 0;
+  font-size: 1.125rem;
+  transition: color 0.3s ease;
+
+  &::before {
+    counter-increment: menu;
+    content: counter(menu, decimal-leading-zero);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    opacity: 0.6;
+  }
+
+  &:hover,
+  &[aria-current='true'] {
+    color: var(--c-accent-hover);
+  }
+
+  &--cv {
+    margin-top: 1rem;
+    color: var(--c-heading);
+  }
+}
+
+.socials {
+  display: flex;
+  gap: 1rem;
+}
+
+.socials__link {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-left: -0.6rem;
+  transform: translate(var(--tx, 0), var(--ty, 0));
+  transition: transform 0.25s var(--ease-out);
+
+  &:hover .socials__icon {
+    background-color: var(--c-accent-hover);
+  }
+}
+
+.socials__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--c-text);
+  mask: center / contain no-repeat;
+  -webkit-mask: center / contain no-repeat;
+  transition: background-color 0.3s ease;
+
+  &--github {
+    mask-image: url('../img/github.svg');
+    -webkit-mask-image: url('../img/github.svg');
+  }
+
+  &--telegram {
+    mask-image: url('../img/iconmonstr-telegram-1.svg');
+    -webkit-mask-image: url('../img/iconmonstr-telegram-1.svg');
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Burger button
+// ---------------------------------------------------------------------------
+.burger {
+  position: fixed;
+  top: clamp(0.75rem, 2vw, 2rem);
+  right: clamp(0.75rem, 2vw, 2rem);
+  z-index: var(--z-burger);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  background-color: rgba(24, 24, 24, 0.7);
+  border-radius: 50%;
+  backdrop-filter: blur(6px);
+  transform: translate(var(--tx, 0), var(--ty, 0));
+  transition: transform 0.25s var(--ease-out);
+
+  &:hover .burger__line {
+    background-color: var(--c-accent);
+  }
+
+  &[aria-expanded='true'] {
+    .burger__line:first-child {
+      transform: translateY(0.28rem) rotate(45deg);
+    }
+
+    .burger__line:last-child {
+      transform: translateY(-0.28rem) rotate(-45deg);
+    }
+  }
+}
+
+.burger__line {
+  width: 1.5rem;
+  height: 1px;
+  background-color: var(--c-heading);
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+// ---------------------------------------------------------------------------
+// "Scroll" hint in the corner, desktop only. Fades out once the page moves.
+// ---------------------------------------------------------------------------
+.scroll-hint {
+  display: none;
+
+  @include up('lg') {
+    position: fixed;
+    right: clamp(0.75rem, 2vw, 2rem);
+    bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 3rem;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+}
+
+.is-scrolled .scroll-hint {
+  opacity: 0;
+}
+
+.scroll-hint__line {
+  position: relative;
+  width: 1px;
+  height: 3rem;
+  overflow: hidden;
+  background-color: var(--c-line);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    animation: scroll-hint 2.4s ease-in-out infinite;
+  }
+}
+
+.scroll-hint__text {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-heading);
+  writing-mode: vertical-rl;
+}
+
+@keyframes scroll-hint {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(100%);
+  }
+}

@@ -1,0 +1,34 @@
+:root {
+  // Colours
+  --c-bg: #222122;
+  --c-surface: #181818;
+  --c-text: #b4b4b4; // 7.6:1 on --c-bg, 8.4:1 on --c-surface
+  --c-heading: #ffffff;
+  --c-accent: #e3af00;
+  --c-accent-hover: #fdc60c;
+  --c-on-accent: #1a1a1a;
+  --c-line: rgba(255, 255, 255, 0.2);
+
+  // Type scale: fluid between a 360px and a 1440px viewport, then capped.
+  --ff-base: 'Source Sans Pro', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --fs-small: 0.8125rem;
+  --fs-body: clamp(1rem, 0.94rem + 0.28vw, 1.1875rem);
+  --fs-lead: clamp(1.125rem, 1rem + 0.55vw, 1.5rem);
+  --fs-h3: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem);
+  --fs-h2: clamp(1.75rem, 1.4rem + 1.5vw, 2.75rem);
+  --fs-h1: clamp(2.5rem, 1.5rem + 4.4vw, 5.5rem);
+
+  // Spacing
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --section-gap: clamp(3.5rem, 2.5rem + 5vw, 7.5rem);
+
+  // Motion
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  // Layers
+  --z-globe: -1;
+  --z-header: 90;
+  --z-burger: 100;
+  --z-modal: 200;
+  --z-cursor: 1000;
+}

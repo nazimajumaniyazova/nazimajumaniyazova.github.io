@@ -1,0 +1,15 @@
+{
+  "name": "portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Personal portfolio of Nazima Jumaniyazova",
+  "scripts": {
+    "build": "sass src/sass/main.scss src/css/main.css --style=compressed --no-source-map",
+    "dev": "sass --watch src/sass/main.scss src/css/main.css --no-source-map",
+    "format": "prettier --write \"index.html\" \"src/js/**/*.js\" \"src/sass/**/*.scss\""
+  },
+  "devDependencies": {
+    "prettier": "^3.3.0",
+    "sass": "^1.77.0"
+  }
+}

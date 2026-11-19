@@ -1,0 +1,212 @@
+@use '../abstracts/mixins' as *;
+
+.section {
+  padding-bottom: var(--section-gap);
+  // Anchor links stop a little below the top edge.
+  scroll-margin-top: 4.5rem;
+}
+
+.section__label {
+  margin-bottom: 1.5rem;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-heading);
+}
+
+.section__title {
+  margin-bottom: 2rem;
+  font-size: var(--fs-h2);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  color: var(--c-heading);
+
+  &::after {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    margin-top: 1.5rem;
+    background-color: var(--c-heading);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Buttons and tags
+// ---------------------------------------------------------------------------
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.875rem;
+  padding: 0.6rem 1.6rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--c-heading);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  // --tx and --ty are set by cursor.js for the magnetic effect.
+  transform: translate(var(--tx, 0), var(--ty, 0));
+  transition:
+    transform 0.25s var(--ease-out),
+    color 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover {
+    color: var(--c-accent-hover);
+    border-color: var(--c-accent-hover);
+  }
+
+  &--primary {
+    color: var(--c-on-accent);
+    background-color: var(--c-accent);
+    border-color: var(--c-accent);
+
+    &:hover {
+      color: var(--c-on-accent);
+      background-color: var(--c-accent-hover);
+    }
+  }
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.15rem 0.7rem;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--c-text);
+  border: 1px solid var(--c-line);
+  border-radius: 999px;
+}
+
+// ---------------------------------------------------------------------------
+// Skills
+// ---------------------------------------------------------------------------
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.skills__item {
+  padding: 0.5rem 1.25rem;
+  background-color: var(--c-surface);
+  border-radius: 999px;
+}
+
+// ---------------------------------------------------------------------------
+// Experience timeline
+// ---------------------------------------------------------------------------
+.timeline {
+  display: grid;
+  gap: 2rem;
+  border-left: 1px solid var(--c-line);
+}
+
+.timeline__item {
+  position: relative;
+  margin-left: 1.75rem;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  background-color: var(--c-surface);
+
+  // Diamond that points at the line.
+  &::after {
+    content: '';
+    position: absolute;
+    top: 2.5rem;
+    left: 0;
+    width: 1rem;
+    height: 1rem;
+    background-color: var(--c-surface);
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  // Bright tick on the line.
+  &::before {
+    content: '';
+    position: absolute;
+    top: 2.5rem;
+    left: -1.75rem;
+    width: 1px;
+    height: 2rem;
+    background-color: var(--c-heading);
+    transform: translate(-1px, -50%);
+  }
+}
+
+.timeline__period {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--c-accent);
+}
+
+.timeline__position {
+  margin-top: 0.35rem;
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--c-heading);
+}
+
+.timeline__company {
+  color: var(--c-heading);
+  opacity: 0.8;
+}
+
+.timeline__list {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  li {
+    position: relative;
+    padding-left: 1.1rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.7em;
+      left: 0;
+      width: 0.4rem;
+      height: 1px;
+      background-color: var(--c-text);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Contacts
+// ---------------------------------------------------------------------------
+.contacts {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.contacts__label {
+  display: block;
+  font-size: var(--fs-small);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.contacts__link {
+  font-size: var(--fs-lead);
+  color: var(--c-heading);
+  overflow-wrap: anywhere;
+  background: linear-gradient(var(--c-accent), var(--c-accent)) left bottom / 0 1px no-repeat;
+  transition:
+    color 0.3s ease,
+    background-size 0.4s var(--ease-out);
+
+  &:hover {
+    color: var(--c-accent-hover);
+    background-size: 100% 1px;
+  }
+}
