@@ -15,15 +15,12 @@ html {
 }
 
 img,
-video,
-canvas,
 svg {
   display: block;
   max-width: 100%;
 }
 
-img,
-video {
+img {
   height: auto;
 }
 
@@ -37,19 +34,29 @@ a {
   text-decoration: none;
 }
 
-button {
+button,
+input {
   font: inherit;
   color: inherit;
   background: none;
   border: 0;
+}
+
+button {
   cursor: pointer;
 }
 
 h1,
 h2,
-h3 {
+h3,
+strong {
   font-size: inherit;
   font-weight: inherit;
+}
+
+code,
+kbd {
+  font: inherit;
 }
 
 [hidden] {

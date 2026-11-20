@@ -1,15 +1,9 @@
-// Build with `npm run build`; the result goes to src/css/main.css.
-
+// Entry point. Compiled to src/css/main.css by `npm run build`.
 @use 'abstracts/tokens';
-
 @use 'base/reset';
 @use 'base/global';
-
-@use 'layout/page';
-@use 'layout/header';
-
-@use 'components/hero';
-@use 'components/section';
-@use 'components/projects';
-@use 'components/cursor';
-@use 'components/globe';
+@use 'layout/ide';
+@use 'components/editor';
+@use 'components/preview';
+@use 'components/terminal';
+@use 'components/palette';

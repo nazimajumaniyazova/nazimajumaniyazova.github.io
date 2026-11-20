@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nazima Jumaniyazova | Bento</title>
+    <link rel="icon" href="../../src/img/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap"
+    />
+    <style>
+      :root {
+        --bg: #f1eee8;
+        --ink: #151515;
+        --card: #ffffff;
+        --soft: #5d5a55;
+        --accent: #c8f560;
+        --lilac: #cdbdff;
+        --radius: clamp(1.25rem, 1rem + 1vw, 2rem);
+        --gap: clamp(0.6rem, 0.4rem + 0.8vw, 1rem);
+        --font: 'Bricolage Grotesque', system-ui, sans-serif;
+      }
+      *, *::before, *::after { box-sizing: border-box; }
+      * { margin: 0; padding: 0; }
+      body { font-family: var(--font); font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem); line-height: 1.5; color: var(--ink); background: var(--bg); }
+      a { color: inherit; text-decoration: none; }
+      img { display: block; max-width: 100%; }
+      ul { list-style: none; }
+      button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+      :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+      .wrap { max-width: 78rem; margin: 0 auto; padding: var(--gap); }
+      .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.5rem 0.5rem 1rem; font-weight: 600; }
+      .top nav { display: flex; gap: 1.1rem; }
+      .top a:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+      .logo { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; font-weight: 800; color: var(--accent); background: var(--ink); border-radius: 50%; transition: transform 0.5s; }
+      .logo:hover { transform: rotate(360deg); }
+
+      .bento { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(9.5rem, auto); grid-auto-flow: dense; gap: var(--gap); }
+      @media (min-width: 62em) { .bento { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(11.5rem, auto); } }
+      .tile { position: relative; display: flex; flex-direction: column; padding: clamp(1rem, 0.7rem + 1.2vw, 1.75rem); overflow: hidden; background: var(--card); border-radius: var(--radius); transform: perspective(60rem) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s; }
+      .tile:hover { box-shadow: 0 1.2rem 2.4rem -1.4rem rgba(0, 0, 0, 0.45); }
+      .js .tile { animation: pop 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 60ms); }
+      @keyframes pop { from { opacity: 0; transform: translateY(1.5rem) scale(0.94); } }
+      .w2 { grid-column: span 2; }
+      .h2 { grid-row: span 2; }
+      .w4 { grid-column: span 2; }
+      @media (min-width: 62em) { .w4 { grid-column: span 4; } }
+      .tile--ink { color: #fff; background: var(--ink); }
+      .tile--accent { background: var(--accent); transition: background 0.4s, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s; }
+      .tile--lilac { background: var(--lilac); }
+      .label { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; }
+      .push { margin-top: auto; }
+
+      /* Intro */
+      .intro h1 { margin-top: 0.75rem; font-size: clamp(2.5rem, 1.5rem + 5vw, 5.25rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.035em; }
+      .intro h1 em { font-style: normal; display: inline-block; background: var(--accent); padding: 0 0.12em; border-radius: 0.2em; transform: rotate(-2deg); transition: background 0.4s; }
+      .intro p { margin-top: 1rem; font-size: 1.2em; }
+      .typed { font-weight: 800; border-bottom: 0.14em solid var(--accent); transition: border-color 0.4s; }
+      .typed::after { content: '|'; margin-left: 2px; font-weight: 400; animation: blink 1s steps(1) infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+      .actions { display: flex; flex-wrap: wrap; gap: 0.6rem; padding-top: 1.25rem; }
+      .btn { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 2.9rem; padding: 0.4rem 1.25rem; font-weight: 600; border: 2px solid var(--ink); border-radius: 999px; transition: transform 0.2s, background 0.2s, color 0.2s; }
+      .btn:hover { transform: translateY(-3px); }
+      .btn--ink { color: #fff; background: var(--ink); }
+
+      /* Photo */
+      .photo { padding: 0; }
+      .photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+      .photo:hover img { transform: scale(1.06); }
+
+      /* Clock */
+      .clock { align-items: center; justify-content: center; gap: 0.3rem; text-align: center; }
+      .clock svg { width: min(6.5rem, 55%); }
+      .clock circle { fill: none; stroke: #fff; stroke-width: 3; }
+      .clock line { stroke: #fff; stroke-linecap: round; transform-origin: 50px 50px; }
+      .clock .sec { stroke: var(--accent); }
+      .clock b { font-size: 1.3em; font-variant-numeric: tabular-nums; }
+
+      /* Hello */
+      .hello { align-items: flex-start; justify-content: space-between; width: 100%; text-align: left; }
+      .hello strong { font-size: clamp(1.9rem, 1.2rem + 3vw, 3.25rem); font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+      .hello.is-swap strong { animation: swap 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+      @keyframes swap { from { opacity: 0; transform: translateY(0.6em) rotate(4deg); } }
+
+      /* Projects */
+      .project { padding: 0; min-height: 15rem; color: #fff; }
+      .project img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+      .project:hover img { transform: scale(1.07); }
+      .project__info { position: relative; margin-top: auto; padding: 3.5rem 1.25rem 1.25rem; background: linear-gradient(transparent, rgba(0, 0, 0, 0.82)); }
+      .project__info h2 { font-size: clamp(1.4rem, 1.1rem + 1.4vw, 2.1rem); font-weight: 800; line-height: 1.05; }
+      .project__info p { max-width: 30rem; font-size: 0.95em; opacity: 0.9; }
+      .arrow { position: absolute; top: 1rem; right: 1rem; display: grid; place-items: center; width: 3rem; height: 3rem; font-size: 1.4rem; color: var(--ink); background: var(--accent); border-radius: 50%; transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s; }
+      .project:hover .arrow, .link-tile:hover .arrow { transform: rotate(45deg) scale(1.1); }
+      .tags { display: flex; gap: 0.4rem; margin-top: 0.5rem; }
+      .tags span { padding: 0.1rem 0.6rem; font-size: 0.8rem; font-weight: 600; border: 1.5px solid currentColor; border-radius: 999px; }
+
+      /* Stickers */
+      .stickers { min-height: 27rem; touch-action: pan-y; }
+      @media (min-width: 62em) { .stickers { min-height: 17rem; } }
+      .stickers__hint { position: absolute; right: 1.25rem; bottom: 1rem; font-weight: 600; opacity: 0.6; }
+      .sticker { position: absolute; padding: 0.4rem 0.95rem; font-weight: 800; white-space: nowrap; background: #fff; border: 2px solid var(--ink); border-radius: 999px; box-shadow: 3px 3px 0 var(--ink); transform: rotate(var(--r, 0deg)); cursor: grab; user-select: none; touch-action: none; transition: box-shadow 0.15s, scale 0.15s; }
+      .sticker:nth-child(3n) { background: var(--accent); }
+      .sticker:nth-child(4n) { color: #fff; background: var(--ink); }
+      .sticker.is-drag { cursor: grabbing; scale: 1.1; box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.35); }
+
+      /* Experience and about */
+      details { border-top: 2px solid var(--ink); }
+      details:last-of-type { border-bottom: 2px solid var(--ink); }
+      summary { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; padding: 0.8rem 0; font-size: 1.15em; font-weight: 800; cursor: pointer; list-style: none; }
+      summary::-webkit-details-marker { display: none; }
+      summary span { font-size: 0.8rem; font-weight: 600; white-space: nowrap; opacity: 0.65; }
+      summary::after { content: '+'; margin-left: auto; font-size: 1.4em; line-height: 0.8; transition: transform 0.3s; }
+      summary span { order: 2; margin-left: auto; }
+      summary::after { order: 3; margin-left: 0.25rem; }
+      details[open] summary::after { transform: rotate(45deg); }
+      details p { font-weight: 600; opacity: 0.7; }
+      details ul { padding: 0.4rem 0 1rem; }
+      details li { position: relative; padding-left: 1.1rem; margin-top: 0.3rem; font-size: 0.95em; }
+      details li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 0.45rem; height: 0.45rem; background: var(--ink); border-radius: 50%; }
+      .tile h2.title { margin: 0.5rem 0 1rem; font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; }
+      .about p { font-size: 1.05em; }
+      .about p + p { margin-top: 0.7rem; }
+      .mini h2 { font-size: clamp(1.3rem, 1.1rem + 1vw, 1.75rem); font-weight: 800; line-height: 1.1; margin: 0.4rem 0; }
+      .mini .tags { flex-wrap: wrap; margin-top: auto; padding-top: 0.9rem; }
+      .certs li { display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0; border-top: 1.5px solid rgba(0, 0, 0, 0.15); font-weight: 600; }
+      .certs li span { font-weight: 400; white-space: nowrap; opacity: 0.7; }
+      .mentor li { position: relative; padding-left: 1.1rem; margin-top: 0.3rem; }
+      .mentor li::before { content: '→'; position: absolute; left: -0.1rem; }
+
+      /* Small tiles */
+      .swatches { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+      .swatch { width: 2.5rem; height: 2.5rem; background: var(--c); border: 2px solid var(--ink); border-radius: 50%; transition: transform 0.2s; }
+      .swatch:hover { transform: scale(1.15); }
+      .swatch[aria-pressed='true'] { box-shadow: 0 0 0 3px var(--card), 0 0 0 5px var(--ink); }
+      .big { font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+      .link-tile .arrow { position: static; margin-top: auto; align-self: flex-end; }
+      .tile--ink .arrow { background: var(--accent); }
+      .tile--accent .arrow { color: #fff; background: var(--ink); }
+
+      /* Contact */
+      .contact { gap: 1.5rem; }
+      @media (min-width: 62em) { .contact { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
+      .contact h2 { font-size: clamp(2.25rem, 1.4rem + 4.5vw, 5rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.035em; }
+      .contact h2 em { font-style: normal; color: var(--accent); transition: color 0.4s; }
+      .contact ul { display: grid; gap: 0.6rem; }
+      .contact li { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; }
+      .contact a { font-size: 1.15em; font-weight: 600; overflow-wrap: anywhere; border-bottom: 2px solid transparent; }
+      .contact a:hover { border-color: var(--accent); }
+      .copy { padding: 0.2rem 0.8rem; font-size: 0.85rem; font-weight: 600; color: var(--ink); background: var(--accent); border-radius: 999px; transition: background 0.4s; }
+      footer { padding: 1.5rem 0.5rem; font-size: 0.9rem; color: var(--soft); }
+
+      .variants-link { position: fixed; right: 0.75rem; bottom: 0.75rem; z-index: 10; padding: 0.3rem 0.8rem; font: 600 0.8rem system-ui, sans-serif; color: #fff; background: #111; border-radius: 999px; opacity: 0.85; }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="variants-link" href="../index.html">← all variants</a>
+
+    <div class="wrap">
+      <header class="top">
+        <a class="logo" href="#top" aria-label="Nazima Jumaniyazova, to the top">NJ</a>
+        <nav aria-label="Main">
+          <a href="#work">Work</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <main class="bento" id="top">
+        <section class="tile intro w2 h2">
+          <p class="label">● Frontend Software Engineer · Tashkent</p>
+          <h1>Hi, I'm <em>Nazima</em> Jumaniyazova</h1>
+          <p>I build interfaces with <span class="typed" data-words="React|TypeScript|Redux Toolkit|Tailwind CSS|React Query">React</span></p>
+          <div class="actions push">
+            <a class="btn btn--ink" href="#work">See my work ↓</a>
+            <a class="btn" href="../../src/files/CV_Nazima_Jumaniyazova_EN.pdf" download>Download CV</a>
+          </div>
+        </section>
+
+        <div class="tile photo h2">
+          <img src="../../src/img/download.png" width="798" height="984" alt="Portrait of Nazima Jumaniyazova" />
+        </div>
+
+        <div class="tile tile--ink clock" aria-label="Local time in Tashkent">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <circle cx="50" cy="50" r="46" />
+            <line class="hour" x1="50" y1="50" x2="50" y2="26" stroke-width="5" />
+            <line class="min" x1="50" y1="50" x2="50" y2="14" stroke-width="3.5" />
+            <line class="sec" x1="50" y1="56" x2="50" y2="10" stroke-width="1.8" />
+          </svg>
+          <b id="clock-text">--:--</b>
+          <span class="label">Tashkent</span>
+        </div>
+
+        <button class="tile tile--accent hello" id="hello" type="button" aria-label="Languages I speak. Press to switch.">
+          <span class="label">I speak · tap</span>
+          <strong id="hello-word">Hello</strong>
+          <span id="hello-level">English · Upper Intermediate</span>
+        </button>
+
+        <a class="tile project w2 h2" id="work" href="https://dachatop.uz/" target="_blank" rel="noopener noreferrer">
+          <img src="../../src/img/project-dachatop.webp" width="1280" height="800" loading="lazy" alt="DachaTop.uz listing page with filters, calendar and dacha cards" />
+          <span class="arrow" aria-hidden="true">↗</span>
+          <div class="project__info">
+            <h2>DachaTop.uz</h2>
+            <p>A real estate platform for renting dachas, with analytics dashboards and property management.</p>
+            
+          </div>
+        </a>
+
+        <section class="tile tile--lilac stickers w2 h2" id="stickers" aria-label="Skills">
+          <p class="label">Skills</p>
+          <ul id="sticker-list">
+            <li class="sticker">TypeScript</li>
+            <li class="sticker">JavaScript</li>
+            <li class="sticker">React</li>
+            <li class="sticker">Redux Toolkit</li>
+            <li class="sticker">React Query</li>
+            <li class="sticker">Zustand</li>
+            <li class="sticker">Tailwind CSS</li>
+            <li class="sticker">Sass</li>
+            <li class="sticker">Ant Design</li>
+            <li class="sticker">React Hook Form</li>
+            <li class="sticker">REST API</li>
+            <li class="sticker">WebSocket</li>
+            <li class="sticker">Git</li>
+            <li class="sticker">Vite</li>
+            <li class="sticker">Figma</li>
+          </ul>
+          <span class="stickers__hint" aria-hidden="true">drag them around ✋</span>
+        </section>
+
+        <a class="tile project w2 h2" href="https://videohub.uz/" target="_blank" rel="noopener noreferrer">
+          <img src="../../src/img/project-videohub.webp" width="1280" height="800" loading="lazy" alt="Videohub.uz home page with a list of programming courses" />
+          <span class="arrow" aria-hidden="true">↗</span>
+          <div class="project__info">
+            <h2>Videohub.uz</h2>
+            <p>A learning management system (LMS) with interactive course tracking, messaging, and role-based dashboards.</p>
+            <div class="tags"><span>React 18</span><span>Ant Design</span><span>Styled Components</span></div>
+          </div>
+        </a>
+
+        <section class="tile w2 h2" id="experience">
+          <p class="label">Experience</p>
+          <h2 class="title">Where I have worked</h2>
+          <details>
+            <summary>PLATMA <span>Sep 2025 – present</span></summary>
+            <p>Frontend Software Engineer · Remote</p>
+            <ul></ul>
+          </details>
+          <details open>
+            <summary>Asakabank <span>Sep 2023 – present</span></summary>
+            <p>Frontend Software Engineer · Tashkent</p>
+            <ul>
+<li>Led UI modernization of the Risk Assessment system using React, TypeScript, and Redux Toolkit to improve usability and performance.</li>
+<li>Enabled lazy-loading to improve loading UI and optimize dashboard performance.</li>
+<li>Refactored legacy tax service UI into a modular React component library to accelerate feature development.</li>
+<li>Built dynamic form builders for loan applications (mortgage, auto, education) using React Hook Form for better data accuracy and UX.</li>
+<li>Developed interactive dashboards with ApexCharts for real-time financial data visualization and market trend analysis.</li>
+<li>Provided ongoing support for existing projects, fixing bugs and optimizing frontend performance.</li>
+</ul>
+          </details>
+          <details>
+            <summary>Brain Development <span>May 2021 – Sep 2023</span></summary>
+            <p>Frontend Software Engineer · Tashkent, remote</p>
+            <ul>
+<li>Developed complex, responsive user interfaces using React, TypeScript, Tailwind CSS, and Ant Design.</li>
+<li>Managed form logic and validation with React Hook Form and Yup for smooth, user-friendly experiences.</li>
+<li>Handled state and data fetching with Redux Toolkit and React Query to build efficient, scalable apps.</li>
+<li>Integrated REST APIs and real-time updates using WebSocket, improving interactivity and performance.</li>
+<li>Followed SPA and modular architecture principles to build clean, maintainable, and reusable code.</li>
+</ul>
+          </details>
+          <details>
+            <summary>StylemixThemes <span>Oct 2019 – May 2021</span></summary>
+            <p>Customer Support & Front-End Assistant · Dubai, UAE</p>
+            <ul>
+<li>Provided fast and helpful support via chat, email, and phone, solving user issues quickly.</li>
+<li>Reported bugs, collected user feedback, and helped improve UI/UX quality.</li>
+<li>Assisted with front-end tasks like updating layouts, fixing styles, and editing page content.</li>
+<li>Helped test new features, debug UI issues, and verify responsive design across devices.</li>
+</ul>
+          </details>
+          <details>
+            <summary>School <span>2017 – 2019</span></summary>
+            <p>Mathematics teacher</p>
+            <ul></ul>
+          </details>
+        </section>
+
+        <section class="tile about w2 h2">
+          <p class="label">About</p>
+          <h2 class="title">A little about me</h2>
+          <p>Frontend developer with 4+ years of experience building scalable and intuitive web applications using React, TypeScript, Redux, and modern CSS frameworks.</p>
+          <p>Skilled in transforming complex UI/UX designs into responsive interfaces and collaborating closely with designers, product managers, and backend engineers. Passionate about clean architecture, usability, and performance optimization.</p>
+          <p>Currently focused on delivering real-time interfaces and admin tools for fintech platforms.</p>
+        </section>
+
+        <div class="tile">
+          <p class="label">Pick a color</p>
+          <div class="swatches push" id="swatches">
+            <button class="swatch" type="button" style="--c: #c8f560" aria-label="Lime" aria-pressed="true"></button>
+            <button class="swatch" type="button" style="--c: #ff8a6b" aria-label="Coral" aria-pressed="false"></button>
+            <button class="swatch" type="button" style="--c: #8fd3ff" aria-label="Sky" aria-pressed="false"></button>
+            <button class="swatch" type="button" style="--c: #ffd84d" aria-label="Yellow" aria-pressed="false"></button>
+            <button class="swatch" type="button" style="--c: #ff9ed8" aria-label="Pink" aria-pressed="false"></button>
+          </div>
+        </div>
+
+        <div class="tile">
+          <p class="label">Education</p>
+          <p class="big push">Lomonosov MSU, Tashkent branch</p>
+          <p>Applied Mathematics and Computer Science, 2013 – 2017</p>
+        </div>
+
+        <a class="tile tile--accent link-tile" href="../../src/files/CV_Nazima_Jumaniyazova_EN.pdf" download>
+          <p class="label">PDF</p>
+          <p class="big">Download my CV</p>
+          <span class="arrow" aria-hidden="true">↓</span>
+        </a>
+
+        <a class="tile tile--ink link-tile" href="https://github.com/nazimajumaniyazova" target="_blank" rel="noopener noreferrer">
+          <p class="label">GitHub</p>
+          <p class="big">More projects</p>
+          <span class="arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <section class="tile tile--accent mentor w2 h2">
+          <p class="label">Mentoring · Dec 2025 – present</p>
+          <h2 class="title">Frontend Mentor at The Rolling Scopes School</h2>
+          <p>I mentor a group of 2–6 aspiring frontend developers through an intensive 11–13 week program at a free, community-driven coding school.</p>
+          <ul style="margin-top: 0.6rem"><li>Technical screening interviews on HTML, CSS and JavaScript</li>
+<li>Weekly code reviews of Pull Requests</li>
+<li>Weekly meetings on curriculum topics</li>
+<li>Grading assignments and guiding students to junior level</li></ul>
+        </section>
+
+        <section class="tile certs w2 h2">
+          <p class="label">Certificates</p>
+          <h2 class="title">Always learning</h2>
+          <ul><li>Meta Front-End Developer <span>Meta · May 2026</span></li><li>Meta React Specialization <span>Meta · Mar 2026</span></li><li>Principles of UX/UI Design <span>Meta · Mar 2026</span></li><li>Version Control <span>Meta · Jun 2025</span></li><li>Programming with JavaScript <span>Meta · May 2025</span></li><li>Introduction to Front-End Development <span>Meta · Nov 2023</span></li><li>JavaScript / Front-end <span>RS School · Mar 2023</span></li></ul>
+        </section>
+
+        <a href="https://minivan.uz/" target="_blank" rel="noopener noreferrer" class="tile mini w2">
+          <p class="label">Project</p>
+          <h2>Minivan.uz ↗</h2>
+          <p>A transport rental platform offering minivans and minibuses for city transfers, tours, business trips, and events with or without a driver.</p>
+          <div class="tags"><span>React 18</span><span>TypeScript</span><span>Vite</span><span>Tailwind CSS</span><span>React Query</span><span>Zustand</span></div>
+        </a>
+
+        <div class="tile mini w2">
+          <p class="label">Project</p>
+          <h2>MyMehmon.uz</h2>
+          <p>An admin panel for a hospitality booking platform that allows hotel owners to manage listings, rooms, bookings, and services.</p>
+          <div class="tags"><span>React 19</span><span>TypeScript</span><span>Vite</span><span>React Hook Form</span><span>React Query</span><span>Tailwind CSS</span></div>
+        </div>
+
+        <section class="tile tile--ink contact w4" id="contact">
+          <h2>Let's get<br />in <em>touch.</em></h2>
+          <ul>
+            <li>
+              <a href="mailto:nazima.jumaniyazova.95@gmail.com">nazima.jumaniyazova.95@gmail.com</a>
+              <button class="copy" type="button" data-copy="nazima.jumaniyazova.95@gmail.com">Copy</button>
+            </li>
+            <li><a href="https://www.linkedin.com/in/nazima-jumaniyazova-7708a5269/" target="_blank" rel="noopener noreferrer">LinkedIn · in/nazima-jumaniyazova</a></li>
+            <li><a href="https://t.me/nazima_jm" target="_blank" rel="noopener noreferrer">Telegram · @nazima_jm</a></li>
+            <li><a href="https://github.com/nazimajumaniyazova" target="_blank" rel="noopener noreferrer">GitHub · nazimajumaniyazova</a></li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>© Nazima Jumaniyazova</footer>
+    </div>
+
+    <script>
+      (function () {
+        const root = document.documentElement;
+        root.classList.add('js');
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+        const tiles = [...document.querySelectorAll('.tile')];
+        tiles.forEach((tile, i) => tile.style.setProperty('--i', i));
+
+        // Tilt towards the pointer
+        if (fine && !reduced) {
+          tiles.forEach((tile) => {
+            if (tile.id === 'stickers') return;
+            tile.addEventListener('pointermove', (e) => {
+              const r = tile.getBoundingClientRect();
+              tile.style.setProperty('--ry', (((e.clientX - r.left) / r.width - 0.5) * 6).toFixed(2) + 'deg');
+              tile.style.setProperty('--rx', ((0.5 - (e.clientY - r.top) / r.height) * 6).toFixed(2) + 'deg');
+            });
+            tile.addEventListener('pointerleave', () => { tile.style.setProperty('--rx', '0deg'); tile.style.setProperty('--ry', '0deg'); });
+          });
+        }
+
+        // Typed words
+        const typed = document.querySelector('.typed');
+        const words = typed.dataset.words.split('|');
+        if (!reduced) {
+          let word = 0, length = words[0].length, deleting = true;
+          (function step() {
+            length += deleting ? -1 : 1;
+            typed.textContent = words[word].slice(0, length);
+            let delay = deleting ? 45 : 95;
+            if (!deleting && length === words[word].length) { deleting = true; delay = 1700; }
+            else if (deleting && length === 0) { deleting = false; word = (word + 1) % words.length; delay = 300; }
+            setTimeout(step, delay);
+          })();
+        }
+
+        // Clock (Tashkent)
+        const hands = { hour: document.querySelector('.hour'), min: document.querySelector('.min'), sec: document.querySelector('.sec') };
+        const clockText = document.getElementById('clock-text');
+        const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Asia/Tashkent' });
+        function tick() {
+          const parts = Object.fromEntries(fmt.formatToParts(new Date()).map((p) => [p.type, Number(p.value)]));
+          const h = parts.hour % 24, m = parts.minute, s = parts.second;
+          hands.hour.style.transform = 'rotate(' + ((h % 12) * 30 + m * 0.5) + 'deg)';
+          hands.min.style.transform = 'rotate(' + (m * 6 + s * 0.1) + 'deg)';
+          hands.sec.style.transform = 'rotate(' + s * 6 + 'deg)';
+          clockText.textContent = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+        }
+        tick(); setInterval(tick, 1000);
+
+        // Languages
+        const HELLO = [['Hello', 'English · Upper Intermediate'], ['Привет', 'Russian · Native'], ['Salom', 'Uzbek · Native']];
+        const hello = document.getElementById('hello');
+        let helloIndex = 0;
+        hello.addEventListener('click', () => {
+          helloIndex = (helloIndex + 1) % HELLO.length;
+          document.getElementById('hello-word').textContent = HELLO[helloIndex][0];
+          document.getElementById('hello-level').textContent = HELLO[helloIndex][1];
+          hello.classList.remove('is-swap'); void hello.offsetWidth; hello.classList.add('is-swap');
+        });
+
+        // Draggable stickers
+        const box = document.getElementById('stickers');
+        const stickers = [...box.querySelectorAll('.sticker')];
+        function scatter() {
+          const bw = box.clientWidth, bh = box.clientHeight, cols = bw < 420 ? 2 : 3, rows = Math.ceil(stickers.length / cols);
+          stickers.forEach((sticker, i) => {
+            const col = i % cols, row = Math.floor(i / cols);
+            const cellW = (bw - 24) / cols, cellH = (bh - 90) / rows;
+            const x = 12 + col * cellW + ((i * 37) % 30) * (cellW - sticker.offsetWidth > 30 ? 1 : 0.2);
+            const y = 48 + row * cellH + ((i * 53) % 14);
+            sticker.style.left = Math.max(6, Math.min(x, bw - sticker.offsetWidth - 6)) + 'px';
+            sticker.style.top = Math.min(y, bh - sticker.offsetHeight - 8) + 'px';
+            sticker.style.setProperty('--r', (((i * 47) % 17) - 8) + 'deg');
+          });
+        }
+        scatter();
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(scatter);
+        let resizeTimer;
+        window.addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(scatter, 200); });
+
+        let top = 1;
+        stickers.forEach((sticker) => {
+          let startX, startY, originX, originY;
+          sticker.addEventListener('pointerdown', (e) => {
+            sticker.setPointerCapture(e.pointerId);
+            startX = e.clientX; startY = e.clientY; originX = sticker.offsetLeft; originY = sticker.offsetTop;
+            sticker.classList.add('is-drag'); sticker.style.zIndex = ++top;
+          });
+          sticker.addEventListener('pointermove', (e) => {
+            if (!sticker.classList.contains('is-drag')) return;
+            const x = Math.max(0, Math.min(originX + e.clientX - startX, box.clientWidth - sticker.offsetWidth));
+            const y = Math.max(0, Math.min(originY + e.clientY - startY, box.clientHeight - sticker.offsetHeight));
+            sticker.style.left = x + 'px'; sticker.style.top = y + 'px';
+          });
+          const drop = () => sticker.classList.remove('is-drag');
+          sticker.addEventListener('pointerup', drop);
+          sticker.addEventListener('pointercancel', drop);
+        });
+
+        // Accent color
+        const swatches = [...document.querySelectorAll('.swatch')];
+        function setAccent(color) {
+          root.style.setProperty('--accent', color);
+          swatches.forEach((s) => s.setAttribute('aria-pressed', String(s.style.getPropertyValue('--c').trim() === color)));
+          try { localStorage.setItem('bento-accent', color); } catch (e) {}
+        }
+        swatches.forEach((s) => s.addEventListener('click', () => setAccent(s.style.getPropertyValue('--c').trim())));
+        try { const saved = localStorage.getItem('bento-accent'); if (saved) setAccent(saved); } catch (e) {}
+
+        // Copy email
+        document.querySelectorAll('[data-copy]').forEach((button) => button.addEventListener('click', () => {
+          if (!navigator.clipboard) return;
+          navigator.clipboard.writeText(button.dataset.copy).then(() => { button.textContent = 'Copied ✓'; setTimeout(() => (button.textContent = 'Copy'), 1800); });
+        }));
+      })();
+    </script>
+  </body>
+</html>

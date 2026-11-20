@@ -1,0 +1,202 @@
+@use '../abstracts/mixins' as *;
+
+// Right-hand "rendered" pane of split files (README and projects).
+.file__preview {
+  position: relative;
+  display: grid;
+  order: -1;
+  container-type: inline-size;
+  place-items: center;
+  padding: 2.75rem 1.25rem 2rem;
+  background-color: var(--c-surface);
+  border-bottom: 1px solid var(--c-border);
+
+  @include up('xl') {
+    order: 0;
+    padding: 3rem 2rem;
+    border-bottom: 0;
+    border-left: 1px solid var(--c-border);
+
+    // Stays in view while the source next to it scrolls.
+    .js & {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      min-height: 100cqb;
+    }
+  }
+}
+
+.preview-label {
+  position: absolute;
+  top: 0.6rem;
+  left: 1rem;
+  font-family: var(--ff-ui);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-muted);
+}
+
+// Fake app window used for the photo and the project screenshots.
+.window {
+  display: block;
+  overflow: hidden;
+  background-color: var(--c-chrome);
+  border: 1px solid var(--c-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 1.25rem 2.5rem -1.25rem rgba(0, 0, 0, 0.55);
+
+  &__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  &__dots {
+    display: flex;
+    flex: none;
+    gap: 0.3rem;
+
+    i {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background-color: var(--c-border);
+    }
+  }
+
+  &__title {
+    overflow: hidden;
+    font-size: 0.6875rem;
+    color: var(--c-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  img {
+    width: 100%;
+    transition: transform 0.6s var(--ease-out);
+  }
+
+  &--link {
+    transition:
+      transform 0.35s var(--ease-out),
+      border-color 0.2s;
+
+    &:hover {
+      border-color: var(--c-accent);
+      transform: translateY(-0.4rem);
+
+      img {
+        transform: scale(1.04);
+      }
+    }
+  }
+}
+
+.hero-card {
+  display: grid;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 24rem;
+
+  // Wide preview pane: photo on the left, text on the right, so the whole
+  // card fits on a laptop screen without scrolling.
+  @container (min-width: 24rem) {
+    grid-template-columns: minmax(8rem, 32%) minmax(0, 1fr);
+    column-gap: 1.25rem;
+    align-content: center;
+    max-width: 42rem;
+
+    > * {
+      grid-column: 2;
+    }
+  }
+
+  &__photo {
+    width: min(13rem, 55%);
+    margin-bottom: 0.75rem;
+    transform: rotate(-3deg);
+    transition: transform 0.4s var(--ease-out);
+
+    @container (min-width: 24rem) {
+      grid-row: 1 / span 4;
+      grid-column: 1;
+      align-self: center;
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    img {
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: top;
+    }
+  }
+
+  &__name {
+    font-family: var(--ff-ui);
+    font-size: clamp(2.25rem, 8cqi, 3.5rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--c-strong);
+
+    @container (min-width: 24rem) {
+      align-self: end;
+      font-size: clamp(1.9rem, 7.6cqi, 3.5rem);
+    }
+  }
+
+  &__stack {
+    min-height: 1.7em;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+}
+
+.typed {
+  color: var(--c-heading);
+
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 0.55em;
+    height: 1.05em;
+    margin-left: 0.15em;
+    vertical-align: text-bottom;
+    background-color: var(--c-accent);
+    animation: caret 1s steps(1) infinite;
+  }
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.project-card {
+  display: grid;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 34rem;
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+}

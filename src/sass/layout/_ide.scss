@@ -1,0 +1,403 @@
+@use '../abstracts/mixins' as *;
+
+// The whole page is one editor window: title bar, activity bar, explorer,
+// editor, terminal and status bar. Only the editor and the terminal scroll.
+.ide {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 2.75rem minmax(0, 1fr) auto 1.75rem;
+  grid-template-areas:
+    'title'
+    'editor'
+    'terminal'
+    'status';
+  height: 100vh;
+  height: 100dvh;
+  background-color: var(--c-bg);
+
+  @include up('md') {
+    grid-template-columns: 3rem auto minmax(0, 1fr);
+    grid-template-areas:
+      'title title title'
+      'activity sidebar editor'
+      'activity sidebar terminal'
+      'status status status';
+  }
+}
+
+.js body {
+  overflow: hidden;
+}
+
+// Without JavaScript the files are simply stacked on one scrolling page.
+html:not(.js) {
+  .ide {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .tabs,
+  .breadcrumbs,
+  .terminal,
+  .sidebar,
+  .titlebar__search,
+  .titlebar__menu,
+  .activity button {
+    display: none;
+  }
+}
+
+// Title bar
+.titlebar {
+  grid-area: title;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+  font-family: var(--ff-ui);
+  font-size: var(--fs-ui);
+  background-color: var(--c-chrome);
+  border-bottom: 1px solid var(--c-border);
+
+  &__menu {
+    @include up('md') {
+      display: none;
+    }
+  }
+
+  &__dots {
+    display: none;
+    gap: 0.4rem;
+    padding: 0 0.5rem;
+
+    @include up('md') {
+      display: flex;
+    }
+
+    i {
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background-color: #ff5f57;
+
+      &:nth-child(2) {
+        background-color: #febc2e;
+      }
+
+      &:nth-child(3) {
+        background-color: #28c840;
+      }
+    }
+  }
+
+  &__search {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 28rem;
+    height: 1.9rem;
+    margin: 0 auto;
+    padding: 0 0.6rem;
+    color: var(--c-muted);
+    background-color: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 0.5rem;
+    transition:
+      border-color 0.15s,
+      color 0.15s;
+
+    &:hover {
+      color: var(--c-text);
+      border-color: var(--c-accent);
+    }
+
+    svg {
+      flex: none;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    span {
+      flex: 1;
+      overflow: hidden;
+      text-align: left;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    kbd {
+      display: none;
+
+      @include up('md') {
+        display: block;
+      }
+    }
+  }
+
+  &__cv {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    height: 1.9rem;
+    padding: 0 0.7rem;
+    font-weight: 600;
+    color: var(--c-on-accent);
+    background-color: var(--c-accent);
+    border-radius: 0.5rem;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      stroke-width: 2;
+    }
+  }
+}
+
+// Activity bar
+.activity {
+  grid-area: activity;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0;
+  background-color: var(--c-chrome);
+  border-right: 1px solid var(--c-border);
+
+  @include up('md') {
+    display: flex;
+  }
+
+  &__bottom {
+    margin-top: auto;
+  }
+}
+
+// Explorer. A drawer on phones, a fixed column from the md breakpoint.
+.sidebar {
+  position: fixed;
+  top: 2.75rem;
+  bottom: 0;
+  left: 0;
+  z-index: var(--z-drawer);
+  display: flex;
+  flex-direction: column;
+  width: min(18rem, 85vw);
+  overflow-y: auto;
+  font-family: var(--ff-ui);
+  font-size: var(--fs-ui);
+  background-color: var(--c-surface);
+  border-right: 1px solid var(--c-border);
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition:
+    transform 0.3s var(--ease-out),
+    visibility 0.3s;
+
+  .explorer-open & {
+    visibility: visible;
+    transform: none;
+  }
+
+  @include up('md') {
+    position: static;
+    grid-area: sidebar;
+    width: 15rem;
+    visibility: visible;
+    transform: none;
+    transition: none;
+
+    .explorer-collapsed & {
+      display: none;
+    }
+  }
+
+  &__title {
+    padding: 0.75rem 1rem 0.5rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+
+  &__hint {
+    margin-top: auto;
+    padding: 1rem;
+    font-size: var(--fs-small);
+    line-height: 1.8;
+    color: var(--c-muted);
+  }
+}
+
+.scrim {
+  position: fixed;
+  inset: 2.75rem 0 0;
+  z-index: calc(var(--z-drawer) - 1);
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  .explorer-open & {
+    display: block;
+  }
+
+  @include up('md') {
+    display: none !important;
+  }
+}
+
+.tree {
+  &__root,
+  &__folder {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.2rem 1rem;
+    font-weight: 700;
+    color: var(--c-text);
+
+    &::before {
+      content: '';
+      width: 0.4rem;
+      height: 0.4rem;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: translateY(-2px) rotate(45deg);
+    }
+  }
+
+  &__root {
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  &__folder {
+    padding-left: 1.75rem;
+    font-weight: 400;
+  }
+
+  &__file {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2rem;
+    padding: 0.15rem 1rem 0.15rem 1.5rem;
+    color: var(--c-muted);
+    border-left: 2px solid transparent;
+
+    &:hover {
+      color: var(--c-strong);
+      background-color: var(--c-line);
+    }
+
+    &[aria-current='page'] {
+      color: var(--c-strong);
+      background-color: var(--c-line);
+      border-left-color: var(--c-accent);
+    }
+  }
+
+  &__list--nested .tree__file {
+    padding-left: 2.5rem;
+  }
+}
+
+// Small colored file-type badge used in the explorer, tabs and palette.
+[data-ext]:not(.file)::before {
+  flex: none;
+  width: 1.6rem;
+  font-family: var(--ff-mono);
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+[data-ext='md']:not(.file)::before {
+  content: 'MD';
+  color: var(--c-func);
+}
+
+[data-ext='json']:not(.file)::before {
+  content: '{ }';
+  color: var(--c-heading);
+}
+
+[data-ext='ts']:not(.file)::before {
+  content: 'TS';
+  color: var(--c-prop);
+}
+
+[data-ext='tsx']:not(.file)::before {
+  content: 'TSX';
+  color: var(--c-keyword);
+}
+
+[data-ext='yml']:not(.file)::before {
+  content: 'YML';
+  color: var(--c-tag);
+}
+
+[data-ext='pdf']:not(.file)::before {
+  content: 'PDF';
+  color: var(--c-tag);
+}
+
+[data-ext='cmd']:not(.file)::before {
+  content: '>_';
+  color: var(--c-string);
+}
+
+// Status bar
+.statusbar {
+  grid-area: status;
+  display: flex;
+  align-items: stretch;
+  font-family: var(--ff-ui);
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+  background-color: var(--c-chrome);
+  border-top: 1px solid var(--c-border);
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0 0.65rem;
+    white-space: nowrap;
+
+    svg {
+      width: 0.9rem;
+      height: 0.9rem;
+    }
+
+    &--accent {
+      font-weight: 600;
+      color: var(--c-on-accent);
+      background-color: var(--c-accent);
+    }
+
+    &--wide {
+      display: none;
+
+      @include up('md') {
+        display: flex;
+      }
+    }
+  }
+
+  &__msg {
+    overflow: hidden;
+    color: var(--c-string);
+    text-overflow: ellipsis;
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__btn:hover {
+    color: var(--c-strong);
+    background-color: var(--c-line);
+  }
+}

@@ -1,0 +1,286 @@
+@use '../abstracts/mixins' as *;
+
+.editor {
+  grid-area: editor;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+}
+
+.tabs {
+  display: flex;
+  flex: none;
+  min-height: 2.5rem;
+  overflow-x: auto;
+  font-family: var(--ff-ui);
+  font-size: var(--fs-ui);
+  background-color: var(--c-surface);
+  border-bottom: 1px solid var(--c-border);
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tab {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  color: var(--c-muted);
+  border-right: 1px solid var(--c-border);
+
+  &.is-new {
+    animation: tab-in 0.25s var(--ease-out);
+  }
+
+  &.is-active {
+    color: var(--c-strong);
+    background-color: var(--c-bg);
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto;
+      height: 2px;
+      background-color: var(--c-accent);
+    }
+  }
+
+  &__open {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 2.5rem;
+    padding: 0 0.25rem 0 0.75rem;
+    white-space: nowrap;
+  }
+
+  &__close {
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 0.35rem;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: var(--c-muted);
+    border-radius: 0.25rem;
+
+    &:hover {
+      color: var(--c-strong);
+      background-color: var(--c-line);
+    }
+  }
+}
+
+@keyframes tab-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+}
+
+.breadcrumbs {
+  flex: none;
+  padding: 0.15rem 1rem;
+  overflow: hidden;
+  font-family: var(--ff-ui);
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.panes {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+// Lets the preview pane size itself to the visible editor area (cqb units).
+.js .panes {
+  container-type: size;
+}
+
+html:not(.js) .panes {
+  overflow: visible;
+}
+
+.js .file {
+  display: none;
+  min-height: 100%;
+
+  &.is-active {
+    display: block;
+  }
+}
+
+// Split files show the source on the left and a rendered preview on the
+// right. On phones the preview comes first.
+.js .file--split.is-active,
+html:not(.js) .file--split {
+  display: flex;
+  flex-direction: column;
+
+  @include up('xl') {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+}
+
+// Code view. Every line carries the class "l" and gets its number from a
+// CSS counter. Indentation comes from the i1..i4 classes.
+.code {
+  --gutter: 2.75rem;
+  --step: 1.5ch;
+  padding: 0.75rem 0 3rem;
+  counter-reset: line;
+
+  @include up('md') {
+    --gutter: 3.75rem;
+    --step: 2ch;
+  }
+
+  ul {
+    display: contents;
+  }
+
+  a {
+    color: var(--c-string);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+    text-underline-offset: 0.2em;
+
+    &:hover {
+      color: var(--c-accent);
+      text-decoration-color: currentColor;
+    }
+  }
+}
+
+.l {
+  position: relative;
+  display: block;
+  min-height: 1.7em;
+  padding: 0 1rem 0 calc(var(--gutter) + var(--indent, 0) * var(--step));
+  overflow-wrap: anywhere;
+  counter-increment: line;
+
+  &::before {
+    content: counter(line);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(var(--gutter) - 1rem);
+    color: var(--c-muted);
+    text-align: right;
+    opacity: 0.6;
+    user-select: none;
+  }
+
+  &:hover,
+  &.is-current {
+    background-color: var(--c-line);
+
+    &::before {
+      color: var(--c-text);
+      opacity: 1;
+    }
+  }
+}
+
+.i1 {
+  --indent: 1;
+}
+
+.i2 {
+  --indent: 2;
+}
+
+.i3 {
+  --indent: 3;
+}
+
+.i4 {
+  --indent: 4;
+}
+
+// Lines slide in one after another when a file is opened.
+.js .file.is-active .l {
+  animation: line-in 0.4s var(--ease-out) both;
+  animation-delay: calc(min(var(--n, 0), 28) * 16ms);
+}
+
+@keyframes line-in {
+  from {
+    opacity: 0;
+    transform: translateX(-0.6rem);
+  }
+}
+
+// Skills light up under the pointer and when the terminal lists them.
+.skill {
+  padding: 0.05em 0.15em;
+  border-radius: 0.25rem;
+  transition:
+    color 0.15s,
+    background-color 0.15s;
+
+  &:hover,
+  &.is-lit {
+    color: var(--c-on-accent);
+    background-color: var(--c-accent);
+  }
+}
+
+// Small actions above a line, the way editors show "Run | Debug".
+.lens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0.1rem 1rem 0.1rem var(--gutter);
+  font-family: var(--ff-ui);
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+
+  a,
+  button {
+    color: var(--c-muted);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--c-accent);
+    }
+  }
+}
+
+.empty {
+  display: grid;
+  place-content: center;
+  gap: 0.75rem;
+  min-height: 100%;
+  padding: 2rem;
+  font-family: var(--ff-ui);
+  font-size: var(--fs-ui);
+  color: var(--c-muted);
+  text-align: center;
+
+  &__logo {
+    font-family: var(--ff-mono);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--c-border);
+  }
+
+  &__keys {
+    display: grid;
+    gap: 0.5rem;
+
+    a {
+      color: var(--c-accent);
+    }
+  }
+}

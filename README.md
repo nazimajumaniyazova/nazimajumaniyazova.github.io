@@ -1,8 +1,15 @@
 # Portfolio
 
-Personal portfolio of Nazima Jumaniyazova.
+Personal portfolio of Nazima Jumaniyazova, built to look and work like a code editor.
 
 Live: https://nazimajumaniyazova.github.io/portfolio/
+
+## What it does
+
+- Every section is a "file" that opens in a tab: `README.md`, `about.md`, `skills.json` and so on.
+- The terminal understands commands: `help`, `ls`, `open about.md`, `cat skills.json`, `git log`, `theme paper`.
+- `Ctrl K` opens a search over files and commands. `Ctrl J` toggles the terminal, `Ctrl B` the explorer.
+- Three color themes: Midnight, Paper, Sunset. The choice is remembered.
 
 ## Stack
 
@@ -25,23 +32,37 @@ Run `npm run build` before every commit that touches `src/sass`.
 ## Structure
 
 ```
-index.html
+index.html            all content: each <article class="file"> is one file
 src/
   css/main.css        compiled styles, do not edit by hand
-  sass/               abstracts (tokens, mixins), base, layout, components
+  sass/
+    abstracts/        tokens (colors of every theme), mixins
+    base/             reset, global styles, syntax colors
+    layout/_ide       title bar, activity bar, explorer, status bar
+    components/       editor, preview, terminal, palette
   js/
-    main.js           menu, section reveal, scroll hint
-    hero.js           letter-by-letter title and typed words
-    globe.js          canvas globe in the background
-    cursor.js         follower ring, magnetic buttons
-    projects.js       card tilt, video preview, detail view
+    app.js            files and tabs, explorer, themes, status bar
+    terminal.js       terminal commands
+    palette.js        Ctrl K search
   img/  files/
 ```
 
+## Editing content
+
+Content lives in `index.html`. Each line of a file is an element with the class `l`;
+line numbers are added by CSS. Indent with `i1` to `i4`. Syntax colors are short classes:
+`k` keyword, `s` string, `n` property, `c` comment, `f` function, `t` tag, `h` heading,
+`m` punctuation.
+
 ## Adding a project
 
-Copy a `<li>` inside `.projects` in `index.html` and change the link, screenshot
-(960x600, WebP), name, description and tags. Optional attributes on the card link:
+1. Copy an `<article class="file file--split">` block in `index.html` and give it a new `id`,
+   `data-name` and `data-path`.
+2. Change the name, links, description and the screenshot (960x600, WebP) in the preview.
+3. Add a link with the same `#id` to the `projects` folder in the explorer.
 
-- `data-code="https://github.com/..."` adds a "View code" button to the detail view.
-- `data-video="./src/video/name.mp4"` plays a muted preview on hover.
+The tab, the terminal (`ls`, `open`, `cat`) and the search pick the new file up automatically.
+
+## Adding a terminal command
+
+Add an entry to `COMMANDS` in `src/js/terminal.js`. Entries with an `about` text show up in `help`.

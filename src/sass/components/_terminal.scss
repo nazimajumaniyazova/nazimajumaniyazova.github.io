@@ -1,0 +1,109 @@
+@use '../abstracts/mixins' as *;
+
+.terminal {
+  grid-area: terminal;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: var(--c-surface);
+  border-top: 1px solid var(--c-border);
+
+  &__bar {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 0.5rem;
+    height: 2.25rem;
+    padding: 0 0.25rem 0 1rem;
+    font-family: var(--ff-ui);
+    font-size: 0.6875rem;
+
+    .icon-btn {
+      width: 2.25rem;
+      height: 2.25rem;
+
+      svg {
+        width: 1.05rem;
+        height: 1.05rem;
+      }
+    }
+  }
+
+  &__tab {
+    height: 100%;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-strong);
+    border-bottom: 1px solid var(--c-accent);
+  }
+
+  &__hint {
+    flex: 1;
+    overflow: hidden;
+    color: var(--c-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__chevron {
+    transition: transform 0.25s var(--ease-out);
+
+    .terminal-collapsed & {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__body {
+    height: clamp(8rem, 26vh, 15rem);
+    padding: 0.25rem 1rem 0.6rem;
+    overflow-y: auto;
+    cursor: text;
+
+    .terminal-collapsed & {
+      display: none;
+    }
+  }
+
+  &__out {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+
+    a,
+    button {
+      color: var(--c-accent);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+  }
+
+  &__cmd {
+    color: var(--c-strong);
+  }
+
+  &__error {
+    color: var(--c-tag);
+  }
+
+  &__form {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  &__prompt {
+    flex: none;
+  }
+
+  &__input {
+    flex: 1;
+    min-width: 0;
+    // 16px keeps iOS from zooming the page when the field gets focus.
+    font-size: max(1em, 16px);
+    line-height: inherit;
+    caret-color: var(--c-accent);
+    outline: none;
+
+    @include up('md') {
+      font-size: 1em;
+    }
+  }
+}

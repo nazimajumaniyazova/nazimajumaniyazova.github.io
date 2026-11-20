@@ -1,34 +1,80 @@
+// Design tokens. Every color lives in a theme block, so a new theme is one
+// more [data-theme] rule here plus an entry in THEMES inside src/js/app.js.
 :root {
-  // Colours
-  --c-bg: #222122;
-  --c-surface: #181818;
-  --c-text: #b4b4b4; // 7.6:1 on --c-bg, 8.4:1 on --c-surface
-  --c-heading: #ffffff;
-  --c-accent: #e3af00;
-  --c-accent-hover: #fdc60c;
-  --c-on-accent: #1a1a1a;
-  --c-line: rgba(255, 255, 255, 0.2);
+  --ff-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+  --ff-ui: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 
-  // Type scale: fluid between a 360px and a 1440px viewport, then capped.
-  --ff-base: 'Source Sans Pro', 'Segoe UI', system-ui, -apple-system, sans-serif;
-  --fs-small: 0.8125rem;
-  --fs-body: clamp(1rem, 0.94rem + 0.28vw, 1.1875rem);
-  --fs-lead: clamp(1.125rem, 1rem + 0.55vw, 1.5rem);
-  --fs-h3: clamp(1.125rem, 1.05rem + 0.35vw, 1.375rem);
-  --fs-h2: clamp(1.75rem, 1.4rem + 1.5vw, 2.75rem);
-  --fs-h1: clamp(2.5rem, 1.5rem + 4.4vw, 5.5rem);
+  --fs-code: clamp(0.875rem, 0.84rem + 0.15vw, 0.9375rem);
+  --fs-ui: 0.8125rem;
+  --fs-small: 0.75rem;
 
-  // Spacing
-  --gutter: clamp(1.25rem, 5vw, 4rem);
-  --section-gap: clamp(3.5rem, 2.5rem + 5vw, 7.5rem);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
-  // Motion
-  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --z-drawer: 20;
+  --z-palette: 40;
+  --z-skip: 50;
+}
 
-  // Layers
-  --z-globe: -1;
-  --z-header: 90;
-  --z-burger: 100;
-  --z-modal: 200;
-  --z-cursor: 1000;
+:root,
+[data-theme='midnight'] {
+  color-scheme: dark;
+  --c-bg: #0f1420;
+  --c-surface: #0b0f19;
+  --c-chrome: #090c14;
+  --c-border: #1e2638;
+  --c-text: #c9d3e6;
+  --c-strong: #ffffff;
+  --c-muted: #7c89a8;
+  --c-accent: #7aa2f7;
+  --c-on-accent: #0b0f19;
+  --c-line: rgba(255, 255, 255, 0.045);
+  --c-keyword: #c792ea;
+  --c-string: #a5d68a;
+  --c-prop: #7fd1e8;
+  --c-comment: #7281a3;
+  --c-heading: #f7c66b;
+  --c-tag: #f07b8a;
+  --c-func: #82aaff;
+}
+
+[data-theme='paper'] {
+  color-scheme: light;
+  --c-bg: #fbfaf7;
+  --c-surface: #f2efe8;
+  --c-chrome: #e9e5dc;
+  --c-border: #d8d2c4;
+  --c-text: #2f3542;
+  --c-strong: #11141a;
+  --c-muted: #646873;
+  --c-accent: #2a63cf;
+  --c-on-accent: #ffffff;
+  --c-line: rgba(0, 0, 0, 0.045);
+  --c-keyword: #9b3fc4;
+  --c-string: #2f7a25;
+  --c-prop: #0b7285;
+  --c-comment: #676a73;
+  --c-heading: #a85600;
+  --c-tag: #c2384d;
+  --c-func: #2456c9;
+}
+
+[data-theme='sunset'] {
+  color-scheme: dark;
+  --c-bg: #1d1524;
+  --c-surface: #17101d;
+  --c-chrome: #120c17;
+  --c-border: #36263f;
+  --c-text: #e6d7e8;
+  --c-strong: #ffffff;
+  --c-muted: #a08aa8;
+  --c-accent: #ff8a5c;
+  --c-on-accent: #1d1524;
+  --c-line: rgba(255, 255, 255, 0.05);
+  --c-keyword: #ff6f9c;
+  --c-string: #ffd580;
+  --c-prop: #7ee0d0;
+  --c-comment: #9580a0;
+  --c-heading: #ffb86b;
+  --c-tag: #ff8a5c;
+  --c-func: #c9a0ff;
 }

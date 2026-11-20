@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Варианты дизайна</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; line-height: 1.5; color: #16171a; background: #f2f1ee; padding: clamp(1rem, 4vw, 3rem); }
+      h1 { font-size: clamp(1.6rem, 1.2rem + 2vw, 2.5rem); line-height: 1.15; }
+      .lead { max-width: 44rem; margin: 0.5rem 0 2rem; color: #55575e; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 30rem), 1fr)); gap: 1.5rem; }
+      .card { display: block; color: inherit; text-decoration: none; background: #fff; border: 1px solid #dddbd5; border-radius: 1rem; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+      .card:hover { transform: translateY(-4px); box-shadow: 0 1.5rem 2.5rem -1.5rem rgba(0, 0, 0, 0.4); }
+      .card:focus-visible { outline: 3px solid #2a63cf; outline-offset: 3px; }
+      .frame { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: #e7e5df; border-bottom: 1px solid #dddbd5; container-type: inline-size; }
+      .frame iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 800px; border: 0; pointer-events: none; transform-origin: 0 0; transform: scale(calc(100cqw / 1280px)); }
+      .body { padding: 1rem 1.25rem 1.25rem; }
+      .body h2 { font-size: 1.25rem; }
+      .body p { color: #55575e; }
+      .body span { display: inline-block; margin-top: 0.6rem; font-weight: 600; color: #2a63cf; }
+    </style>
+  </head>
+  <body>
+    <h1>Четыре варианта дизайна</h1>
+    <p class="lead">
+      Нажмите на карточку, чтобы открыть вариант на весь экран. Содержание везде одинаковое,
+      отличается подача. Каждый вариант стоит открыть и на телефоне.
+    </p>
+
+    <div class="grid">
+      <a class="card" href="../index.html">
+        <div class="frame"><iframe src="../index.html" title="" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="body">
+          <h2>1. Редактор кода</h2>
+          <p>Файлы во вкладках, рабочий терминал, поиск по Ctrl K, три темы.</p>
+          <span>Открыть →</span>
+        </div>
+      </a>
+      <a class="card" href="./math/index.html">
+        <div class="frame"><iframe src="./math/index.html" title="" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="body">
+          <h2>2. Математика</h2>
+          <p>Тетрадь в клетку, живой график из частиц, граф навыков, опыт на числовой прямой.</p>
+          <span>Открыть →</span>
+        </div>
+      </a>
+      <a class="card" href="./bento/index.html">
+        <div class="frame"><iframe src="./bento/index.html" title="" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="body">
+          <h2>3. Bento-сетка</h2>
+          <p>Яркие плитки: часы, стикеры навыков, которые можно таскать, выбор цвета.</p>
+          <span>Открыть →</span>
+        </div>
+      </a>
+      <a class="card" href="./type/index.html">
+        <div class="frame"><iframe src="./type/index.html" title="" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="body">
+          <h2>4. Крупная типографика</h2>
+          <p>Имя во весь экран реагирует на курсор, картинка проекта летит за мышью.</p>
+          <span>Открыть →</span>
+        </div>
+      </a>
+    </div>
+  </body>
+</html>

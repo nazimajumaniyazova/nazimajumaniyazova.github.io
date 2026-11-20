@@ -1,11 +1,11 @@
 @use 'sass:map';
 
 // Breakpoints are mobile-first: styles outside a mixin are for phones.
-//   sm  640px   two-column grids
-//   lg  1024px  desktop layout with the sticky portrait
+//   md  768px   explorer and activity bar become permanent
+//   xl  1280px  source and preview sit side by side
 $breakpoints: (
-  'sm': 40em,
-  'lg': 64em,
+  'md': 48em,
+  'xl': 80em,
 );
 
 @mixin up($name) {
@@ -14,9 +14,8 @@ $breakpoints: (
   }
 }
 
-// Styles for devices with a real mouse.
-@mixin fine-pointer {
-  @media (hover: hover) and (pointer: fine) {
+@mixin down($name) {
+  @media (max-width: calc(map.get($breakpoints, $name) - 0.02em)) {
     @content;
   }
 }
