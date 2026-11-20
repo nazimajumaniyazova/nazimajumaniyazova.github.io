@@ -50,6 +50,7 @@
     <script src="./src/js/app.js" defer></script>
     <script src="./src/js/search.js" defer></script>
     <script src="./src/js/scm.js" defer></script>
+    <script src="./src/js/split.js" defer></script>
     <script src="./src/js/minimap.js" defer></script>
     <script src="./src/js/terminal.js" defer></script>
     <script src="./src/js/palette.js" defer></script>
@@ -258,7 +259,21 @@
 
       <!-- Editor -->
       <main class="editor" id="main">
-        <div class="tabs" id="tabs" role="tablist" aria-label="Open files"></div>
+        <div class="editor__head">
+          <div class="tabs" id="tabs" role="tablist" aria-label="Open files"></div>
+          <button
+            class="icon-btn editor__split"
+            type="button"
+            aria-label="Split editor right"
+            title="Split editor right (or drag a tab to the right)"
+            data-action="split"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="16" rx="2" />
+              <path d="M12 4v16" />
+            </svg>
+          </button>
+        </div>
         <p class="breadcrumbs" id="breadcrumbs" aria-hidden="true"></p>
 
         <div class="editor__body" id="editor-body">
@@ -327,6 +342,9 @@
                   <li class="l"><span class="m">-</span> hover a skill to see where I used it</li>
                   <li class="l">
                     <span class="m">-</span> <kbd>Ctrl Shift G</kbd> my path as a commit graph
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> drag a tab to the right to open two files side by side
                   </li>
                   <li class="l">
                     <span class="m">-</span> type <kbd>help</kbd> in the terminal to see what it can
@@ -1445,6 +1463,26 @@
           <div class="minimap" id="minimap" aria-hidden="true">
             <canvas class="minimap__canvas"></canvas>
             <div class="minimap__view"></div>
+          </div>
+
+          <!-- Second editor group, filled by src/js/split.js -->
+          <section class="side" id="side" aria-label="Second editor">
+            <div class="side__head">
+              <span class="side__name" id="side-name"></span>
+              <button
+                class="tab__close"
+                type="button"
+                data-action="unsplit"
+                aria-label="Close the second editor"
+              >
+                ×
+              </button>
+            </div>
+            <div class="side__scroll" id="side-scroll"></div>
+          </section>
+
+          <div class="dropzone" id="dropzone" aria-hidden="true">
+            <span>Open to the side</span>
           </div>
         </div>
       </main>

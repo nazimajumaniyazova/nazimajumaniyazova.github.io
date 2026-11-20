@@ -5,6 +5,8 @@
 
   const P = window.Portfolio;
   const panes = document.getElementById('panes');
+  // The editor body holds both editor groups (see split.js).
+  const area = document.getElementById('editor-body') || panes;
   if (!P || !panes) return;
 
   const $$ = (selector, scope) => Array.from((scope || document).querySelectorAll(selector));
@@ -186,7 +188,7 @@
 
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 
-  panes.addEventListener('mouseover', (event) => {
+  area.addEventListener('mouseover', (event) => {
     if (!finePointer.matches) return;
     const skill = event.target.closest('.skill');
     if (!skill) return;
@@ -197,7 +199,7 @@
     showTimer = setTimeout(() => show(skill), current ? 0 : 250);
   });
 
-  panes.addEventListener('mouseout', (event) => {
+  area.addEventListener('mouseout', (event) => {
     // Phones send a mouseout right after a tap; there the card stays until
     // the next tap.
     if (!finePointer.matches || !event.target.closest('.skill')) return;
@@ -210,7 +212,7 @@
 
   // Tap (or click) opens the card too, which is how it works on phones.
   document.addEventListener('click', (event) => {
-    const skill = event.target.closest('.panes .skill');
+    const skill = event.target.closest('.editor__body .skill');
     if (skill) {
       if (skill === current && !card.hidden) hide();
       else show(skill);
@@ -222,6 +224,8 @@
   });
 
   panes.addEventListener('scroll', hide, { passive: true });
+  const side = document.getElementById('side-scroll');
+  if (side) side.addEventListener('scroll', hide, { passive: true });
   window.addEventListener('resize', hide);
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') hide();

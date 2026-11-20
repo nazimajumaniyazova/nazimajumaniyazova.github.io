@@ -77,6 +77,9 @@
       tab.className =
         'tab' + (id === activeId ? ' is-active' : '') + (id === newId ? ' is-new' : '');
       tab.setAttribute('role', 'presentation');
+      // Tabs can be dragged to the right half of the editor (src/js/split.js).
+      tab.draggable = true;
+      tab.dataset.file = id;
 
       const open = document.createElement('button');
       open.className = 'tab__open';
@@ -289,6 +292,8 @@
     terminal: () => toggleTerminal(),
     theme: cycleTheme,
     palette: () => api.openPalette && api.openPalette(),
+    split: () => api.splitRight && api.splitRight(),
+    unsplit: () => api.closeSide && api.closeSide(),
   };
 
   document.addEventListener('click', (event) => {

@@ -43,7 +43,10 @@ html:not(.js) {
   .titlebar__search,
   .titlebar__menu,
   .activity button,
-  .minimap {
+  .editor__split,
+  .minimap,
+  .side,
+  .dropzone {
     display: none;
   }
 }

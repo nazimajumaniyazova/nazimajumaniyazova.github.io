@@ -33,6 +33,8 @@
       [
         { label: 'Search in files', hint: 'Ctrl Shift F', run: () => P.showView('search') },
         { label: 'Source control: my path', hint: 'Ctrl Shift G', run: () => P.showView('scm') },
+        { label: 'Split editor right', hint: 'wide screens', run: () => P.splitRight() },
+        { label: 'Close the second editor', hint: 'split', run: () => P.closeSide() },
         { label: 'Toggle terminal', hint: 'Ctrl J', run: () => P.toggleTerminal() },
         { label: 'Toggle explorer', hint: 'Ctrl B', run: () => P.toggleExplorer() },
         {

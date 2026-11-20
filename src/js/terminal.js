@@ -410,6 +410,14 @@
         return 'Try ' + ['git log', 'git show c08d3f2', 'git branch'].map(run).join('  ');
       },
     },
+    split: {
+      about: 'open a file on the side: split skills.json',
+      run: (args) => {
+        const file = args[0] ? findFile(args[0]) : P.getActive();
+        if (!file) return args[0] ? notFound(args[0]) : 'Usage: split &lt;file&gt;';
+        return P.openSide(file.id) ? 'Opened ' + fileLink(file) + ' on the side' : '';
+      },
+    },
     clear: {
       about: 'clear the terminal',
       run: () => {
