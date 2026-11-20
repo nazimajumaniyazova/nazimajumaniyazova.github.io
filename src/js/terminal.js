@@ -204,6 +204,41 @@
     if (button) execute('run ' + button.dataset.runProject);
   });
 
+  // `git log --graph`: work on main, certificates on a learning branch.
+  function gitLog() {
+    const commits = P.commits || [];
+    const lastLearning = commits.reduce((last, commit, index) => (commit.lane ? index : last), -1);
+    const rows = [];
+    commits.forEach((commit, index) => {
+      const graph =
+        index > lastLearning
+          ? '*  '
+          : commit.lane
+            ? '| <span class="k">*</span>'
+            : '* <span class="k">|</span>';
+      const head =
+        commit.hash === 'c08d3f2'
+          ? ' <span class="c">(HEAD -&gt; main)</span>'
+          : index === 0
+            ? ' <span class="c">(learning)</span>'
+            : '';
+      rows.push(
+        graph +
+          ' <button type="button" data-run="git show ' +
+          commit.hash +
+          '" class="h">' +
+          commit.hash +
+          '</button>' +
+          head +
+          ' ' +
+          commit.date.padEnd(9) +
+          esc(commit.message),
+      );
+      if (index === lastLearning) rows.push('|<span class="k">/</span>');
+    });
+    return rows.join('\n') + '\n<span class="c">Click a hash to see what it added.</span>';
+  }
+
   const COMMANDS = {
     help: {
       about: 'show this list',
@@ -363,16 +398,17 @@
     },
     git: {
       about: 'my path so far: git log',
-      run: (args) =>
-        args[0] === 'log'
-          ? [
-              '<span class="h">c08d3f2</span> <span class="c">(HEAD -&gt; main)</span> Dec 2025  Frontend Mentor, The Rolling Scopes School',
-              '<span class="h">e41b7a9</span> Sep 2025  Frontend Software Engineer, PLATMA',
-              '<span class="h">a3f9c21</span> Sep 2023  Frontend Software Engineer, Asakabank',
-              '<span class="h">9d2e6b4</span> Sep 2021  Frontend Software Engineer, Brain Development',
-              '<span class="h">0000001</span> 2017      init: BSc in Applied Mathematics and Computer Science, MSU',
-            ].join('\n')
-          : 'Only ' + run('git log') + ' works here.',
+      run: (args) => {
+        const sub = args[0];
+        if (sub === 'log') return gitLog();
+        if (sub === 'show') {
+          return args[1] && P.showCommit && P.showCommit(args[1])
+            ? 'Showing ' + esc(args[1]) + ' in the editor'
+            : 'Usage: git show &lt;hash&gt;, hashes are in ' + run('git log');
+        }
+        if (sub === 'branch') return '* <span class="s">main</span>\n  learning';
+        return 'Try ' + ['git log', 'git show c08d3f2', 'git branch'].map(run).join('  ');
+      },
     },
     clear: {
       about: 'clear the terminal',
@@ -434,7 +470,7 @@
     let pool;
     if (parts.length === 1) pool = Object.keys(COMMANDS).filter((name) => COMMANDS[name].about);
     else if (parts[0] === 'theme') pool = P.themes.map((theme) => theme.id);
-    else if (parts[0] === 'git') pool = ['log'];
+    else if (parts[0] === 'git') pool = ['log', 'show', 'branch'];
     else if (parts[0] === 'run') pool = projects.map((file) => file.id);
     else pool = P.files.map((file) => file.path).concat(P.files.map((file) => file.name));
 

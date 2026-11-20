@@ -32,6 +32,7 @@
         })),
       [
         { label: 'Search in files', hint: 'Ctrl Shift F', run: () => P.showView('search') },
+        { label: 'Source control: my path', hint: 'Ctrl Shift G', run: () => P.showView('scm') },
         { label: 'Toggle terminal', hint: 'Ctrl J', run: () => P.toggleTerminal() },
         { label: 'Toggle explorer', hint: 'Ctrl B', run: () => P.toggleExplorer() },
         {

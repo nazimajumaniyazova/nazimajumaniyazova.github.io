@@ -114,6 +114,8 @@
       : 'nazima-portfolio';
     statusLang.textContent = active ? active.lang : 'Plain Text';
     statusLine.textContent = 'Ln 1';
+    // The source control view follows the active file.
+    document.dispatchEvent(new CustomEvent('portfolio:open', { detail: activeId }));
   }
 
   function openFile(id, options) {
@@ -282,6 +284,7 @@
     explorer: toggleExplorer,
     'view-explorer': () => toggleView('explorer'),
     'view-search': () => toggleView('search'),
+    'view-scm': () => toggleView('scm'),
     terminal: () => toggleTerminal(),
     theme: cycleTheme,
     palette: () => api.openPalette && api.openPalette(),
@@ -356,6 +359,9 @@
     if (key === 'f' && event.shiftKey) {
       event.preventDefault();
       showView('search');
+    } else if (key === 'g' && event.shiftKey) {
+      event.preventDefault();
+      showView('scm');
     } else if (key === 'k' || key === 'p') {
       event.preventDefault();
       actions.palette();

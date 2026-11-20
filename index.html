@@ -49,6 +49,7 @@
     <link rel="stylesheet" href="./src/css/main.css" />
     <script src="./src/js/app.js" defer></script>
     <script src="./src/js/search.js" defer></script>
+    <script src="./src/js/scm.js" defer></script>
     <script src="./src/js/terminal.js" defer></script>
     <script src="./src/js/palette.js" defer></script>
     <script src="./src/js/hover.js" defer></script>
@@ -115,6 +116,20 @@
         <button
           class="icon-btn"
           type="button"
+          aria-label="Source control (Ctrl Shift G)"
+          title="Source control (Ctrl Shift G)"
+          data-action="view-scm"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="7" cy="6" r="2" />
+            <circle cx="7" cy="18" r="2" />
+            <circle cx="17" cy="9" r="2" />
+            <path d="M7 8v8M17 11c0 3-10 2-10 5" />
+          </svg>
+        </button>
+        <button
+          class="icon-btn"
+          type="button"
           aria-label="Toggle terminal (Ctrl J)"
           title="Terminal (Ctrl J)"
           data-action="terminal"
@@ -167,6 +182,15 @@
           <button class="sidebar__view" type="button" data-view="search" aria-pressed="false">
             Search
           </button>
+          <button class="sidebar__view" type="button" data-view="scm" aria-pressed="false">
+            Git
+          </button>
+        </div>
+
+        <!-- Source control: my career as a commit graph. Filled by src/js/scm.js -->
+        <div class="scm" data-panel="scm" hidden>
+          <p class="scm__intro">My path as a commit graph. Click a commit to see what it added.</p>
+          <ol class="scm__list" id="scm-list"></ol>
         </div>
 
         <!-- Search in all files. Filled by src/js/search.js -->
@@ -299,6 +323,9 @@
                   <span class="m">-</span> press <kbd>▶ Run</kbd> in any project file to start it
                 </li>
                 <li class="l"><span class="m">-</span> hover a skill to see where I used it</li>
+                <li class="l">
+                  <span class="m">-</span> <kbd>Ctrl Shift G</kbd> my path as a commit graph
+                </li>
                 <li class="l">
                   <span class="m">-</span> type <kbd>help</kbd> in the terminal to see what it can
                   do
@@ -1451,7 +1478,12 @@
 
       <!-- Status bar -->
       <footer class="statusbar">
-        <span class="statusbar__item statusbar__item--accent">
+        <button
+          class="statusbar__item statusbar__item--accent"
+          type="button"
+          data-action="view-scm"
+          title="Source control"
+        >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="7" cy="6" r="2" />
             <circle cx="7" cy="18" r="2" />
@@ -1459,7 +1491,7 @@
             <path d="M7 8v8M17 11c0 3-10 2-10 5" />
           </svg>
           main
-        </span>
+        </button>
         <span class="statusbar__item statusbar__msg" id="status-msg" role="status"></span>
         <span class="statusbar__spacer"></span>
         <span class="statusbar__item statusbar__item--wide" id="status-line">Ln 1</span>
