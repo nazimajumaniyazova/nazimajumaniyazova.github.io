@@ -9,6 +9,14 @@ Live: https://nazimajumaniyazova.github.io/portfolio/
 - Every section is a "file" that opens in a tab: `README.md`, `about.md`, `skills.json` and so on.
 - The terminal understands commands: `help`, `ls`, `open about.md`, `cat skills.json`, `git log`, `theme paper`.
 - `Ctrl K` opens a search over files and commands. `Ctrl J` toggles the terminal, `Ctrl B` the explorer.
+- `Ctrl Shift F` searches inside all files, `Ctrl Shift G` shows my path as a commit graph.
+- "▶ Run" in a project file plays a build log and "starts" the preview.
+- Hovering a skill shows where it was used.
+- `.vscode/settings.json` is live: theme, font size, word wrap, line numbers, minimap, animations.
+- The side bar and the terminal can be resized by dragging their edges (double-click resets).
+- Drag a tab to the right half of the editor to see two files side by side; a minimap sits on the right.
+- `contact.ts` has a "git commit" box: Push opens the visitor's mail app with the message.
+- Terminal extras: `npm test`, `snake`, `git log`, `git commit -m "..."` and `git push`.
 - Three color themes: Midnight, Paper, Sunset. The choice is remembered.
 
 ## Stack
@@ -39,11 +47,19 @@ src/
     abstracts/        tokens (colors of every theme), mixins
     base/             reset, global styles, syntax colors
     layout/_ide       title bar, activity bar, explorer, status bar
-    components/       editor, preview, terminal, palette, search, hover cards
+    components/       editor, preview, terminal, palette, search, hover cards,
+                      scm (commit graph), controls (settings values, commit box)
   js/
     app.js            files and tabs, side bar views, themes, status bar
     search.js         Ctrl Shift F search in all files
+    scm.js            Ctrl Shift G commit graph; the commits live in COMMITS
+    settings.js       values of .vscode/settings.json, kept in localStorage
+    split.js          second editor group, drag and drop of tabs
+    layout.js         resizing the side bar and the terminal
+    minimap.js        minimap drawn on a canvas
+    contact.js        "git commit" message box in contact.ts
     terminal.js       terminal commands, "▶ Run" for projects
+    games.js          `npm test` and `snake`
     palette.js        Ctrl K search
     hover.js          skill hover cards ("Used at")
   img/  files/
@@ -69,4 +85,16 @@ link and the `skill` items from the file itself.
 
 ## Adding a terminal command
 
-Add an entry to `COMMANDS` in `src/js/terminal.js`. Entries with an `about` text show up in `help`.
+Add an entry to `COMMANDS` in `src/js/terminal.js`, or call `Portfolio.terminal.addCommand()`
+from another script, as `src/js/games.js` does. Entries with an `about` text show up in `help`.
+
+## Updating the commit graph
+
+New jobs and certificates go into `COMMITS` in `src/js/scm.js` (newest first). `lane: 0` is work,
+`lane: 1` is learning. `target` names the lines the commit "added": a `company` in experience.ts,
+a `match` in certificates.json, or a whole `file`. `git log` in the terminal reads the same list.
+
+## Settings
+
+The inline script in the `<head>` of `index.html` applies saved settings before the first paint,
+and `src/js/settings.js` handles changes. Keep the two in sync when adding a setting.
