@@ -1,0 +1,167 @@
+@use '../abstracts/mixins' as *;
+
+// "Search in files" view of the side bar.
+.search {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  padding-bottom: 1rem;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__form {
+    padding: 0.25rem 0.75rem 0.5rem;
+  }
+
+  &__input {
+    width: 100%;
+    height: 2rem;
+    padding: 0 0.6rem;
+    // 16px keeps iOS from zooming the page when the field gets focus.
+    font-size: max(1em, 16px);
+    color: var(--c-strong);
+    background-color: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 0.35rem;
+    outline: none;
+
+    @include up('md') {
+      font-size: inherit;
+    }
+
+    &::placeholder {
+      color: var(--c-muted);
+    }
+
+    &:focus {
+      border-color: var(--c-accent);
+    }
+  }
+
+  &__summary {
+    padding: 0 1rem 0.5rem;
+    font-size: var(--fs-small);
+    color: var(--c-muted);
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__try {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0.25rem 1rem;
+    font-size: var(--fs-small);
+    color: var(--c-muted);
+
+    p {
+      flex-basis: 100%;
+    }
+  }
+
+  &__chip {
+    padding: 0.2rem 0.55rem;
+    color: var(--c-text);
+    border: 1px solid var(--c-border);
+    border-radius: 1rem;
+
+    &:hover {
+      color: var(--c-strong);
+      border-color: var(--c-accent);
+    }
+  }
+
+  &__group {
+    margin-bottom: 0.35rem;
+  }
+
+  &__file {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: 100%;
+    min-height: 1.9rem;
+    padding: 0.15rem 1rem;
+    color: var(--c-text);
+    text-align: left;
+
+    &:hover {
+      color: var(--c-strong);
+      background-color: var(--c-line);
+    }
+  }
+
+  &__name {
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  &__dir {
+    overflow: hidden;
+    font-size: var(--fs-small);
+    color: var(--c-muted);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__count {
+    flex: none;
+    min-width: 1.4rem;
+    margin-left: auto;
+    padding: 0 0.4rem;
+    font-size: 0.6875rem;
+    line-height: 1.4rem;
+    color: var(--c-strong);
+    text-align: center;
+    background-color: var(--c-border);
+    border-radius: 1rem;
+  }
+
+  &__hit {
+    display: block;
+    width: 100%;
+    padding: 0.2rem 1rem 0.2rem 1.9rem;
+    overflow: hidden;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    color: var(--c-muted);
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--c-text);
+      background-color: var(--c-line);
+    }
+
+    mark {
+      color: var(--c-strong);
+      background-color: color-mix(in srgb, var(--c-heading) 35%, transparent);
+      border-radius: 0.15rem;
+    }
+  }
+}
+
+// Matches inside the open file (CSS Custom Highlight API).
+::highlight(search) {
+  color: var(--c-strong);
+  background-color: color-mix(in srgb, var(--c-heading) 35%, transparent);
+}
+
+// The line a search result points to flashes once.
+.l.is-found {
+  animation: found 1.6s var(--ease-out);
+}
+
+@keyframes found {
+  0%,
+  30% {
+    background-color: color-mix(in srgb, var(--c-accent) 28%, transparent);
+  }
+}

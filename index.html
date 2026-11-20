@@ -6,7 +6,7 @@
     <title>Nazima Jumaniyazova | Frontend Software Engineer</title>
     <meta
       name="description"
-      content="Portfolio of Nazima Jumaniyazova, a frontend software engineer from Tashkent with 4+ years of experience in React, TypeScript and Redux Toolkit."
+      content="Portfolio of Nazima Jumaniyazova, a frontend software engineer from Tashkent with 5 years of experience building large single-page applications in React and TypeScript."
     />
     <meta name="theme-color" content="#090c14" />
     <link rel="canonical" href="https://nazimajumaniyazova.github.io/portfolio/" />
@@ -17,7 +17,7 @@
     <meta property="og:title" content="Nazima Jumaniyazova | Frontend Software Engineer" />
     <meta
       property="og:description"
-      content="Frontend software engineer. React, TypeScript, Redux Toolkit, Tailwind CSS."
+      content="Frontend software engineer. 5 years with React and TypeScript, 2 of them in banking."
     />
     <meta
       property="og:image"
@@ -48,8 +48,10 @@
     />
     <link rel="stylesheet" href="./src/css/main.css" />
     <script src="./src/js/app.js" defer></script>
+    <script src="./src/js/search.js" defer></script>
     <script src="./src/js/terminal.js" defer></script>
     <script src="./src/js/palette.js" defer></script>
+    <script src="./src/js/hover.js" defer></script>
   </head>
 
   <body>
@@ -89,9 +91,9 @@
         <button
           class="icon-btn"
           type="button"
-          aria-label="Toggle explorer (Ctrl B)"
+          aria-label="Explorer (Ctrl B)"
           title="Explorer (Ctrl B)"
-          data-action="explorer"
+          data-action="view-explorer"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z" />
@@ -101,9 +103,9 @@
         <button
           class="icon-btn"
           type="button"
-          aria-label="Search (Ctrl K)"
-          title="Search (Ctrl K)"
-          data-action="palette"
+          aria-label="Search in files (Ctrl Shift F)"
+          title="Search in files (Ctrl Shift F)"
+          data-action="view-search"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="11" cy="11" r="6" />
@@ -157,46 +159,75 @@
       </nav>
 
       <!-- Explorer -->
-      <aside class="sidebar" id="explorer" aria-label="Explorer">
-        <p class="sidebar__title">Explorer</p>
-        <nav class="tree" aria-label="Files">
-          <p class="tree__root">nazima-portfolio</p>
-          <ul class="tree__list">
-            <li><a class="tree__file" href="#readme" data-ext="md">README.md</a></li>
-            <li><a class="tree__file" href="#about" data-ext="md">about.md</a></li>
-            <li><a class="tree__file" href="#skills" data-ext="json">skills.json</a></li>
-            <li><a class="tree__file" href="#experience" data-ext="ts">experience.ts</a></li>
-            <li>
-              <p class="tree__folder">projects</p>
-              <ul class="tree__list tree__list--nested">
-                <li><a class="tree__file" href="#dachatop" data-ext="tsx">dachatop.tsx</a></li>
-                <li><a class="tree__file" href="#videohub" data-ext="tsx">videohub.tsx</a></li>
-                <li><a class="tree__file" href="#minivan" data-ext="tsx">minivan.tsx</a></li>
-                <li><a class="tree__file" href="#mymehmon" data-ext="tsx">mymehmon.tsx</a></li>
-                <li><a class="tree__file" href="#todo-app" data-ext="tsx">todo-app.tsx</a></li>
-              </ul>
-            </li>
-            <li><a class="tree__file" href="#mentoring" data-ext="md">mentoring.md</a></li>
-            <li><a class="tree__file" href="#education" data-ext="md">education.md</a></li>
-            <li>
-              <a class="tree__file" href="#certificates" data-ext="json">certificates.json</a>
-            </li>
-            <li><a class="tree__file" href="#languages" data-ext="yml">languages.yml</a></li>
-            <li><a class="tree__file" href="#contact" data-ext="ts">contact.ts</a></li>
-            <li>
-              <a
-                class="tree__file"
-                href="./src/files/CV_Nazima_Jumaniyazova_EN.pdf"
-                download
-                data-ext="pdf"
-                >CV.pdf</a
-              >
-            </li>
-          </ul>
-        </nav>
-        <p class="sidebar__hint">
-          Tip: press <kbd>Ctrl K</kbd> to jump to any file, or type <kbd>help</kbd> in the terminal.
-        </p>
+      <aside class="sidebar" id="explorer" aria-label="Side bar">
+        <div class="sidebar__views">
+          <button class="sidebar__view" type="button" data-view="explorer" aria-pressed="true">
+            Explorer
+          </button>
+          <button class="sidebar__view" type="button" data-view="search" aria-pressed="false">
+            Search
+          </button>
+        </div>
+
+        <!-- Search in all files. Filled by src/js/search.js -->
+        <div class="search" data-panel="search" hidden>
+          <form class="search__form" role="search">
+            <label class="visually-hidden" for="search-input">Search in all files</label>
+            <input
+              class="search__input"
+              id="search-input"
+              type="search"
+              placeholder="Search in files"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </form>
+          <p class="search__summary" id="search-summary" role="status"></p>
+          <div class="search__results" id="search-results"></div>
+        </div>
+
+        <div class="sidebar__panel" data-panel="explorer">
+          <nav class="tree" aria-label="Files">
+            <p class="tree__root">nazima-portfolio</p>
+            <ul class="tree__list">
+              <li><a class="tree__file" href="#readme" data-ext="md">README.md</a></li>
+              <li><a class="tree__file" href="#about" data-ext="md">about.md</a></li>
+              <li><a class="tree__file" href="#skills" data-ext="json">skills.json</a></li>
+              <li><a class="tree__file" href="#experience" data-ext="ts">experience.ts</a></li>
+              <li>
+                <p class="tree__folder">projects</p>
+                <ul class="tree__list tree__list--nested">
+                  <li><a class="tree__file" href="#dachatop" data-ext="tsx">dachatop.tsx</a></li>
+                  <li><a class="tree__file" href="#videohub" data-ext="tsx">videohub.tsx</a></li>
+                  <li><a class="tree__file" href="#scolaro" data-ext="tsx">scolaro.tsx</a></li>
+                  <li><a class="tree__file" href="#minivan" data-ext="tsx">minivan.tsx</a></li>
+                  <li><a class="tree__file" href="#mymehmon" data-ext="tsx">mymehmon.tsx</a></li>
+                  <li><a class="tree__file" href="#todo-app" data-ext="tsx">todo-app.tsx</a></li>
+                </ul>
+              </li>
+              <li><a class="tree__file" href="#mentoring" data-ext="md">mentoring.md</a></li>
+              <li><a class="tree__file" href="#education" data-ext="md">education.md</a></li>
+              <li>
+                <a class="tree__file" href="#certificates" data-ext="json">certificates.json</a>
+              </li>
+              <li><a class="tree__file" href="#languages" data-ext="yml">languages.yml</a></li>
+              <li><a class="tree__file" href="#contact" data-ext="ts">contact.ts</a></li>
+              <li>
+                <a
+                  class="tree__file"
+                  href="./src/files/CV_Nazima_Jumaniyazova_EN.pdf"
+                  download
+                  data-ext="pdf"
+                  >CV.pdf</a
+                >
+              </li>
+            </ul>
+          </nav>
+          <p class="sidebar__hint">
+            Tip: press <kbd>Ctrl K</kbd> to jump to any file, <kbd>Ctrl Shift F</kbd> to search
+            inside them, or type <kbd>help</kbd> in the terminal.
+          </p>
+        </div>
       </aside>
       <div class="scrim" data-action="explorer" aria-hidden="true"></div>
 
@@ -222,10 +253,10 @@
               <p class="l"><span class="m">&gt;</span> Frontend Software Engineer, Tashkent</p>
               <div class="l" aria-hidden="true"></div>
               <p class="l">
-                4+ years of building web applications with <code class="s">React</code>,
-                <code class="s">TypeScript</code>, <code class="s">Redux Toolkit</code> and
-                <code class="s">Tailwind CSS</code>. Now working on real-time interfaces and admin
-                tools for fintech.
+                5 years of building large single-page applications with
+                <code class="s">React</code> and <code class="s">TypeScript</code>, including 2
+                years on banking and financial products. I own features end to end, from design
+                hand-off to production.
               </p>
               <div class="l" aria-hidden="true"></div>
               <h2 class="l"><span class="h">## Start here</span></h2>
@@ -259,8 +290,15 @@
                 <li class="l">
                   <span class="m">-</span> <kbd>Ctrl K</kbd> search files and commands
                 </li>
+                <li class="l">
+                  <span class="m">-</span> <kbd>Ctrl Shift F</kbd> search inside all files
+                </li>
                 <li class="l"><span class="m">-</span> <kbd>Ctrl J</kbd> toggle the terminal</li>
                 <li class="l"><span class="m">-</span> <kbd>Ctrl B</kbd> toggle the explorer</li>
+                <li class="l">
+                  <span class="m">-</span> press <kbd>▶ Run</kbd> in any project file to start it
+                </li>
+                <li class="l"><span class="m">-</span> hover a skill to see where I used it</li>
                 <li class="l">
                   <span class="m">-</span> type <kbd>help</kbd> in the terminal to see what it can
                   do
@@ -291,7 +329,7 @@
                   <span class="k">import</span>
                   <span
                     class="typed"
-                    data-words="React|TypeScript|Redux Toolkit|Tailwind CSS|React Query"
+                    data-words="React|TypeScript|Redux Toolkit|Jest|Tailwind CSS|MUI"
                     >React</span
                   >
                 </p>
@@ -319,20 +357,36 @@
               <h2 class="l"><span class="h"># About me</span></h2>
               <div class="l" aria-hidden="true"></div>
               <p class="l">
-                Frontend developer with 4+ years of experience building scalable and intuitive web
-                applications using React, TypeScript, Redux, and modern CSS frameworks.
+                Frontend engineer with 5 years of experience building and maintaining large-scale
+                single-page applications in React and TypeScript, including 2 years on banking and
+                financial products.
               </p>
               <div class="l" aria-hidden="true"></div>
               <p class="l">
-                Skilled in transforming complex UI/UX designs into responsive interfaces and
-                collaborating closely with designers, product managers, and backend engineers.
-                Passionate about clean architecture, usability, and performance optimization.
+                I own features end to end, from design hand-off to production, with a focus on
+                performance optimization, clean architecture and test coverage.
               </p>
               <div class="l" aria-hidden="true"></div>
               <p class="l">
-                Currently focused on delivering real-time interfaces and admin tools for fintech
-                platforms.
+                I review code daily, maintain technical documentation, and mentor other frontend
+                developers. Experienced in distributed, remote-first teams.
               </p>
+              <div class="l" aria-hidden="true"></div>
+              <h3 class="l"><span class="h">## Right now</span></h3>
+              <div class="l" aria-hidden="true"></div>
+              <ul>
+                <li class="l">
+                  <span class="m">-</span> Building product interfaces at
+                  <a href="#experience">PLATMA</a>, remotely
+                </li>
+                <li class="l">
+                  <span class="m">-</span> Mentoring at
+                  <a href="#mentoring">The Rolling Scopes School</a>
+                </li>
+                <li class="l">
+                  <span class="m">-</span> Based in Tashkent, open to relocation and business trips
+                </li>
+              </ul>
               <div class="l" aria-hidden="true"></div>
               <p class="l">
                 <span class="c">&lt;!-- next:</span> <a href="#experience">experience.ts</a>
@@ -365,20 +419,23 @@
                 <li class="l i1">
                   <span class="n">"frameworks"</span><span class="m">: [</span
                   ><span class="s skill">"React"</span><span class="m">,</span>
-                  <span class="s skill">"React Router"</span><span class="m">],</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">"state"</span><span class="m">: [</span
-                  ><span class="s skill">"Redux Toolkit"</span><span class="m">,</span>
+                  <span class="s skill">"React Router"</span><span class="m">,</span>
+                  <span class="s skill">"Redux Toolkit"</span><span class="m">,</span>
                   <span class="s skill">"React Query"</span><span class="m">,</span>
                   <span class="s skill">"Zustand"</span><span class="m">],</span>
                 </li>
                 <li class="l i1">
-                  <span class="n">"styling"</span><span class="m">: [</span
-                  ><span class="s skill">"Tailwind CSS"</span><span class="m">,</span>
-                  <span class="s skill">"Sass"</span><span class="m">,</span>
+                  <span class="n">"ui"</span><span class="m">: [</span
+                  ><span class="s skill">"MUI"</span><span class="m">,</span>
                   <span class="s skill">"Ant Design"</span><span class="m">,</span>
-                  <span class="s skill">"Bootstrap"</span><span class="m">,</span>
+                  <span class="s skill">"Tailwind CSS"</span><span class="m">,</span>
+                  <span class="s skill">"Bootstrap"</span><span class="m">],</span>
+                </li>
+                <li class="l i1">
+                  <span class="n">"styling"</span><span class="m">: [</span
+                  ><span class="s skill">"Sass"</span><span class="m">,</span>
+                  <span class="s skill">"LESS"</span><span class="m">,</span>
+                  <span class="s skill">"CSS Modules"</span><span class="m">,</span>
                   <span class="s skill">"Styled Components"</span><span class="m">],</span>
                 </li>
                 <li class="l i1">
@@ -386,6 +443,18 @@
                   ><span class="s skill">"React Hook Form"</span><span class="m">,</span>
                   <span class="s skill">"Formik"</span><span class="m">,</span>
                   <span class="s skill">"Yup"</span><span class="m">],</span>
+                </li>
+                <li class="l i1">
+                  <span class="n">"testing"</span><span class="m">: [</span
+                  ><span class="s skill">"Jest"</span><span class="m">,</span>
+                  <span class="s skill">"React Testing Library"</span><span class="m">],</span>
+                </li>
+                <li class="l i1">
+                  <span class="n">"performance"</span><span class="m">: [</span
+                  ><span class="s skill">"Code splitting"</span><span class="m">,</span>
+                  <span class="s skill">"Lazy loading"</span><span class="m">,</span>
+                  <span class="s skill">"Memoization"</span><span class="m">,</span>
+                  <span class="s skill">"Caching"</span><span class="m">],</span>
                 </li>
                 <li class="l i1">
                   <span class="n">"data"</span><span class="m">: [</span
@@ -396,11 +465,22 @@
                   <span class="s skill">"i18next"</span><span class="m">],</span>
                 </li>
                 <li class="l i1">
-                  <span class="n">"tools"</span><span class="m">: [</span
-                  ><span class="s skill">"Git"</span><span class="m">,</span>
-                  <span class="s skill">"Vite"</span><span class="m">,</span>
+                  <span class="n">"tooling"</span><span class="m">: [</span
+                  ><span class="s skill">"Vite"</span><span class="m">,</span>
                   <span class="s skill">"Webpack"</span><span class="m">,</span>
-                  <span class="s skill">"Figma"</span><span class="m">]</span>
+                  <span class="s skill">"ESLint"</span><span class="m">,</span>
+                  <span class="s skill">"Prettier"</span><span class="m">,</span>
+                  <span class="s skill">"Git"</span><span class="m">,</span>
+                  <span class="s skill">"Chrome DevTools"</span><span class="m">,</span>
+                  <span class="s skill">"Figma"</span><span class="m">],</span>
+                </li>
+                <li class="l i1">
+                  <span class="n">"practices"</span><span class="m">: [</span
+                  ><span class="s skill">"Code review"</span><span class="m">,</span>
+                  <span class="s skill">"SOLID"</span><span class="m">,</span>
+                  <span class="s skill">"Clean code"</span><span class="m">,</span>
+                  <span class="s skill">"Technical documentation"</span><span class="m">,</span>
+                  <span class="s skill">"Agile/Scrum"</span><span class="m">]</span>
                 </li>
               </ul>
               <div class="l" aria-hidden="true"><span class="m">}</span></div>
@@ -437,15 +517,67 @@
                 <span class="s">'PLATMA'</span><span class="m">,</span>
               </p>
               <p class="l i2">
-                <span class="n">place</span><span class="m">:</span> <span class="s">'Remote'</span
-                ><span class="m">,</span>
+                <span class="n">place</span><span class="m">:</span>
+                <span class="s">'Remote, full-time'</span><span class="m">,</span>
               </p>
-
+              <div class="l i2" aria-hidden="true">
+                <span class="n">did</span><span class="m">: [</span>
+              </div>
+              <ul>
+                <li class="l i3">
+                  <span class="s"
+                    >'Deliver core product features in React end to end, from planning and
+                    estimation through to production release.'</span
+                  ><span class="m">,</span>
+                </li>
+                <li class="l i3">
+                  <span class="s"
+                    >'Build responsive, cross-browser layouts with HTML/CSS, Sass/LESS and UI
+                    libraries (MUI, Bootstrap).'</span
+                  ><span class="m">,</span>
+                </li>
+                <li class="l i3">
+                  <span class="s"
+                    >'Manage application state with Redux and integrate with backend services over
+                    REST API.'</span
+                  ><span class="m">,</span>
+                </li>
+                <li class="l i3">
+                  <span class="s"
+                    >'Write and maintain automated component tests with Jest and React Testing
+                    Library.'</span
+                  ><span class="m">,</span>
+                </li>
+                <li class="l i3">
+                  <span class="s"
+                    >'Optimize frontend performance through code splitting, lazy loading,
+                    memoization and caching.'</span
+                  ><span class="m">,</span>
+                </li>
+                <li class="l i3">
+                  <span class="s"
+                    >'Take part in code reviews and keep technical documentation for components and
+                    modules up to date.'</span
+                  ><span class="m">,</span>
+                </li>
+              </ul>
+              <div class="l i2" aria-hidden="true"><span class="m">],</span></div>
+              <p class="l i2">
+                <span class="n">stack</span><span class="m">: [</span
+                ><span class="s skill">'React'</span><span class="m">,</span>
+                <span class="s skill">'Redux'</span><span class="m">,</span>
+                <span class="s skill">'Sass'</span><span class="m">,</span>
+                <span class="s skill">'LESS'</span><span class="m">,</span>
+                <span class="s skill">'MUI'</span><span class="m">,</span>
+                <span class="s skill">'Bootstrap'</span><span class="m">,</span>
+                <span class="s skill">'Jest'</span><span class="m">,</span>
+                <span class="s skill">'React Testing Library'</span><span class="m">],</span>
+              </p>
               <div class="l i1" aria-hidden="true"><span class="m">},</span></div>
               <div class="l i1" aria-hidden="true"><span class="m">{</span></div>
               <p class="l i2">
                 <span class="n">period</span><span class="m">:</span>
-                <span class="s">'Sep 2023 – present'</span><span class="m">,</span>
+                <span class="s">'Sep 2023 – Aug 2025'</span><span class="m">,</span>
               </p>
               <h3 class="l i2">
                 <span class="n">role</span><span class="m">:</span>
@@ -465,38 +597,32 @@
               <ul>
                 <li class="l i3">
                   <span class="s"
-                    >'Led UI modernization of the Risk Assessment system using React, TypeScript,
-                    and Redux Toolkit to improve usability and performance.'</span
+                    >'Improved UX and runtime performance of the internal analytics system by
+                    40%.'</span
                   ><span class="m">,</span>
                 </li>
                 <li class="l i3">
                   <span class="s"
-                    >'Enabled lazy-loading to improve loading UI and optimize dashboard
-                    performance.'</span
+                    >'Reduced dashboard load time by 30% by introducing WebSocket streaming and
+                    lazy-loading with code splitting.'</span
                   ><span class="m">,</span>
                 </li>
                 <li class="l i3">
                   <span class="s"
-                    >'Refactored legacy tax service UI into a modular React component library to
-                    accelerate feature development.'</span
+                    >'Built and documented a shared component library that cut delivery time for new
+                    interfaces by 25% and unified the UI across product teams.'</span
                   ><span class="m">,</span>
                 </li>
                 <li class="l i3">
                   <span class="s"
-                    >'Built dynamic form builders for loan applications (mortgage, auto, education)
-                    using React Hook Form for better data accuracy and UX.'</span
+                    >'Implemented dynamic, schema-driven application forms with complex multi-step
+                    validation, and real-time financial dashboards with ApexCharts.'</span
                   ><span class="m">,</span>
                 </li>
                 <li class="l i3">
                   <span class="s"
-                    >'Developed interactive dashboards with ApexCharts for real-time financial data
-                    visualization and market trend analysis.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Provided ongoing support for existing projects, fixing bugs and optimizing
-                    frontend performance.'</span
+                    >'Worked in a regulated financial environment with strict requirements for data
+                    accuracy, security and accessibility.'</span
                   ><span class="m">,</span>
                 </li>
               </ul>
@@ -506,19 +632,17 @@
                 ><span class="s skill">'React'</span><span class="m">,</span>
                 <span class="s skill">'TypeScript'</span><span class="m">,</span>
                 <span class="s skill">'Redux Toolkit'</span><span class="m">,</span>
-                <span class="s skill">'React Query'</span><span class="m">,</span>
-                <span class="s skill">'Sass'</span><span class="m">,</span>
-                <span class="s skill">'Ant Design'</span><span class="m">,</span>
-                <span class="s skill">'Formik + Yup'</span><span class="m">,</span>
+                <span class="s skill">'WebSocket'</span><span class="m">,</span>
                 <span class="s skill">'ApexCharts'</span><span class="m">,</span>
-                <span class="s skill">'React Intl'</span><span class="m">,</span>
+                <span class="s skill">'Ant Design'</span><span class="m">,</span>
+                <span class="s skill">'Sass'</span><span class="m">,</span>
                 <span class="s skill">'Webpack'</span><span class="m">],</span>
               </p>
               <div class="l i1" aria-hidden="true"><span class="m">},</span></div>
               <div class="l i1" aria-hidden="true"><span class="m">{</span></div>
               <p class="l i2">
                 <span class="n">period</span><span class="m">:</span>
-                <span class="s">'May 2021 – Sep 2023'</span><span class="m">,</span>
+                <span class="s">'Sep 2021 – Sep 2023'</span><span class="m">,</span>
               </p>
               <h3 class="l i2">
                 <span class="n">role</span><span class="m">:</span>
@@ -530,112 +654,54 @@
               </p>
               <p class="l i2">
                 <span class="n">place</span><span class="m">:</span>
-                <span class="s">'Tashkent, remote'</span><span class="m">,</span>
+                <span class="s">'Tashkent, Uzbekistan'</span><span class="m">,</span>
               </p>
               <div class="l i2" aria-hidden="true">
                 <span class="n">did</span><span class="m">: [</span>
               </div>
               <ul>
                 <li class="l i3">
-                  <span class="s"
-                    >'Developed complex, responsive user interfaces using React, TypeScript,
-                    Tailwind CSS, and Ant Design.'</span
+                  <a href="#videohub"
+                    >'VideoHub.uz: LMS with progress tracking, role-based access and in-app
+                    messaging.'</a
+                  ><span class="m">,</span>
+                </li>
+                <li class="l i3">
+                  <a href="#dachatop"
+                    >'DachaTop.uz: real-estate portal with authentication, analytics and listing
+                    management.'</a
+                  ><span class="m">,</span>
+                </li>
+                <li class="l i3">
+                  <a href="#scolaro"
+                    >'Scolaro.uz: university admissions platform with advanced filtering and
+                    reviews.'</a
                   ><span class="m">,</span>
                 </li>
                 <li class="l i3">
                   <span class="s"
-                    >'Managed form logic and validation with React Hook Form and Yup for smooth,
-                    user-friendly experiences.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Handled state and data fetching with Redux Toolkit and React Query to build
-                    efficient, scalable apps.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Integrated REST APIs and real-time updates using WebSocket, improving
-                    interactivity and performance.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Followed SPA and modular architecture principles to build clean, maintainable,
-                    and reusable code.'</span
+                    >'Built responsive React interfaces, integrated REST APIs, and implemented
+                    business logic and user scenarios, working directly with designers and clients
+                    to translate Figma designs into production.'</span
                   ><span class="m">,</span>
                 </li>
               </ul>
               <div class="l i2" aria-hidden="true"><span class="m">],</span></div>
-
-              <div class="l i1" aria-hidden="true"><span class="m">},</span></div>
-              <div class="l i1" aria-hidden="true"><span class="m">{</span></div>
               <p class="l i2">
-                <span class="n">period</span><span class="m">:</span>
-                <span class="s">'Oct 2019 – May 2021'</span><span class="m">,</span>
+                <span class="n">stack</span><span class="m">: [</span
+                ><span class="s skill">'React'</span><span class="m">,</span>
+                <span class="s skill">'TypeScript'</span><span class="m">,</span>
+                <span class="s skill">'REST API'</span><span class="m">,</span>
+                <span class="s skill">'Ant Design'</span><span class="m">,</span>
+                <span class="s skill">'Sass'</span><span class="m">,</span>
+                <span class="s skill">'Figma'</span><span class="m">],</span>
               </p>
-              <h3 class="l i2">
-                <span class="n">role</span><span class="m">:</span>
-                <span class="s">'Customer Support &amp; Front-End Assistant'</span
-                ><span class="m">,</span>
-              </h3>
-              <p class="l i2">
-                <span class="n">company</span><span class="m">:</span>
-                <span class="s">'StylemixThemes'</span><span class="m">,</span>
-              </p>
-              <p class="l i2">
-                <span class="n">place</span><span class="m">:</span>
-                <span class="s">'Dubai, UAE'</span><span class="m">,</span>
-              </p>
-              <div class="l i2" aria-hidden="true">
-                <span class="n">did</span><span class="m">: [</span>
-              </div>
-              <ul>
-                <li class="l i3">
-                  <span class="s"
-                    >'Provided fast and helpful support via chat, email, and phone, solving user
-                    issues quickly.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Reported bugs, collected user feedback, and helped improve UI/UX
-                    quality.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Assisted with front-end tasks like updating layouts, fixing styles, and
-                    editing page content.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Helped test new features, debug UI issues, and verify responsive design across
-                    devices.'</span
-                  ><span class="m">,</span>
-                </li>
-              </ul>
-              <div class="l i2" aria-hidden="true"><span class="m">],</span></div>
-
-              <div class="l i1" aria-hidden="true"><span class="m">},</span></div>
-              <div class="l i1" aria-hidden="true"><span class="m">{</span></div>
-              <p class="l i2">
-                <span class="n">period</span><span class="m">:</span>
-                <span class="s">'2017 – 2019'</span><span class="m">,</span>
-              </p>
-              <h3 class="l i2">
-                <span class="n">role</span><span class="m">:</span>
-                <span class="s">'Mathematics teacher'</span><span class="m">,</span>
-              </h3>
-              <p class="l i2">
-                <span class="n">company</span><span class="m">:</span>
-                <span class="s">'School'</span><span class="m">,</span>
-              </p>
-
               <div class="l i1" aria-hidden="true"><span class="m">},</span></div>
               <div class="l" aria-hidden="true"><span class="m">];</span></div>
+              <div class="l" aria-hidden="true"></div>
+              <p class="l">
+                <span class="c">// see also:</span> <a href="#mentoring">mentoring.md</a>
+              </p>
             </div>
           </article>
 
@@ -670,14 +736,14 @@
 
               <p class="l i2">
                 <span class="n">role</span><span class="m">=</span
-                ><span class="s">"Freelance, front-end"</span>
+                ><span class="s">"Frontend, at Brain Development"</span>
               </p>
 
               <p class="l i2">
                 <span class="n">about</span><span class="m">=</span
                 ><span class="s"
-                  >"A real estate platform for renting dachas, with analytics dashboards and
-                  property management."</span
+                  >"A real-estate portal for renting dachas, with authentication, analytics and
+                  listing management."</span
                 >
               </p>
               <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
@@ -748,6 +814,10 @@
                   >"https://videohub.uz/"</a
                 >
               </p>
+              <p class="l i2">
+                <span class="n">role</span><span class="m">=</span
+                ><span class="s">"Frontend, at Brain Development"</span>
+              </p>
 
               <p class="l i2">
                 <span class="n">stack</span><span class="m">={[</span
@@ -764,14 +834,14 @@
               <p class="l i2">
                 <span class="n">about</span><span class="m">=</span
                 ><span class="s"
-                  >"A learning management system (LMS) with interactive course tracking, messaging,
-                  and role-based dashboards."</span
+                  >"A learning management system (LMS) with progress tracking, role-based access and
+                  in-app messaging."</span
                 >
               </p>
               <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
               <div class="l" aria-hidden="true"><span class="m">);</span></div>
               <div class="l" aria-hidden="true"></div>
-              <p class="l"><span class="c">// next:</span> <a href="#minivan">minivan.tsx</a></p>
+              <p class="l"><span class="c">// next:</span> <a href="#scolaro">scolaro.tsx</a></p>
             </div>
             <div class="file__preview">
               <p class="preview-label" aria-hidden="true">Preview</p>
@@ -804,9 +874,51 @@
                     >Open live site</a
                   >
 
-                  <a class="btn" href="#minivan">Next project</a>
+                  <a class="btn" href="#scolaro">Next project</a>
                 </div>
               </div>
+            </div>
+          </article>
+
+          <article
+            class="file"
+            id="scolaro"
+            data-name="scolaro.tsx"
+            data-path="projects/scolaro.tsx"
+            data-ext="tsx"
+            data-lang="TypeScript JSX"
+          >
+            <div class="file__source code">
+              <div class="l" aria-hidden="true">
+                <span class="k">export const</span> <span class="f">Scolaro</span>
+                <span class="m">= () =&gt; (</span>
+              </div>
+              <div class="l i1" aria-hidden="true">
+                <span class="m">&lt;</span><span class="t">Project</span>
+              </div>
+              <h2 class="l i2">
+                <span class="n">name</span><span class="m">=</span
+                ><span class="s">"Scolaro.uz"</span>
+              </h2>
+              <p class="l i2">
+                <span class="n">role</span><span class="m">=</span
+                ><span class="s">"Frontend, at Brain Development"</span>
+              </p>
+              <p class="l i2">
+                <span class="n">stack</span><span class="m">={[</span
+                ><span class="s skill">'React'</span><span class="m">,</span>
+                <span class="s skill">'REST API'</span><span class="m">]}</span>
+              </p>
+              <p class="l i2">
+                <span class="n">about</span><span class="m">=</span
+                ><span class="s"
+                  >"A university admissions platform with advanced filtering and reviews."</span
+                >
+              </p>
+              <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
+              <div class="l" aria-hidden="true"><span class="m">);</span></div>
+              <div class="l" aria-hidden="true"></div>
+              <p class="l"><span class="c">// next:</span> <a href="#minivan">minivan.tsx</a></p>
             </div>
           </article>
 
@@ -1035,26 +1147,26 @@
               </p>
               <div class="l" aria-hidden="true"></div>
               <p class="l">
-                I mentor a group of 2–6 aspiring frontend developers through an intensive 11–13 week
-                program at a free, community-driven coding school.
+                I mentor groups of 2–6 aspiring frontend developers through an intensive 11–13 week
+                program at RS School, a free community-driven coding school with 1,500+ graduates
+                worldwide.
               </p>
               <div class="l" aria-hidden="true"></div>
               <ul>
                 <li class="l">
-                  <span class="m">-</span> Technical screening interviews on HTML, CSS and
+                  <span class="m">-</span> Conduct technical screening interviews on HTML, CSS and
                   JavaScript fundamentals
                 </li>
                 <li class="l">
-                  <span class="m">-</span> Weekly code reviews of Pull Requests: code quality,
-                  architecture, best practices
+                  <span class="m">-</span> Review student pull requests weekly: code quality,
+                  architecture, DRY/KISS, semantic HTML, CSS structure and JS patterns
                 </li>
                 <li class="l">
-                  <span class="m">-</span> Weekly 60–90 minute meetings on curriculum topics and
-                  student questions
+                  <span class="m">-</span> Run weekly 60–90 minute sessions on curriculum topics
                 </li>
                 <li class="l">
-                  <span class="m">-</span> Grading assignments and helping beginners grow into
-                  job-ready junior developers
+                  <span class="m">-</span> Grade assignments against defined criteria and guide
+                  students from beginners to job-ready junior developers
                 </li>
               </ul>
               <div class="l" aria-hidden="true"></div>
@@ -1078,11 +1190,9 @@
             <div class="file__source code">
               <h2 class="l"><span class="h"># Education</span></h2>
               <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                <strong>**Lomonosov Moscow State University, Tashkent branch**</strong>
-              </p>
-              <p class="l">Bachelor, Applied Mathematics and Computer Science</p>
-              <p class="l"><span class="c">2013 – 2017</span></p>
+              <p class="l"><strong>**Lomonosov Moscow State University (MSU)**</strong></p>
+              <p class="l">Bachelor's degree, Applied Mathematics and Computer Science</p>
+              <p class="l"><span class="c">graduated in 2017</span></p>
               <div class="l" aria-hidden="true"></div>
               <p class="l">
                 <span class="c">&lt;!-- see also:</span>
@@ -1117,7 +1227,15 @@
                   <span class="s">"Meta React Specialization"</span><span class="m">,</span>
                   <span class="n">"by"</span><span class="m">:</span> <span class="s">"Meta"</span
                   ><span class="m">,</span> <span class="n">"issued"</span><span class="m">:</span>
-                  <span class="s">"Mar 2026"</span> <span class="m">},</span>
+                  <span class="s">"Mar 2026"</span><span class="m">,</span>
+                  <span class="n">"verify"</span><span class="m">:</span>
+                  <a
+                    href="https://coursera.org/verify/specialization/HO2YYW0CWJW5"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >"coursera.org/verify/specialization/HO2YYW0CWJW5"</a
+                  >
+                  <span class="m">},</span>
                 </li>
                 <li class="l i1">
                   <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
@@ -1154,7 +1272,15 @@
                   <span class="n">"by"</span><span class="m">:</span>
                   <span class="s">"The Rolling Scopes School"</span><span class="m">,</span>
                   <span class="n">"issued"</span><span class="m">:</span>
-                  <span class="s">"Mar 2023"</span> <span class="m">}</span>
+                  <span class="s">"2023"</span><span class="m">,</span>
+                  <span class="n">"verify"</span><span class="m">:</span>
+                  <a
+                    href="https://app.rs.school/certificate/deja5sdc"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >"app.rs.school/certificate/deja5sdc"</a
+                  >
+                  <span class="m">}</span>
                 </li>
               </ul>
               <div class="l" aria-hidden="true"><span class="m">]</span></div>
@@ -1174,16 +1300,16 @@
               <h2 class="l"><span class="n">languages</span><span class="m">:</span></h2>
               <ul>
                 <li class="l i1">
-                  <span class="m">-</span> <span class="n">English</span><span class="m">:</span>
-                  <span class="s">Upper Intermediate</span>
-                </li>
-                <li class="l i1">
                   <span class="m">-</span> <span class="n">Russian</span><span class="m">:</span>
                   <span class="s">Native</span>
                 </li>
                 <li class="l i1">
                   <span class="m">-</span> <span class="n">Uzbek</span><span class="m">:</span>
                   <span class="s">Native</span>
+                </li>
+                <li class="l i1">
+                  <span class="m">-</span> <span class="n">English</span><span class="m">:</span>
+                  <span class="s">B2, Upper Intermediate</span>
                 </li>
               </ul>
             </div>
@@ -1248,6 +1374,14 @@
                   <span class="n">location</span><span class="m">:</span>
                   <span class="s">'Tashkent, Uzbekistan'</span><span class="m">,</span>
                 </li>
+                <li class="l i1">
+                  <span class="n">relocation</span><span class="m">:</span>
+                  <span class="k">true</span><span class="m">,</span>
+                </li>
+                <li class="l i1">
+                  <span class="n">businessTrips</span><span class="m">:</span>
+                  <span class="k">true</span><span class="m">,</span>
+                </li>
               </ul>
               <div class="l" aria-hidden="true"><span class="m">};</span></div>
             </div>
@@ -1278,7 +1412,7 @@
           >
             Terminal
           </button>
-          <span class="terminal__hint" aria-hidden="true">try: help, ls, git log, theme</span>
+          <span class="terminal__hint" aria-hidden="true">try: help, run, grep react, git log</span>
           <button class="icon-btn" type="button" aria-label="Clear terminal" data-term="clear">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13" />

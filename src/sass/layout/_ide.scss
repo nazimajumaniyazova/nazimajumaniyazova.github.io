@@ -213,12 +213,40 @@ html:not(.js) {
     }
   }
 
-  &__title {
-    padding: 0.75rem 1rem 0.5rem;
+  &__views {
+    display: flex;
+    flex: none;
+    gap: 1rem;
+    padding: 0 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  &__view {
+    padding: 0.75rem 0 0.4rem;
     font-size: 0.6875rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--c-muted);
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      color: var(--c-text);
+    }
+
+    &[aria-pressed='true'] {
+      color: var(--c-strong);
+      border-bottom-color: var(--c-accent);
+    }
+  }
+
+  &__panel {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+
+    &[hidden] {
+      display: none;
+    }
   }
 
   &__hint {

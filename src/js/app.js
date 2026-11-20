@@ -154,6 +154,35 @@
     root.classList.toggle(desktop.matches ? 'explorer-collapsed' : 'explorer-open');
   }
 
+  // The side bar has two views, Explorer and Search, as in VS Code.
+  let view = 'explorer';
+
+  const sidebarVisible = () =>
+    desktop.matches
+      ? !root.classList.contains('explorer-collapsed')
+      : root.classList.contains('explorer-open');
+
+  function showView(name) {
+    view = name;
+    $$('[data-panel]').forEach((panel) => (panel.hidden = panel.dataset.panel !== name));
+    $$('[data-view]').forEach((button) =>
+      button.setAttribute('aria-pressed', String(button.dataset.view === name)),
+    );
+    root.classList.remove('explorer-collapsed');
+    if (!desktop.matches) root.classList.add('explorer-open');
+    if (name === 'search') {
+      const input = $('#search-input');
+      input.focus();
+      input.select();
+    }
+  }
+
+  // Clicking the icon of the view that is already open hides the side bar.
+  function toggleView(name) {
+    if (sidebarVisible() && view === name) toggleExplorer();
+    else showView(name);
+  }
+
   function toggleTerminal(show) {
     const collapsed =
       typeof show === 'boolean' ? !show : !root.classList.contains('terminal-collapsed');
@@ -251,6 +280,8 @@
 
   const actions = {
     explorer: toggleExplorer,
+    'view-explorer': () => toggleView('explorer'),
+    'view-search': () => toggleView('search'),
     terminal: () => toggleTerminal(),
     theme: cycleTheme,
     palette: () => api.openPalette && api.openPalette(),
@@ -262,6 +293,12 @@
     const action = target.closest('[data-action]');
     if (action) {
       actions[action.dataset.action]();
+      return;
+    }
+
+    const viewButton = target.closest('[data-view]');
+    if (viewButton) {
+      showView(viewButton.dataset.view);
       return;
     }
 
@@ -316,7 +353,10 @@
     if (event.key === 'Escape') root.classList.remove('explorer-open');
     if (!(event.ctrlKey || event.metaKey) || event.altKey) return;
     const key = event.key.toLowerCase();
-    if (key === 'k' || key === 'p') {
+    if (key === 'f' && event.shiftKey) {
+      event.preventDefault();
+      showView('search');
+    } else if (key === 'k' || key === 'p') {
       event.preventDefault();
       actions.palette();
     } else if (key === 'b') {
@@ -345,6 +385,7 @@
     setTheme,
     cycleTheme,
     toggleExplorer,
+    showView,
     toggleTerminal,
     flash,
     copyText,

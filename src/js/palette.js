@@ -23,7 +23,15 @@
         hint: 'color theme',
         run: () => P.setTheme(theme.id),
       })),
+      P.files
+        .filter((file) => file.path.startsWith('projects/'))
+        .map((file) => ({
+          label: 'Run ' + file.name,
+          hint: 'project',
+          run: () => P.runProject(file.id),
+        })),
       [
+        { label: 'Search in files', hint: 'Ctrl Shift F', run: () => P.showView('search') },
         { label: 'Toggle terminal', hint: 'Ctrl J', run: () => P.toggleTerminal() },
         { label: 'Toggle explorer', hint: 'Ctrl B', run: () => P.toggleExplorer() },
         {

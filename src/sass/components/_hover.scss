@@ -1,0 +1,109 @@
+@use '../abstracts/mixins' as *;
+
+// IDE-style hover card that shows where a skill was used.
+.hover-card {
+  position: fixed;
+  z-index: calc(var(--z-palette) - 1);
+  width: min(19rem, calc(100vw - 1rem));
+  padding: 0.7rem 0.85rem 0.6rem;
+  font-family: var(--ff-ui);
+  font-size: var(--fs-ui);
+  color: var(--c-text);
+  background-color: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 0.5rem;
+  box-shadow: 0 1rem 2rem -0.75rem rgba(0, 0, 0, 0.5);
+  animation: hover-in 0.15s var(--ease-out);
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__name {
+    font-family: var(--ff-mono);
+    font-weight: 700;
+    color: var(--c-string);
+  }
+
+  &__kind {
+    padding: 0 0.45rem;
+    font-size: 0.6875rem;
+    line-height: 1.5;
+    color: var(--c-muted);
+    border: 1px solid var(--c-border);
+    border-radius: 1rem;
+  }
+
+  &__label {
+    margin-bottom: 0.25rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+
+  &__list button {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    width: calc(100% + 0.8rem);
+    margin: 0 -0.4rem;
+    padding: 0.3rem 0.4rem;
+    color: var(--c-strong);
+    text-align: left;
+    border-radius: 0.3rem;
+
+    &:hover {
+      color: var(--c-accent);
+      background-color: var(--c-line);
+    }
+
+    small {
+      flex: none;
+      font-size: var(--fs-small);
+      color: var(--c-muted);
+    }
+  }
+
+  &__none {
+    color: var(--c-muted);
+  }
+
+  &__find {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    font-size: var(--fs-small);
+    color: var(--c-accent);
+    text-align: left;
+    border-top: 1px solid var(--c-border);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@keyframes hover-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+}
+
+.skill {
+  cursor: help;
+
+  &.is-hovered {
+    color: var(--c-on-accent);
+    background-color: var(--c-accent);
+  }
+}

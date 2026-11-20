@@ -67,6 +67,143 @@
   const notFound = (name) =>
     '<span class="terminal__error">No such file: ' + esc(name) + '</span>. Try ' + run('ls') + '.';
 
+  // ---------- Running projects ----------
+
+  const isProject = (file) => Boolean(file) && file.path.startsWith('projects/');
+  const projects = P.files.filter(isProject);
+  const wide = window.matchMedia('(min-width: 80em)');
+
+  // Everything the fake build needs is read from the project file itself.
+  function projectInfo(file) {
+    const source = file.el.querySelector('.file__source');
+    const name = source.querySelector('h2 .s');
+    const link = source.querySelector('.l a[href^="http"]');
+    const stack = Array.from(source.querySelectorAll('.skill'), (skill) =>
+      skill.textContent.replace(/['"]/g, ''),
+    );
+    return {
+      name: name ? name.textContent.replace(/"/g, '') : file.name,
+      url: link ? link.href : null,
+      stack: Array.from(new Set(stack)),
+      window: file.el.querySelector('.file__preview .window'),
+    };
+  }
+
+  // A "▶ Run | Open live site" lens above the code of every project.
+  projects.forEach((file) => {
+    const info = projectInfo(file);
+    const lens = document.createElement('p');
+    lens.className = 'lens';
+    lens.innerHTML =
+      '<button class="lens__run" type="button" data-run-project="' +
+      file.id +
+      '">▶ Run</button>' +
+      (info.url
+        ? '<span aria-hidden="true">|</span>' + external(info.url, 'Open live site')
+        : '<span aria-hidden="true">|</span><span>no public link</span>');
+    file.el.querySelector('.file__source').prepend(lens);
+  });
+
+  const bar = (part) => {
+    const filled = Math.round(part * 24);
+    return (
+      '  [' +
+      '█'.repeat(filled) +
+      '░'.repeat(24 - filled) +
+      '] ' +
+      String(Math.round(part * 100)).padStart(3) +
+      '%'
+    );
+  };
+
+  let running = false;
+
+  function runProject(file) {
+    if (running) return 'A project is already starting, give it a second.';
+    running = true;
+    const info = projectInfo(file);
+    const win = info.window;
+    P.openFile(file.id);
+    P.toggleTerminal(true);
+
+    if (win) {
+      win.classList.remove('is-running');
+      win.classList.add('is-booting');
+      win.style.setProperty('--progress', 0.04);
+      if (!wide.matches) win.scrollIntoView({ block: 'nearest' });
+    }
+
+    // Numbers only make the log look alive; they are stable per project.
+    const modules = 64 + info.name.length * 11 + info.stack.length * 23;
+    const time = 320 + ((info.name.length * 97) % 480);
+    const steps = [
+      '<span class="c">&gt; ' + file.id + '@1.0.0 dev</span>',
+      ' ',
+      info.stack.length
+        ? '  resolving  <span class="s">' + info.stack.map(esc).join(' · ') + '</span>'
+        : '  resolving  dependencies',
+      'progress',
+      '  <span class="s">✓</span> ' + modules + ' modules compiled in ' + time + ' ms',
+      ' ',
+      '  <span class="m">➜</span>  Live:     ' +
+        (info.url
+          ? external(info.url, info.url.replace(/^https?:\/\//, '').replace(/\/$/, ''))
+          : '<span class="c">no public link for this project</span>'),
+    ];
+    if (win) {
+      steps.push(
+        '  <span class="m">➜</span>  Preview:  ' +
+          (wide.matches ? 'on the right' : 'above the code'),
+      );
+    }
+
+    const pause = P.reducedMotion ? 0 : 240;
+    let index = 0;
+
+    function finish() {
+      running = false;
+      if (win) {
+        win.style.setProperty('--progress', 1);
+        win.classList.remove('is-booting');
+        win.classList.add('is-running');
+      }
+      P.flash(info.name + ' is running');
+    }
+
+    function progress(done) {
+      const line = document.createElement('div');
+      out.append(line);
+      if (P.reducedMotion) {
+        line.textContent = bar(1);
+        return done();
+      }
+      let part = 0;
+      const timer = setInterval(() => {
+        part = Math.min(1, part + 0.06 + Math.random() * 0.07);
+        line.textContent = bar(part);
+        if (win) win.style.setProperty('--progress', 0.1 + part * 0.9);
+        body.scrollTop = body.scrollHeight;
+        if (part >= 1) {
+          clearInterval(timer);
+          setTimeout(done, 160);
+        }
+      }, 70);
+    }
+
+    (function next() {
+      if (index >= steps.length) return finish();
+      const step = steps[index++];
+      if (step === 'progress') return progress(next);
+      print(step);
+      setTimeout(next, pause);
+    })();
+  }
+
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-run-project]');
+    if (button) execute('run ' + button.dataset.runProject);
+  });
+
   const COMMANDS = {
     help: {
       about: 'show this list',
@@ -109,11 +246,65 @@
         return esc(fileText(file));
       },
     },
+    run: {
+      about: 'start a project: run dachatop',
+      run: (args) => {
+        const file = args[0] ? findFile(args[0]) : P.getActive();
+        if (isProject(file)) return runProject(file);
+        return (
+          (args[0]
+            ? '<span class="terminal__error">No such project: ' + esc(args[0]) + '</span>\n'
+            : '') +
+          'Projects: ' +
+          projects.map((project) => run('run ' + project.id)).join('  ')
+        );
+      },
+    },
+    grep: {
+      about: 'search all files: grep jest',
+      run: (args) => {
+        const query = args.join(' ');
+        if (!query) return 'Usage: grep &lt;text&gt;';
+        const result = P.search(query);
+        if (!result.total) return 'No matches for ' + esc(query) + '.';
+        const rows = result.groups
+          .flatMap((group) => group.hits)
+          .slice(0, 8)
+          .map((hit) => {
+            const start = Math.max(0, hit.index - 20);
+            return (
+              '<button type="button" data-goto="' +
+              hit.line.file.id +
+              ':' +
+              hit.line.n +
+              '">' +
+              hit.line.file.path +
+              ':' +
+              hit.line.n +
+              '</button>  <span class="c">' +
+              (start ? '…' : '') +
+              esc(hit.line.text.slice(start, start + 64)) +
+              '</span>'
+            );
+          });
+        return (
+          rows.join('\n') +
+          '\n' +
+          result.total +
+          ' matches in ' +
+          result.groups.length +
+          ' files. <button type="button" data-search="' +
+          esc(query) +
+          '">Show all in Search</button>'
+        );
+      },
+    },
     whoami: {
       about: 'who is behind this site',
       run: () =>
         'Nazima Jumaniyazova, frontend software engineer from Tashkent.\n' +
-        '4+ years with React, TypeScript, Redux Toolkit and Tailwind CSS.\n' +
+        '5 years with React and TypeScript, 2 of them in banking.\n' +
+        'Open to relocation and business trips.\n' +
         'Type ' +
         run('help') +
         ' to see what this terminal can do.',
@@ -178,10 +369,8 @@
               '<span class="h">c08d3f2</span> <span class="c">(HEAD -&gt; main)</span> Dec 2025  Frontend Mentor, The Rolling Scopes School',
               '<span class="h">e41b7a9</span> Sep 2025  Frontend Software Engineer, PLATMA',
               '<span class="h">a3f9c21</span> Sep 2023  Frontend Software Engineer, Asakabank',
-              '<span class="h">9d2e6b4</span> May 2021  Frontend Software Engineer, Brain Development',
-              '<span class="h">7be4d10</span> Oct 2019  Customer Support &amp; Front-End Assistant, StylemixThemes',
-              '<span class="h">2c1a9f4</span> 2017      Mathematics teacher',
-              '<span class="h">0000001</span> 2013      init: Applied Mathematics and Computer Science, MSU',
+              '<span class="h">9d2e6b4</span> Sep 2021  Frontend Software Engineer, Brain Development',
+              '<span class="h">0000001</span> 2017      init: BSc in Applied Mathematics and Computer Science, MSU',
             ].join('\n')
           : 'Only ' + run('git log') + ' works here.',
     },
@@ -204,6 +393,12 @@
     sudo: { run: () => 'Nice try. You are a guest here.' },
     exit: { run: () => 'There is nothing outside. Try ' + run('help') + '.' },
     hello: { run: () => 'Hello! Nice to meet you. ' + run('contact') + ' if you want to talk.' },
+    npm: {
+      run: (args) =>
+        /^(run )?(dev|start)$/.test(args.join(' '))
+          ? COMMANDS.run.run([])
+          : 'Try ' + run('npm run dev') + ' while a project file is open.',
+    },
   };
   COMMANDS.hi = COMMANDS.hello;
   COMMANDS.code = COMMANDS.open;
@@ -240,6 +435,7 @@
     if (parts.length === 1) pool = Object.keys(COMMANDS).filter((name) => COMMANDS[name].about);
     else if (parts[0] === 'theme') pool = P.themes.map((theme) => theme.id);
     else if (parts[0] === 'git') pool = ['log'];
+    else if (parts[0] === 'run') pool = projects.map((file) => file.id);
     else pool = P.files.map((file) => file.path).concat(P.files.map((file) => file.name));
 
     const matches = Array.from(new Set(pool.filter((item) => item.toLowerCase().startsWith(last))));
@@ -324,4 +520,5 @@
   setTimeout(greet, 900);
 
   P.runCommand = execute;
+  P.runProject = (id) => execute('run ' + id);
 })();

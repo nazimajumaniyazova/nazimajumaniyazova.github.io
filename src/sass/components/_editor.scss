@@ -255,6 +255,11 @@ html:not(.js) .file--split {
       color: var(--c-accent);
     }
   }
+
+  .lens__run {
+    font-weight: 600;
+    color: var(--c-string);
+  }
 }
 
 .empty {

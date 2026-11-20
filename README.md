@@ -39,11 +39,13 @@ src/
     abstracts/        tokens (colors of every theme), mixins
     base/             reset, global styles, syntax colors
     layout/_ide       title bar, activity bar, explorer, status bar
-    components/       editor, preview, terminal, palette
+    components/       editor, preview, terminal, palette, search, hover cards
   js/
-    app.js            files and tabs, explorer, themes, status bar
-    terminal.js       terminal commands
+    app.js            files and tabs, side bar views, themes, status bar
+    search.js         Ctrl Shift F search in all files
+    terminal.js       terminal commands, "▶ Run" for projects
     palette.js        Ctrl K search
+    hover.js          skill hover cards ("Used at")
   img/  files/
 ```
 
@@ -61,7 +63,9 @@ line numbers are added by CSS. Indent with `i1` to `i4`. Syntax colors are short
 2. Change the name, links, description and the screenshot (960x600, WebP) in the preview.
 3. Add a link with the same `#id` to the `projects` folder in the explorer.
 
-The tab, the terminal (`ls`, `open`, `cat`) and the search pick the new file up automatically.
+The tab, the terminal (`ls`, `open`, `cat`, `run`), the search, the "▶ Run" lens and the
+skill hover cards pick the new file up automatically. Run reads the project name, the first
+link and the `skill` items from the file itself.
 
 ## Adding a terminal command
 
