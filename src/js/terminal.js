@@ -398,7 +398,7 @@
     },
     git: {
       about: 'my path so far: git log',
-      run: (args) => {
+      run: (args, raw) => {
         const sub = args[0];
         if (sub === 'log') return gitLog();
         if (sub === 'show') {
@@ -407,7 +407,30 @@
             : 'Usage: git show &lt;hash&gt;, hashes are in ' + run('git log');
         }
         if (sub === 'branch') return '* <span class="s">main</span>\n  learning';
-        return 'Try ' + ['git log', 'git show c08d3f2', 'git branch'].map(run).join('  ');
+        if (sub === 'status') {
+          return P.git && P.git.staged()
+            ? "On branch main\nYour branch is ahead of 'origin/main' by 1 commit.\n  (use " +
+                run('git push') +
+                ' to send your message)'
+            : 'On branch main\nnothing to commit, working tree clean';
+        }
+        if (sub === 'commit') {
+          const match = raw.match(/-m\s+(["'])([\s\S]*?)\1?\s*$/) || raw.match(/-m\s+(.+)$/);
+          const message = match ? (match[2] !== undefined ? match[2] : match[1]).trim() : '';
+          if (!message) return 'Usage: git commit -m "Hi Nazima!"\nYour message goes to my inbox.';
+          return P.git.commit(message).join('\n') + '\nNow ' + run('git push') + ' to send it.';
+        }
+        if (sub === 'push') {
+          const lines = P.git && P.git.push();
+          return lines
+            ? lines.join('\n')
+            : 'Everything up-to-date. Write a message first: git commit -m "Hi Nazima!"';
+        }
+        return (
+          'Try ' +
+          ['git log', 'git status', 'git branch'].map(run).join('  ') +
+          '\nor leave me a message: git commit -m "Hi Nazima!", then git push'
+        );
       },
     },
     split: {
@@ -471,7 +494,7 @@
       );
       return;
     }
-    const result = command.run(args);
+    const result = command.run(args, line);
     if (result) print(result);
   }
 
@@ -482,7 +505,7 @@
     let pool;
     if (parts.length === 1) pool = Object.keys(COMMANDS).filter((name) => COMMANDS[name].about);
     else if (parts[0] === 'theme') pool = P.themes.map((theme) => theme.id);
-    else if (parts[0] === 'git') pool = ['log', 'show', 'branch'];
+    else if (parts[0] === 'git') pool = ['log', 'status', 'branch', 'commit', 'push', 'show'];
     else if (parts[0] === 'run') pool = projects.map((file) => file.id);
     else pool = P.files.map((file) => file.path).concat(P.files.map((file) => file.name));
 

@@ -15,6 +15,13 @@
     P.runCommand(command);
   }
 
+  function writeMessage() {
+    P.openFile('contact');
+    const field = document.getElementById('commit-message');
+    field.scrollIntoView({ block: 'center' });
+    field.focus({ preventScroll: true });
+  }
+
   const items = P.files
     .map((file) => ({
       label: file.path,
@@ -43,6 +50,7 @@
         { label: 'Close the second editor', hint: 'split', run: () => P.closeSide() },
         { label: 'Run tests', hint: 'npm test', run: () => terminal('npm test') },
         { label: 'Play snake', hint: 'terminal game', run: () => terminal('snake') },
+        { label: 'Write me a message', hint: 'git commit', run: writeMessage },
         { label: 'Toggle terminal', hint: 'Ctrl J', run: () => P.toggleTerminal() },
         { label: 'Toggle explorer', hint: 'Ctrl B', run: () => P.toggleExplorer() },
         {

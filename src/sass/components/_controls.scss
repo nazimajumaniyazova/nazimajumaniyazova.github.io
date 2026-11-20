@@ -67,3 +67,80 @@
     background-color: color-mix(in srgb, var(--c-accent) 40%, transparent);
   }
 }
+
+// "git commit -m" message box in contact.ts (src/js/contact.js).
+.commit {
+  &__input {
+    display: block;
+    width: min(100%, 40rem);
+    min-height: 5.2em;
+    padding: 0.4rem 0.6rem;
+    font: inherit;
+    color: var(--c-string);
+    background-color: var(--c-line);
+    border: 1px solid var(--c-border);
+    border-radius: 0.35rem;
+    outline: none;
+    resize: vertical;
+
+    &::placeholder {
+      font-style: italic;
+      color: var(--c-muted);
+    }
+
+    &:focus {
+      border-color: var(--c-accent);
+    }
+
+    @include down('md') {
+      font-size: max(1em, 16px);
+    }
+
+    .no-wrap & {
+      width: 36rem;
+    }
+  }
+
+  &__push {
+    margin-left: 0.4rem;
+    padding: 0.1rem 0.75rem;
+    font-family: var(--ff-ui);
+    font-size: var(--fs-ui);
+    font-weight: 700;
+    color: var(--c-on-accent);
+    background-color: var(--c-accent);
+    border-radius: 0.35rem;
+    transition: transform 0.2s var(--ease-out);
+
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  &__hint {
+    margin-left: 0.3rem;
+    font-size: var(--fs-small);
+
+    @media (pointer: coarse) {
+      display: none;
+    }
+  }
+
+  &__log {
+    padding: 0.35rem 1rem 0 var(--gutter);
+    font-size: var(--fs-small);
+    line-height: 1.7;
+    color: var(--c-muted);
+    white-space: pre-wrap;
+
+    &:empty {
+      display: none;
+    }
+
+    button {
+      color: var(--c-accent);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+  }
+}

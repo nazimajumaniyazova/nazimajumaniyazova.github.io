@@ -63,6 +63,7 @@
     <script src="./src/js/settings.js" defer></script>
     <script src="./src/js/split.js" defer></script>
     <script src="./src/js/minimap.js" defer></script>
+    <script src="./src/js/contact.js" defer></script>
     <script src="./src/js/terminal.js" defer></script>
     <script src="./src/js/games.js" defer></script>
     <script src="./src/js/palette.js" defer></script>
@@ -1554,6 +1555,36 @@
                   </li>
                 </ul>
                 <div class="l" aria-hidden="true"><span class="m">};</span></div>
+                <div class="l" aria-hidden="true"></div>
+
+                <!-- A message written as a commit. "Push" opens the visitor's mail app (src/js/contact.js). -->
+                <form class="commit" novalidate>
+                  <p class="l">
+                    <span class="c">// Or write me right here and push it to my inbox:</span>
+                  </p>
+                  <p class="l">
+                    <span class="f">git</span> commit <span class="n">-m</span>
+                    <span class="s">"</span>
+                  </p>
+                  <div class="l i1">
+                    <label class="visually-hidden" for="commit-message">Your message</label>
+                    <textarea
+                      class="commit__input"
+                      id="commit-message"
+                      name="message"
+                      rows="3"
+                      maxlength="1500"
+                      placeholder="Hi Nazima! I would like to talk about…"
+                    ></textarea>
+                  </div>
+                  <p class="l"><span class="s">"</span></p>
+                  <p class="l">
+                    <span class="f">git</span> push <span class="m">origin</span> inbox
+                    <button class="commit__push" type="submit">▶ Push</button>
+                    <span class="c commit__hint">Ctrl Enter</span>
+                  </p>
+                  <div class="commit__log" role="status"></div>
+                </form>
               </div>
             </article>
 
