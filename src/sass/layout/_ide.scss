@@ -42,7 +42,8 @@ html:not(.js) {
   .sidebar,
   .titlebar__search,
   .titlebar__menu,
-  .activity button {
+  .activity button,
+  .minimap {
     display: none;
   }
 }

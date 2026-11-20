@@ -50,6 +50,7 @@
     <script src="./src/js/app.js" defer></script>
     <script src="./src/js/search.js" defer></script>
     <script src="./src/js/scm.js" defer></script>
+    <script src="./src/js/minimap.js" defer></script>
     <script src="./src/js/terminal.js" defer></script>
     <script src="./src/js/palette.js" defer></script>
     <script src="./src/js/hover.js" defer></script>
@@ -260,1169 +261,1190 @@
         <div class="tabs" id="tabs" role="tablist" aria-label="Open files"></div>
         <p class="breadcrumbs" id="breadcrumbs" aria-hidden="true"></p>
 
-        <div class="panes" id="panes">
-          <!-- README.md -->
+        <div class="editor__body" id="editor-body">
+          <div class="panes" id="panes">
+            <!-- README.md -->
 
-          <article
-            class="file file--split"
-            id="readme"
-            data-name="README.md"
-            data-path="README.md"
-            data-ext="md"
-            data-lang="Markdown"
-          >
-            <div class="file__source code">
-              <h1 class="l"><span class="h"># Nazima Jumaniyazova</span></h1>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l"><span class="m">&gt;</span> Frontend Software Engineer, Tashkent</p>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                5 years of building large single-page applications with
-                <code class="s">React</code> and <code class="s">TypeScript</code>, including 2
-                years on banking and financial products. I own features end to end, from design
-                hand-off to production.
-              </p>
-              <div class="l" aria-hidden="true"></div>
-              <h2 class="l"><span class="h">## Start here</span></h2>
-              <div class="l" aria-hidden="true"></div>
-              <ul>
-                <li class="l">
-                  <span class="m">-</span> <a href="#dachatop">projects/</a>
-                  <span class="c">what I have built</span>
-                </li>
-                <li class="l">
-                  <span class="m">-</span> <a href="#experience">experience.ts</a>
-                  <span class="c">where I have worked</span>
-                </li>
-                <li class="l">
-                  <span class="m">-</span> <a href="#skills">skills.json</a>
-                  <span class="c">what I work with</span>
-                </li>
-                <li class="l">
-                  <span class="m">-</span> <a href="#mentoring">mentoring.md</a>
-                  <span class="c">teaching at The Rolling Scopes School</span>
-                </li>
-                <li class="l">
-                  <span class="m">-</span> <a href="#contact">contact.ts</a>
-                  <span class="c">how to reach me</span>
-                </li>
-              </ul>
-              <div class="l" aria-hidden="true"></div>
-              <h2 class="l"><span class="h">## Shortcuts</span></h2>
-              <div class="l" aria-hidden="true"></div>
-              <ul>
-                <li class="l">
-                  <span class="m">-</span> <kbd>Ctrl K</kbd> search files and commands
-                </li>
-                <li class="l">
-                  <span class="m">-</span> <kbd>Ctrl Shift F</kbd> search inside all files
-                </li>
-                <li class="l"><span class="m">-</span> <kbd>Ctrl J</kbd> toggle the terminal</li>
-                <li class="l"><span class="m">-</span> <kbd>Ctrl B</kbd> toggle the explorer</li>
-                <li class="l">
-                  <span class="m">-</span> press <kbd>▶ Run</kbd> in any project file to start it
-                </li>
-                <li class="l"><span class="m">-</span> hover a skill to see where I used it</li>
-                <li class="l">
-                  <span class="m">-</span> <kbd>Ctrl Shift G</kbd> my path as a commit graph
-                </li>
-                <li class="l">
-                  <span class="m">-</span> type <kbd>help</kbd> in the terminal to see what it can
-                  do
-                </li>
-              </ul>
-            </div>
-            <div class="file__preview">
-              <p class="preview-label" aria-hidden="true">Preview</p>
-              <div class="hero-card">
-                <div class="window hero-card__photo">
-                  <div class="window__bar" aria-hidden="true">
-                    <span class="window__dots"><i></i><i></i><i></i></span
-                    ><span class="window__title">nazima.png</span>
+            <article
+              class="file file--split"
+              id="readme"
+              data-name="README.md"
+              data-path="README.md"
+              data-ext="md"
+              data-lang="Markdown"
+            >
+              <div class="file__source code">
+                <h1 class="l"><span class="h"># Nazima Jumaniyazova</span></h1>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l"><span class="m">&gt;</span> Frontend Software Engineer, Tashkent</p>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  5 years of building large single-page applications with
+                  <code class="s">React</code> and <code class="s">TypeScript</code>, including 2
+                  years on banking and financial products. I own features end to end, from design
+                  hand-off to production.
+                </p>
+                <div class="l" aria-hidden="true"></div>
+                <h2 class="l"><span class="h">## Start here</span></h2>
+                <div class="l" aria-hidden="true"></div>
+                <ul>
+                  <li class="l">
+                    <span class="m">-</span> <a href="#dachatop">projects/</a>
+                    <span class="c">what I have built</span>
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> <a href="#experience">experience.ts</a>
+                    <span class="c">where I have worked</span>
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> <a href="#skills">skills.json</a>
+                    <span class="c">what I work with</span>
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> <a href="#mentoring">mentoring.md</a>
+                    <span class="c">teaching at The Rolling Scopes School</span>
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> <a href="#contact">contact.ts</a>
+                    <span class="c">how to reach me</span>
+                  </li>
+                </ul>
+                <div class="l" aria-hidden="true"></div>
+                <h2 class="l"><span class="h">## Shortcuts</span></h2>
+                <div class="l" aria-hidden="true"></div>
+                <ul>
+                  <li class="l">
+                    <span class="m">-</span> <kbd>Ctrl K</kbd> search files and commands
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> <kbd>Ctrl Shift F</kbd> search inside all files
+                  </li>
+                  <li class="l"><span class="m">-</span> <kbd>Ctrl J</kbd> toggle the terminal</li>
+                  <li class="l"><span class="m">-</span> <kbd>Ctrl B</kbd> toggle the explorer</li>
+                  <li class="l">
+                    <span class="m">-</span> press <kbd>▶ Run</kbd> in any project file to start it
+                  </li>
+                  <li class="l"><span class="m">-</span> hover a skill to see where I used it</li>
+                  <li class="l">
+                    <span class="m">-</span> <kbd>Ctrl Shift G</kbd> my path as a commit graph
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> type <kbd>help</kbd> in the terminal to see what it can
+                    do
+                  </li>
+                </ul>
+              </div>
+              <div class="file__preview">
+                <p class="preview-label" aria-hidden="true">Preview</p>
+                <div class="hero-card">
+                  <div class="window hero-card__photo">
+                    <div class="window__bar" aria-hidden="true">
+                      <span class="window__dots"><i></i><i></i><i></i></span
+                      ><span class="window__title">nazima.png</span>
+                    </div>
+                    <img
+                      src="./src/img/download.png"
+                      width="798"
+                      height="984"
+                      alt="Portrait of Nazima Jumaniyazova"
+                    />
                   </div>
-                  <img
-                    src="./src/img/download.png"
-                    width="798"
-                    height="984"
-                    alt="Portrait of Nazima Jumaniyazova"
-                  />
-                </div>
-                <p class="hero-card__name" aria-hidden="true">Nazima<br />Jumaniyazova</p>
-                <p class="hero-card__role" aria-hidden="true">
-                  <span class="k">const</span> <span class="n">role</span> <span class="m">=</span>
-                  <span class="s">'Frontend Engineer'</span>
-                </p>
-                <p class="hero-card__stack" aria-hidden="true">
-                  <span class="k">import</span>
-                  <span
-                    class="typed"
-                    data-words="React|TypeScript|Redux Toolkit|Jest|Tailwind CSS|MUI"
-                    >React</span
-                  >
-                </p>
-                <div class="hero-card__actions">
-                  <a class="btn btn--primary" href="#dachatop">View my work</a>
-                  <a class="btn" href="./src/files/CV_Nazima_Jumaniyazova_EN.pdf" download
-                    >Download CV</a
-                  >
+                  <p class="hero-card__name" aria-hidden="true">Nazima<br />Jumaniyazova</p>
+                  <p class="hero-card__role" aria-hidden="true">
+                    <span class="k">const</span> <span class="n">role</span>
+                    <span class="m">=</span>
+                    <span class="s">'Frontend Engineer'</span>
+                  </p>
+                  <p class="hero-card__stack" aria-hidden="true">
+                    <span class="k">import</span>
+                    <span
+                      class="typed"
+                      data-words="React|TypeScript|Redux Toolkit|Jest|Tailwind CSS|MUI"
+                      >React</span
+                    >
+                  </p>
+                  <div class="hero-card__actions">
+                    <a class="btn btn--primary" href="#dachatop">View my work</a>
+                    <a class="btn" href="./src/files/CV_Nazima_Jumaniyazova_EN.pdf" download
+                      >Download CV</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <!-- about.md -->
+            <!-- about.md -->
 
-          <article
-            class="file"
-            id="about"
-            data-name="about.md"
-            data-path="about.md"
-            data-ext="md"
-            data-lang="Markdown"
-          >
-            <div class="file__source code">
-              <h2 class="l"><span class="h"># About me</span></h2>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                Frontend engineer with 5 years of experience building and maintaining large-scale
-                single-page applications in React and TypeScript, including 2 years on banking and
-                financial products.
-              </p>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                I own features end to end, from design hand-off to production, with a focus on
-                performance optimization, clean architecture and test coverage.
-              </p>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                I review code daily, maintain technical documentation, and mentor other frontend
-                developers. Experienced in distributed, remote-first teams.
-              </p>
-              <div class="l" aria-hidden="true"></div>
-              <h3 class="l"><span class="h">## Right now</span></h3>
-              <div class="l" aria-hidden="true"></div>
-              <ul>
-                <li class="l">
-                  <span class="m">-</span> Building product interfaces at
-                  <a href="#experience">PLATMA</a>, remotely
-                </li>
-                <li class="l">
-                  <span class="m">-</span> Mentoring at
-                  <a href="#mentoring">The Rolling Scopes School</a>
-                </li>
-                <li class="l">
-                  <span class="m">-</span> Based in Tashkent, open to relocation and business trips
-                </li>
-              </ul>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                <span class="c">&lt;!-- next:</span> <a href="#experience">experience.ts</a>
-                <span class="c">--&gt;</span>
-              </p>
-            </div>
-          </article>
-
-          <!-- skills.json -->
-
-          <article
-            class="file"
-            id="skills"
-            data-name="skills.json"
-            data-path="skills.json"
-            data-ext="json"
-            data-lang="JSON"
-          >
-            <div class="file__source code">
-              <h2 class="visually-hidden">Skills</h2>
-              <div class="l" aria-hidden="true"><span class="m">{</span></div>
-              <ul>
-                <li class="l i1">
-                  <span class="n">"languages"</span><span class="m">: [</span
-                  ><span class="s skill">"TypeScript"</span><span class="m">,</span>
-                  <span class="s skill">"JavaScript (ES6+)"</span><span class="m">,</span>
-                  <span class="s skill">"HTML5"</span><span class="m">,</span>
-                  <span class="s skill">"CSS3"</span><span class="m">],</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">"frameworks"</span><span class="m">: [</span
-                  ><span class="s skill">"React"</span><span class="m">,</span>
-                  <span class="s skill">"React Router"</span><span class="m">,</span>
-                  <span class="s skill">"Redux Toolkit"</span><span class="m">,</span>
-                  <span class="s skill">"React Query"</span><span class="m">,</span>
-                  <span class="s skill">"Zustand"</span><span class="m">],</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">"ui"</span><span class="m">: [</span
-                  ><span class="s skill">"MUI"</span><span class="m">,</span>
-                  <span class="s skill">"Ant Design"</span><span class="m">,</span>
-                  <span class="s skill">"Tailwind CSS"</span><span class="m">,</span>
-                  <span class="s skill">"Bootstrap"</span><span class="m">],</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">"styling"</span><span class="m">: [</span
-                  ><span class="s skill">"Sass"</span><span class="m">,</span>
-                  <span class="s skill">"LESS"</span><span class="m">,</span>
-                  <span class="s skill">"CSS Modules"</span><span class="m">,</span>
-                  <span class="s skill">"Styled Components"</span><span class="m">],</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">"forms"</span><span class="m">: [</span
-                  ><span class="s skill">"React Hook Form"</span><span class="m">,</span>
-                  <span class="s skill">"Formik"</span><span class="m">,</span>
-                  <span class="s skill">"Yup"</span><span class="m">],</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">"testing"</span><span class="m">: [</span
-                  ><span class="s skill">"Jest"</span><span class="m">,</span>
-                  <span class="s skill">"React Testing Library"</span><span class="m">],</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">"performance"</span><span class="m">: [</span
-                  ><span class="s skill">"Code splitting"</span><span class="m">,</span>
-                  <span class="s skill">"Lazy loading"</span><span class="m">,</span>
-                  <span class="s skill">"Memoization"</span><span class="m">,</span>
-                  <span class="s skill">"Caching"</span><span class="m">],</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">"data"</span><span class="m">: [</span
-                  ><span class="s skill">"REST API"</span><span class="m">,</span>
-                  <span class="s skill">"WebSocket"</span><span class="m">,</span>
-                  <span class="s skill">"Axios"</span><span class="m">,</span>
-                  <span class="s skill">"ApexCharts"</span><span class="m">,</span>
-                  <span class="s skill">"i18next"</span><span class="m">],</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">"tooling"</span><span class="m">: [</span
-                  ><span class="s skill">"Vite"</span><span class="m">,</span>
-                  <span class="s skill">"Webpack"</span><span class="m">,</span>
-                  <span class="s skill">"ESLint"</span><span class="m">,</span>
-                  <span class="s skill">"Prettier"</span><span class="m">,</span>
-                  <span class="s skill">"Git"</span><span class="m">,</span>
-                  <span class="s skill">"Chrome DevTools"</span><span class="m">,</span>
-                  <span class="s skill">"Figma"</span><span class="m">],</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">"practices"</span><span class="m">: [</span
-                  ><span class="s skill">"Code review"</span><span class="m">,</span>
-                  <span class="s skill">"SOLID"</span><span class="m">,</span>
-                  <span class="s skill">"Clean code"</span><span class="m">,</span>
-                  <span class="s skill">"Technical documentation"</span><span class="m">,</span>
-                  <span class="s skill">"Agile/Scrum"</span><span class="m">]</span>
-                </li>
-              </ul>
-              <div class="l" aria-hidden="true"><span class="m">}</span></div>
-            </div>
-          </article>
-
-          <!-- experience.ts -->
-
-          <article
-            class="file"
-            id="experience"
-            data-name="experience.ts"
-            data-path="experience.ts"
-            data-ext="ts"
-            data-lang="TypeScript"
-          >
-            <div class="file__source code">
-              <h2 class="visually-hidden">Experience</h2>
-              <div class="l" aria-hidden="true">
-                <span class="k">export const</span> <span class="f">experience</span
-                ><span class="m">:</span> <span class="t">Job</span><span class="m">[] = [</span>
+            <article
+              class="file"
+              id="about"
+              data-name="about.md"
+              data-path="about.md"
+              data-ext="md"
+              data-lang="Markdown"
+            >
+              <div class="file__source code">
+                <h2 class="l"><span class="h"># About me</span></h2>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  Frontend engineer with 5 years of experience building and maintaining large-scale
+                  single-page applications in React and TypeScript, including 2 years on banking and
+                  financial products.
+                </p>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  I own features end to end, from design hand-off to production, with a focus on
+                  performance optimization, clean architecture and test coverage.
+                </p>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  I review code daily, maintain technical documentation, and mentor other frontend
+                  developers. Experienced in distributed, remote-first teams.
+                </p>
+                <div class="l" aria-hidden="true"></div>
+                <h3 class="l"><span class="h">## Right now</span></h3>
+                <div class="l" aria-hidden="true"></div>
+                <ul>
+                  <li class="l">
+                    <span class="m">-</span> Building product interfaces at
+                    <a href="#experience">PLATMA</a>, remotely
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> Mentoring at
+                    <a href="#mentoring">The Rolling Scopes School</a>
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> Based in Tashkent, open to relocation and business
+                    trips
+                  </li>
+                </ul>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  <span class="c">&lt;!-- next:</span> <a href="#experience">experience.ts</a>
+                  <span class="c">--&gt;</span>
+                </p>
               </div>
-              <div class="l i1" aria-hidden="true"><span class="m">{</span></div>
-              <p class="l i2">
-                <span class="n">period</span><span class="m">:</span>
-                <span class="s">'Sep 2025 – present'</span><span class="m">,</span>
-              </p>
-              <h3 class="l i2">
-                <span class="n">role</span><span class="m">:</span>
-                <span class="s">'Frontend Software Engineer'</span><span class="m">,</span>
-              </h3>
-              <p class="l i2">
-                <span class="n">company</span><span class="m">:</span>
-                <span class="s">'PLATMA'</span><span class="m">,</span>
-              </p>
-              <p class="l i2">
-                <span class="n">place</span><span class="m">:</span>
-                <span class="s">'Remote, full-time'</span><span class="m">,</span>
-              </p>
-              <div class="l i2" aria-hidden="true">
-                <span class="n">did</span><span class="m">: [</span>
-              </div>
-              <ul>
-                <li class="l i3">
-                  <span class="s"
-                    >'Deliver core product features in React end to end, from planning and
-                    estimation through to production release.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Build responsive, cross-browser layouts with HTML/CSS, Sass/LESS and UI
-                    libraries (MUI, Bootstrap).'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Manage application state with Redux and integrate with backend services over
-                    REST API.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Write and maintain automated component tests with Jest and React Testing
-                    Library.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Optimize frontend performance through code splitting, lazy loading,
-                    memoization and caching.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Take part in code reviews and keep technical documentation for components and
-                    modules up to date.'</span
-                  ><span class="m">,</span>
-                </li>
-              </ul>
-              <div class="l i2" aria-hidden="true"><span class="m">],</span></div>
-              <p class="l i2">
-                <span class="n">stack</span><span class="m">: [</span
-                ><span class="s skill">'React'</span><span class="m">,</span>
-                <span class="s skill">'Redux'</span><span class="m">,</span>
-                <span class="s skill">'Sass'</span><span class="m">,</span>
-                <span class="s skill">'LESS'</span><span class="m">,</span>
-                <span class="s skill">'MUI'</span><span class="m">,</span>
-                <span class="s skill">'Bootstrap'</span><span class="m">,</span>
-                <span class="s skill">'Jest'</span><span class="m">,</span>
-                <span class="s skill">'React Testing Library'</span><span class="m">],</span>
-              </p>
-              <div class="l i1" aria-hidden="true"><span class="m">},</span></div>
-              <div class="l i1" aria-hidden="true"><span class="m">{</span></div>
-              <p class="l i2">
-                <span class="n">period</span><span class="m">:</span>
-                <span class="s">'Sep 2023 – Aug 2025'</span><span class="m">,</span>
-              </p>
-              <h3 class="l i2">
-                <span class="n">role</span><span class="m">:</span>
-                <span class="s">'Frontend Software Engineer'</span><span class="m">,</span>
-              </h3>
-              <p class="l i2">
-                <span class="n">company</span><span class="m">:</span>
-                <span class="s">'Asakabank'</span><span class="m">,</span>
-              </p>
-              <p class="l i2">
-                <span class="n">place</span><span class="m">:</span>
-                <span class="s">'Tashkent, Uzbekistan'</span><span class="m">,</span>
-              </p>
-              <div class="l i2" aria-hidden="true">
-                <span class="n">did</span><span class="m">: [</span>
-              </div>
-              <ul>
-                <li class="l i3">
-                  <span class="s"
-                    >'Improved UX and runtime performance of the internal analytics system by
-                    40%.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Reduced dashboard load time by 30% by introducing WebSocket streaming and
-                    lazy-loading with code splitting.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Built and documented a shared component library that cut delivery time for new
-                    interfaces by 25% and unified the UI across product teams.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Implemented dynamic, schema-driven application forms with complex multi-step
-                    validation, and real-time financial dashboards with ApexCharts.'</span
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Worked in a regulated financial environment with strict requirements for data
-                    accuracy, security and accessibility.'</span
-                  ><span class="m">,</span>
-                </li>
-              </ul>
-              <div class="l i2" aria-hidden="true"><span class="m">],</span></div>
-              <p class="l i2">
-                <span class="n">stack</span><span class="m">: [</span
-                ><span class="s skill">'React'</span><span class="m">,</span>
-                <span class="s skill">'TypeScript'</span><span class="m">,</span>
-                <span class="s skill">'Redux Toolkit'</span><span class="m">,</span>
-                <span class="s skill">'WebSocket'</span><span class="m">,</span>
-                <span class="s skill">'ApexCharts'</span><span class="m">,</span>
-                <span class="s skill">'Ant Design'</span><span class="m">,</span>
-                <span class="s skill">'Sass'</span><span class="m">,</span>
-                <span class="s skill">'Webpack'</span><span class="m">],</span>
-              </p>
-              <div class="l i1" aria-hidden="true"><span class="m">},</span></div>
-              <div class="l i1" aria-hidden="true"><span class="m">{</span></div>
-              <p class="l i2">
-                <span class="n">period</span><span class="m">:</span>
-                <span class="s">'Sep 2021 – Sep 2023'</span><span class="m">,</span>
-              </p>
-              <h3 class="l i2">
-                <span class="n">role</span><span class="m">:</span>
-                <span class="s">'Frontend Software Engineer'</span><span class="m">,</span>
-              </h3>
-              <p class="l i2">
-                <span class="n">company</span><span class="m">:</span>
-                <span class="s">'Brain Development'</span><span class="m">,</span>
-              </p>
-              <p class="l i2">
-                <span class="n">place</span><span class="m">:</span>
-                <span class="s">'Tashkent, Uzbekistan'</span><span class="m">,</span>
-              </p>
-              <div class="l i2" aria-hidden="true">
-                <span class="n">did</span><span class="m">: [</span>
-              </div>
-              <ul>
-                <li class="l i3">
-                  <a href="#videohub"
-                    >'VideoHub.uz: LMS with progress tracking, role-based access and in-app
-                    messaging.'</a
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <a href="#dachatop"
-                    >'DachaTop.uz: real-estate portal with authentication, analytics and listing
-                    management.'</a
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <a href="#scolaro"
-                    >'Scolaro.uz: university admissions platform with advanced filtering and
-                    reviews.'</a
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i3">
-                  <span class="s"
-                    >'Built responsive React interfaces, integrated REST APIs, and implemented
-                    business logic and user scenarios, working directly with designers and clients
-                    to translate Figma designs into production.'</span
-                  ><span class="m">,</span>
-                </li>
-              </ul>
-              <div class="l i2" aria-hidden="true"><span class="m">],</span></div>
-              <p class="l i2">
-                <span class="n">stack</span><span class="m">: [</span
-                ><span class="s skill">'React'</span><span class="m">,</span>
-                <span class="s skill">'TypeScript'</span><span class="m">,</span>
-                <span class="s skill">'REST API'</span><span class="m">,</span>
-                <span class="s skill">'Ant Design'</span><span class="m">,</span>
-                <span class="s skill">'Sass'</span><span class="m">,</span>
-                <span class="s skill">'Figma'</span><span class="m">],</span>
-              </p>
-              <div class="l i1" aria-hidden="true"><span class="m">},</span></div>
-              <div class="l" aria-hidden="true"><span class="m">];</span></div>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                <span class="c">// see also:</span> <a href="#mentoring">mentoring.md</a>
-              </p>
-            </div>
-          </article>
+            </article>
 
-          <!-- Project files. To add a project, copy one <article>, give it a new id, and add a matching link to the "projects" folder in the explorer above. A project without a screenshot simply has no file__preview block. -->
+            <!-- skills.json -->
 
-          <article
-            class="file file--split"
-            id="dachatop"
-            data-name="dachatop.tsx"
-            data-path="projects/dachatop.tsx"
-            data-ext="tsx"
-            data-lang="TypeScript JSX"
-          >
-            <div class="file__source code">
-              <div class="l" aria-hidden="true">
-                <span class="k">export const</span> <span class="f">DachaTop</span>
-                <span class="m">= () =&gt; (</span>
+            <article
+              class="file"
+              id="skills"
+              data-name="skills.json"
+              data-path="skills.json"
+              data-ext="json"
+              data-lang="JSON"
+            >
+              <div class="file__source code">
+                <h2 class="visually-hidden">Skills</h2>
+                <div class="l" aria-hidden="true"><span class="m">{</span></div>
+                <ul>
+                  <li class="l i1">
+                    <span class="n">"languages"</span><span class="m">: [</span
+                    ><span class="s skill">"TypeScript"</span><span class="m">,</span>
+                    <span class="s skill">"JavaScript (ES6+)"</span><span class="m">,</span>
+                    <span class="s skill">"HTML5"</span><span class="m">,</span>
+                    <span class="s skill">"CSS3"</span><span class="m">],</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"frameworks"</span><span class="m">: [</span
+                    ><span class="s skill">"React"</span><span class="m">,</span>
+                    <span class="s skill">"React Router"</span><span class="m">,</span>
+                    <span class="s skill">"Redux Toolkit"</span><span class="m">,</span>
+                    <span class="s skill">"React Query"</span><span class="m">,</span>
+                    <span class="s skill">"Zustand"</span><span class="m">],</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"ui"</span><span class="m">: [</span
+                    ><span class="s skill">"MUI"</span><span class="m">,</span>
+                    <span class="s skill">"Ant Design"</span><span class="m">,</span>
+                    <span class="s skill">"Tailwind CSS"</span><span class="m">,</span>
+                    <span class="s skill">"Bootstrap"</span><span class="m">],</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"styling"</span><span class="m">: [</span
+                    ><span class="s skill">"Sass"</span><span class="m">,</span>
+                    <span class="s skill">"LESS"</span><span class="m">,</span>
+                    <span class="s skill">"CSS Modules"</span><span class="m">,</span>
+                    <span class="s skill">"Styled Components"</span><span class="m">],</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"forms"</span><span class="m">: [</span
+                    ><span class="s skill">"React Hook Form"</span><span class="m">,</span>
+                    <span class="s skill">"Formik"</span><span class="m">,</span>
+                    <span class="s skill">"Yup"</span><span class="m">],</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"testing"</span><span class="m">: [</span
+                    ><span class="s skill">"Jest"</span><span class="m">,</span>
+                    <span class="s skill">"React Testing Library"</span><span class="m">],</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"performance"</span><span class="m">: [</span
+                    ><span class="s skill">"Code splitting"</span><span class="m">,</span>
+                    <span class="s skill">"Lazy loading"</span><span class="m">,</span>
+                    <span class="s skill">"Memoization"</span><span class="m">,</span>
+                    <span class="s skill">"Caching"</span><span class="m">],</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"data"</span><span class="m">: [</span
+                    ><span class="s skill">"REST API"</span><span class="m">,</span>
+                    <span class="s skill">"WebSocket"</span><span class="m">,</span>
+                    <span class="s skill">"Axios"</span><span class="m">,</span>
+                    <span class="s skill">"ApexCharts"</span><span class="m">,</span>
+                    <span class="s skill">"i18next"</span><span class="m">],</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"tooling"</span><span class="m">: [</span
+                    ><span class="s skill">"Vite"</span><span class="m">,</span>
+                    <span class="s skill">"Webpack"</span><span class="m">,</span>
+                    <span class="s skill">"ESLint"</span><span class="m">,</span>
+                    <span class="s skill">"Prettier"</span><span class="m">,</span>
+                    <span class="s skill">"Git"</span><span class="m">,</span>
+                    <span class="s skill">"Chrome DevTools"</span><span class="m">,</span>
+                    <span class="s skill">"Figma"</span><span class="m">],</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"practices"</span><span class="m">: [</span
+                    ><span class="s skill">"Code review"</span><span class="m">,</span>
+                    <span class="s skill">"SOLID"</span><span class="m">,</span>
+                    <span class="s skill">"Clean code"</span><span class="m">,</span>
+                    <span class="s skill">"Technical documentation"</span><span class="m">,</span>
+                    <span class="s skill">"Agile/Scrum"</span><span class="m">]</span>
+                  </li>
+                </ul>
+                <div class="l" aria-hidden="true"><span class="m">}</span></div>
               </div>
-              <div class="l i1" aria-hidden="true">
-                <span class="m">&lt;</span><span class="t">Project</span>
+            </article>
+
+            <!-- experience.ts -->
+
+            <article
+              class="file"
+              id="experience"
+              data-name="experience.ts"
+              data-path="experience.ts"
+              data-ext="ts"
+              data-lang="TypeScript"
+            >
+              <div class="file__source code">
+                <h2 class="visually-hidden">Experience</h2>
+                <div class="l" aria-hidden="true">
+                  <span class="k">export const</span> <span class="f">experience</span
+                  ><span class="m">:</span> <span class="t">Job</span><span class="m">[] = [</span>
+                </div>
+                <div class="l i1" aria-hidden="true"><span class="m">{</span></div>
+                <p class="l i2">
+                  <span class="n">period</span><span class="m">:</span>
+                  <span class="s">'Sep 2025 – present'</span><span class="m">,</span>
+                </p>
+                <h3 class="l i2">
+                  <span class="n">role</span><span class="m">:</span>
+                  <span class="s">'Frontend Software Engineer'</span><span class="m">,</span>
+                </h3>
+                <p class="l i2">
+                  <span class="n">company</span><span class="m">:</span>
+                  <span class="s">'PLATMA'</span><span class="m">,</span>
+                </p>
+                <p class="l i2">
+                  <span class="n">place</span><span class="m">:</span>
+                  <span class="s">'Remote, full-time'</span><span class="m">,</span>
+                </p>
+                <div class="l i2" aria-hidden="true">
+                  <span class="n">did</span><span class="m">: [</span>
+                </div>
+                <ul>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Deliver core product features in React end to end, from planning and
+                      estimation through to production release.'</span
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Build responsive, cross-browser layouts with HTML/CSS, Sass/LESS and UI
+                      libraries (MUI, Bootstrap).'</span
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Manage application state with Redux and integrate with backend services over
+                      REST API.'</span
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Write and maintain automated component tests with Jest and React Testing
+                      Library.'</span
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Optimize frontend performance through code splitting, lazy loading,
+                      memoization and caching.'</span
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Take part in code reviews and keep technical documentation for components
+                      and modules up to date.'</span
+                    ><span class="m">,</span>
+                  </li>
+                </ul>
+                <div class="l i2" aria-hidden="true"><span class="m">],</span></div>
+                <p class="l i2">
+                  <span class="n">stack</span><span class="m">: [</span
+                  ><span class="s skill">'React'</span><span class="m">,</span>
+                  <span class="s skill">'Redux'</span><span class="m">,</span>
+                  <span class="s skill">'Sass'</span><span class="m">,</span>
+                  <span class="s skill">'LESS'</span><span class="m">,</span>
+                  <span class="s skill">'MUI'</span><span class="m">,</span>
+                  <span class="s skill">'Bootstrap'</span><span class="m">,</span>
+                  <span class="s skill">'Jest'</span><span class="m">,</span>
+                  <span class="s skill">'React Testing Library'</span><span class="m">],</span>
+                </p>
+                <div class="l i1" aria-hidden="true"><span class="m">},</span></div>
+                <div class="l i1" aria-hidden="true"><span class="m">{</span></div>
+                <p class="l i2">
+                  <span class="n">period</span><span class="m">:</span>
+                  <span class="s">'Sep 2023 – Aug 2025'</span><span class="m">,</span>
+                </p>
+                <h3 class="l i2">
+                  <span class="n">role</span><span class="m">:</span>
+                  <span class="s">'Frontend Software Engineer'</span><span class="m">,</span>
+                </h3>
+                <p class="l i2">
+                  <span class="n">company</span><span class="m">:</span>
+                  <span class="s">'Asakabank'</span><span class="m">,</span>
+                </p>
+                <p class="l i2">
+                  <span class="n">place</span><span class="m">:</span>
+                  <span class="s">'Tashkent, Uzbekistan'</span><span class="m">,</span>
+                </p>
+                <div class="l i2" aria-hidden="true">
+                  <span class="n">did</span><span class="m">: [</span>
+                </div>
+                <ul>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Improved UX and runtime performance of the internal analytics system by
+                      40%.'</span
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Reduced dashboard load time by 30% by introducing WebSocket streaming and
+                      lazy-loading with code splitting.'</span
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Built and documented a shared component library that cut delivery time for
+                      new interfaces by 25% and unified the UI across product teams.'</span
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Implemented dynamic, schema-driven application forms with complex multi-step
+                      validation, and real-time financial dashboards with ApexCharts.'</span
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Worked in a regulated financial environment with strict requirements for
+                      data accuracy, security and accessibility.'</span
+                    ><span class="m">,</span>
+                  </li>
+                </ul>
+                <div class="l i2" aria-hidden="true"><span class="m">],</span></div>
+                <p class="l i2">
+                  <span class="n">stack</span><span class="m">: [</span
+                  ><span class="s skill">'React'</span><span class="m">,</span>
+                  <span class="s skill">'TypeScript'</span><span class="m">,</span>
+                  <span class="s skill">'Redux Toolkit'</span><span class="m">,</span>
+                  <span class="s skill">'WebSocket'</span><span class="m">,</span>
+                  <span class="s skill">'ApexCharts'</span><span class="m">,</span>
+                  <span class="s skill">'Ant Design'</span><span class="m">,</span>
+                  <span class="s skill">'Sass'</span><span class="m">,</span>
+                  <span class="s skill">'Webpack'</span><span class="m">],</span>
+                </p>
+                <div class="l i1" aria-hidden="true"><span class="m">},</span></div>
+                <div class="l i1" aria-hidden="true"><span class="m">{</span></div>
+                <p class="l i2">
+                  <span class="n">period</span><span class="m">:</span>
+                  <span class="s">'Sep 2021 – Sep 2023'</span><span class="m">,</span>
+                </p>
+                <h3 class="l i2">
+                  <span class="n">role</span><span class="m">:</span>
+                  <span class="s">'Frontend Software Engineer'</span><span class="m">,</span>
+                </h3>
+                <p class="l i2">
+                  <span class="n">company</span><span class="m">:</span>
+                  <span class="s">'Brain Development'</span><span class="m">,</span>
+                </p>
+                <p class="l i2">
+                  <span class="n">place</span><span class="m">:</span>
+                  <span class="s">'Tashkent, Uzbekistan'</span><span class="m">,</span>
+                </p>
+                <div class="l i2" aria-hidden="true">
+                  <span class="n">did</span><span class="m">: [</span>
+                </div>
+                <ul>
+                  <li class="l i3">
+                    <a href="#videohub"
+                      >'VideoHub.uz: LMS with progress tracking, role-based access and in-app
+                      messaging.'</a
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <a href="#dachatop"
+                      >'DachaTop.uz: real-estate portal with authentication, analytics and listing
+                      management.'</a
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <a href="#scolaro"
+                      >'Scolaro.uz: university admissions platform with advanced filtering and
+                      reviews.'</a
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i3">
+                    <span class="s"
+                      >'Built responsive React interfaces, integrated REST APIs, and implemented
+                      business logic and user scenarios, working directly with designers and clients
+                      to translate Figma designs into production.'</span
+                    ><span class="m">,</span>
+                  </li>
+                </ul>
+                <div class="l i2" aria-hidden="true"><span class="m">],</span></div>
+                <p class="l i2">
+                  <span class="n">stack</span><span class="m">: [</span
+                  ><span class="s skill">'React'</span><span class="m">,</span>
+                  <span class="s skill">'TypeScript'</span><span class="m">,</span>
+                  <span class="s skill">'REST API'</span><span class="m">,</span>
+                  <span class="s skill">'Ant Design'</span><span class="m">,</span>
+                  <span class="s skill">'Sass'</span><span class="m">,</span>
+                  <span class="s skill">'Figma'</span><span class="m">],</span>
+                </p>
+                <div class="l i1" aria-hidden="true"><span class="m">},</span></div>
+                <div class="l" aria-hidden="true"><span class="m">];</span></div>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  <span class="c">// see also:</span> <a href="#mentoring">mentoring.md</a>
+                </p>
               </div>
-              <h2 class="l i2">
-                <span class="n">name</span><span class="m">=</span
-                ><span class="s">"DachaTop.uz"</span>
-              </h2>
-              <p class="l i2">
-                <span class="n">url</span><span class="m">=</span
-                ><a href="https://dachatop.uz/" target="_blank" rel="noopener noreferrer"
-                  >"https://dachatop.uz/"</a
-                >
-              </p>
+            </article>
 
-              <p class="l i2">
-                <span class="n">role</span><span class="m">=</span
-                ><span class="s">"Frontend, at Brain Development"</span>
-              </p>
+            <!-- Project files. To add a project, copy one <article>, give it a new id, and add a matching link to the "projects" folder in the explorer above. A project without a screenshot simply has no file__preview block. -->
 
-              <p class="l i2">
-                <span class="n">about</span><span class="m">=</span
-                ><span class="s"
-                  >"A real-estate portal for renting dachas, with authentication, analytics and
-                  listing management."</span
-                >
-              </p>
-              <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
-              <div class="l" aria-hidden="true"><span class="m">);</span></div>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l"><span class="c">// next:</span> <a href="#videohub">videohub.tsx</a></p>
-            </div>
-            <div class="file__preview">
-              <p class="preview-label" aria-hidden="true">Preview</p>
-              <div class="project-card">
-                <a
-                  class="window window--link"
-                  href="https://dachatop.uz/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open DachaTop.uz"
-                >
-                  <span class="window__bar" aria-hidden="true"
-                    ><span class="window__dots"><i></i><i></i><i></i></span
-                    ><span class="window__title">dachatop.uz</span></span
+            <article
+              class="file file--split"
+              id="dachatop"
+              data-name="dachatop.tsx"
+              data-path="projects/dachatop.tsx"
+              data-ext="tsx"
+              data-lang="TypeScript JSX"
+            >
+              <div class="file__source code">
+                <div class="l" aria-hidden="true">
+                  <span class="k">export const</span> <span class="f">DachaTop</span>
+                  <span class="m">= () =&gt; (</span>
+                </div>
+                <div class="l i1" aria-hidden="true">
+                  <span class="m">&lt;</span><span class="t">Project</span>
+                </div>
+                <h2 class="l i2">
+                  <span class="n">name</span><span class="m">=</span
+                  ><span class="s">"DachaTop.uz"</span>
+                </h2>
+                <p class="l i2">
+                  <span class="n">url</span><span class="m">=</span
+                  ><a href="https://dachatop.uz/" target="_blank" rel="noopener noreferrer"
+                    >"https://dachatop.uz/"</a
                   >
-                  <img
-                    src="./src/img/project-dachatop.webp"
-                    width="1280"
-                    height="800"
-                    loading="lazy"
-                    alt="DachaTop.uz listing page with filters, calendar and dacha cards"
-                  />
-                </a>
-                <div class="project-card__actions">
+                </p>
+
+                <p class="l i2">
+                  <span class="n">role</span><span class="m">=</span
+                  ><span class="s">"Frontend, at Brain Development"</span>
+                </p>
+
+                <p class="l i2">
+                  <span class="n">about</span><span class="m">=</span
+                  ><span class="s"
+                    >"A real-estate portal for renting dachas, with authentication, analytics and
+                    listing management."</span
+                  >
+                </p>
+                <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
+                <div class="l" aria-hidden="true"><span class="m">);</span></div>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  <span class="c">// next:</span> <a href="#videohub">videohub.tsx</a>
+                </p>
+              </div>
+              <div class="file__preview">
+                <p class="preview-label" aria-hidden="true">Preview</p>
+                <div class="project-card">
                   <a
-                    class="btn btn--primary"
+                    class="window window--link"
                     href="https://dachatop.uz/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >Open live site</a
+                    aria-label="Open DachaTop.uz"
                   >
+                    <span class="window__bar" aria-hidden="true"
+                      ><span class="window__dots"><i></i><i></i><i></i></span
+                      ><span class="window__title">dachatop.uz</span></span
+                    >
+                    <img
+                      src="./src/img/project-dachatop.webp"
+                      width="1280"
+                      height="800"
+                      loading="lazy"
+                      alt="DachaTop.uz listing page with filters, calendar and dacha cards"
+                    />
+                  </a>
+                  <div class="project-card__actions">
+                    <a
+                      class="btn btn--primary"
+                      href="https://dachatop.uz/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Open live site</a
+                    >
 
-                  <a class="btn" href="#videohub">Next project</a>
+                    <a class="btn" href="#videohub">Next project</a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article
-            class="file file--split"
-            id="videohub"
-            data-name="videohub.tsx"
-            data-path="projects/videohub.tsx"
-            data-ext="tsx"
-            data-lang="TypeScript JSX"
-          >
-            <div class="file__source code">
-              <div class="l" aria-hidden="true">
-                <span class="k">export const</span> <span class="f">Videohub</span>
-                <span class="m">= () =&gt; (</span>
-              </div>
-              <div class="l i1" aria-hidden="true">
-                <span class="m">&lt;</span><span class="t">Project</span>
-              </div>
-              <h2 class="l i2">
-                <span class="n">name</span><span class="m">=</span
-                ><span class="s">"Videohub.uz"</span>
-              </h2>
-              <p class="l i2">
-                <span class="n">url</span><span class="m">=</span
-                ><a href="https://videohub.uz/" target="_blank" rel="noopener noreferrer"
-                  >"https://videohub.uz/"</a
-                >
-              </p>
-              <p class="l i2">
-                <span class="n">role</span><span class="m">=</span
-                ><span class="s">"Frontend, at Brain Development"</span>
-              </p>
-
-              <p class="l i2">
-                <span class="n">stack</span><span class="m">={[</span
-                ><span class="s skill">'React 18'</span><span class="m">,</span>
-                <span class="s skill">'React Router'</span><span class="m">,</span>
-                <span class="s skill">'Ant Design'</span><span class="m">,</span>
-                <span class="s skill">'Sass'</span><span class="m">,</span>
-                <span class="s skill">'Styled Components'</span><span class="m">,</span>
-                <span class="s skill">'Formik'</span><span class="m">,</span>
-                <span class="s skill">'Yup'</span><span class="m">,</span>
-                <span class="s skill">'Draft.js'</span><span class="m">,</span>
-                <span class="s skill">'React Player'</span><span class="m">]}</span>
-              </p>
-              <p class="l i2">
-                <span class="n">about</span><span class="m">=</span
-                ><span class="s"
-                  >"A learning management system (LMS) with progress tracking, role-based access and
-                  in-app messaging."</span
-                >
-              </p>
-              <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
-              <div class="l" aria-hidden="true"><span class="m">);</span></div>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l"><span class="c">// next:</span> <a href="#scolaro">scolaro.tsx</a></p>
-            </div>
-            <div class="file__preview">
-              <p class="preview-label" aria-hidden="true">Preview</p>
-              <div class="project-card">
-                <a
-                  class="window window--link"
-                  href="https://videohub.uz/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open Videohub.uz"
-                >
-                  <span class="window__bar" aria-hidden="true"
-                    ><span class="window__dots"><i></i><i></i><i></i></span
-                    ><span class="window__title">videohub.uz</span></span
+            <article
+              class="file file--split"
+              id="videohub"
+              data-name="videohub.tsx"
+              data-path="projects/videohub.tsx"
+              data-ext="tsx"
+              data-lang="TypeScript JSX"
+            >
+              <div class="file__source code">
+                <div class="l" aria-hidden="true">
+                  <span class="k">export const</span> <span class="f">Videohub</span>
+                  <span class="m">= () =&gt; (</span>
+                </div>
+                <div class="l i1" aria-hidden="true">
+                  <span class="m">&lt;</span><span class="t">Project</span>
+                </div>
+                <h2 class="l i2">
+                  <span class="n">name</span><span class="m">=</span
+                  ><span class="s">"Videohub.uz"</span>
+                </h2>
+                <p class="l i2">
+                  <span class="n">url</span><span class="m">=</span
+                  ><a href="https://videohub.uz/" target="_blank" rel="noopener noreferrer"
+                    >"https://videohub.uz/"</a
                   >
-                  <img
-                    src="./src/img/project-videohub.webp"
-                    width="1280"
-                    height="800"
-                    loading="lazy"
-                    alt="Videohub.uz home page with a list of programming courses"
-                  />
-                </a>
-                <div class="project-card__actions">
+                </p>
+                <p class="l i2">
+                  <span class="n">role</span><span class="m">=</span
+                  ><span class="s">"Frontend, at Brain Development"</span>
+                </p>
+
+                <p class="l i2">
+                  <span class="n">stack</span><span class="m">={[</span
+                  ><span class="s skill">'React 18'</span><span class="m">,</span>
+                  <span class="s skill">'React Router'</span><span class="m">,</span>
+                  <span class="s skill">'Ant Design'</span><span class="m">,</span>
+                  <span class="s skill">'Sass'</span><span class="m">,</span>
+                  <span class="s skill">'Styled Components'</span><span class="m">,</span>
+                  <span class="s skill">'Formik'</span><span class="m">,</span>
+                  <span class="s skill">'Yup'</span><span class="m">,</span>
+                  <span class="s skill">'Draft.js'</span><span class="m">,</span>
+                  <span class="s skill">'React Player'</span><span class="m">]}</span>
+                </p>
+                <p class="l i2">
+                  <span class="n">about</span><span class="m">=</span
+                  ><span class="s"
+                    >"A learning management system (LMS) with progress tracking, role-based access
+                    and in-app messaging."</span
+                  >
+                </p>
+                <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
+                <div class="l" aria-hidden="true"><span class="m">);</span></div>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l"><span class="c">// next:</span> <a href="#scolaro">scolaro.tsx</a></p>
+              </div>
+              <div class="file__preview">
+                <p class="preview-label" aria-hidden="true">Preview</p>
+                <div class="project-card">
                   <a
-                    class="btn btn--primary"
+                    class="window window--link"
                     href="https://videohub.uz/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >Open live site</a
+                    aria-label="Open Videohub.uz"
                   >
+                    <span class="window__bar" aria-hidden="true"
+                      ><span class="window__dots"><i></i><i></i><i></i></span
+                      ><span class="window__title">videohub.uz</span></span
+                    >
+                    <img
+                      src="./src/img/project-videohub.webp"
+                      width="1280"
+                      height="800"
+                      loading="lazy"
+                      alt="Videohub.uz home page with a list of programming courses"
+                    />
+                  </a>
+                  <div class="project-card__actions">
+                    <a
+                      class="btn btn--primary"
+                      href="https://videohub.uz/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Open live site</a
+                    >
 
-                  <a class="btn" href="#scolaro">Next project</a>
+                    <a class="btn" href="#scolaro">Next project</a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </article>
+            </article>
 
-          <article
-            class="file"
-            id="scolaro"
-            data-name="scolaro.tsx"
-            data-path="projects/scolaro.tsx"
-            data-ext="tsx"
-            data-lang="TypeScript JSX"
-          >
-            <div class="file__source code">
-              <div class="l" aria-hidden="true">
-                <span class="k">export const</span> <span class="f">Scolaro</span>
-                <span class="m">= () =&gt; (</span>
-              </div>
-              <div class="l i1" aria-hidden="true">
-                <span class="m">&lt;</span><span class="t">Project</span>
-              </div>
-              <h2 class="l i2">
-                <span class="n">name</span><span class="m">=</span
-                ><span class="s">"Scolaro.uz"</span>
-              </h2>
-              <p class="l i2">
-                <span class="n">role</span><span class="m">=</span
-                ><span class="s">"Frontend, at Brain Development"</span>
-              </p>
-              <p class="l i2">
-                <span class="n">stack</span><span class="m">={[</span
-                ><span class="s skill">'React'</span><span class="m">,</span>
-                <span class="s skill">'REST API'</span><span class="m">]}</span>
-              </p>
-              <p class="l i2">
-                <span class="n">about</span><span class="m">=</span
-                ><span class="s"
-                  >"A university admissions platform with advanced filtering and reviews."</span
-                >
-              </p>
-              <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
-              <div class="l" aria-hidden="true"><span class="m">);</span></div>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l"><span class="c">// next:</span> <a href="#minivan">minivan.tsx</a></p>
-            </div>
-          </article>
-
-          <article
-            class="file"
-            id="minivan"
-            data-name="minivan.tsx"
-            data-path="projects/minivan.tsx"
-            data-ext="tsx"
-            data-lang="TypeScript JSX"
-          >
-            <div class="file__source code">
-              <div class="l" aria-hidden="true">
-                <span class="k">export const</span> <span class="f">Minivan</span>
-                <span class="m">= () =&gt; (</span>
-              </div>
-              <div class="l i1" aria-hidden="true">
-                <span class="m">&lt;</span><span class="t">Project</span>
-              </div>
-              <h2 class="l i2">
-                <span class="n">name</span><span class="m">=</span
-                ><span class="s">"Minivan.uz"</span>
-              </h2>
-              <p class="l i2">
-                <span class="n">url</span><span class="m">=</span
-                ><a href="https://minivan.uz/" target="_blank" rel="noopener noreferrer"
-                  >"https://minivan.uz/"</a
-                >
-              </p>
-
-              <p class="l i2">
-                <span class="n">stack</span><span class="m">={[</span
-                ><span class="s skill">'React 18'</span><span class="m">,</span>
-                <span class="s skill">'TypeScript'</span><span class="m">,</span>
-                <span class="s skill">'Vite'</span><span class="m">,</span>
-                <span class="s skill">'Ant Design'</span><span class="m">,</span>
-                <span class="s skill">'Tailwind CSS'</span><span class="m">,</span>
-                <span class="s skill">'React Query'</span><span class="m">,</span>
-                <span class="s skill">'Zustand'</span><span class="m">,</span>
-                <span class="s skill">'i18next'</span><span class="m">]}</span>
-              </p>
-              <p class="l i2">
-                <span class="n">about</span><span class="m">=</span
-                ><span class="s"
-                  >"A transport rental platform offering minivans and minibuses for city transfers,
-                  tours, business trips, and events with or without a driver."</span
-                >
-              </p>
-              <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
-              <div class="l" aria-hidden="true"><span class="m">);</span></div>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l"><span class="c">// next:</span> <a href="#mymehmon">mymehmon.tsx</a></p>
-            </div>
-          </article>
-
-          <article
-            class="file"
-            id="mymehmon"
-            data-name="mymehmon.tsx"
-            data-path="projects/mymehmon.tsx"
-            data-ext="tsx"
-            data-lang="TypeScript JSX"
-          >
-            <div class="file__source code">
-              <div class="l" aria-hidden="true">
-                <span class="k">export const</span> <span class="f">MyMehmon</span>
-                <span class="m">= () =&gt; (</span>
-              </div>
-              <div class="l i1" aria-hidden="true">
-                <span class="m">&lt;</span><span class="t">Project</span>
-              </div>
-              <h2 class="l i2">
-                <span class="n">name</span><span class="m">=</span
-                ><span class="s">"MyMehmon.uz partner panel"</span>
-              </h2>
-
-              <p class="l i2">
-                <span class="n">stack</span><span class="m">={[</span
-                ><span class="s skill">'React 19'</span><span class="m">,</span>
-                <span class="s skill">'TypeScript'</span><span class="m">,</span>
-                <span class="s skill">'Vite'</span><span class="m">,</span>
-                <span class="s skill">'React Hook Form'</span><span class="m">,</span>
-                <span class="s skill">'React Query'</span><span class="m">,</span>
-                <span class="s skill">'Yup'</span><span class="m">,</span>
-                <span class="s skill">'Tailwind CSS'</span><span class="m">,</span>
-                <span class="s skill">'i18next'</span><span class="m">]}</span>
-              </p>
-              <p class="l i2">
-                <span class="n">about</span><span class="m">=</span
-                ><span class="s"
-                  >"An admin panel for a hospitality booking platform that allows hotel owners to
-                  manage listings, rooms, bookings, and services."</span
-                >
-              </p>
-              <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
-              <div class="l" aria-hidden="true"><span class="m">);</span></div>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l"><span class="c">// next:</span> <a href="#todo-app">todo-app.tsx</a></p>
-            </div>
-          </article>
-
-          <article
-            class="file file--split"
-            id="todo-app"
-            data-name="todo-app.tsx"
-            data-path="projects/todo-app.tsx"
-            data-ext="tsx"
-            data-lang="TypeScript JSX"
-          >
-            <div class="file__source code">
-              <div class="l" aria-hidden="true">
-                <span class="k">export const</span> <span class="f">TodoApp</span>
-                <span class="m">= () =&gt; (</span>
-              </div>
-              <div class="l i1" aria-hidden="true">
-                <span class="m">&lt;</span><span class="t">Project</span>
-              </div>
-              <h2 class="l i2">
-                <span class="n">name</span><span class="m">=</span
-                ><span class="s">"Advanced Todo app"</span>
-              </h2>
-              <p class="l i2">
-                <span class="n">url</span><span class="m">=</span
-                ><a
-                  href="https://nazimajumaniyazova.github.io/redux-toolkit/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >"https://nazimajumaniyazova.github.io/redux-toolkit/"</a
-                >
-              </p>
-              <p class="l i2">
-                <span class="n">code</span><span class="m">=</span
-                ><a
-                  href="https://github.com/nazimajumaniyazova/redux-toolkit"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >"https://github.com/nazimajumaniyazova/redux-toolkit"</a
-                >
-              </p>
-
-              <p class="l i2">
-                <span class="n">stack</span><span class="m">={[</span
-                ><span class="s skill">'React'</span><span class="m">,</span>
-                <span class="s skill">'Redux Toolkit'</span><span class="m">]}</span>
-              </p>
-              <p class="l i2">
-                <span class="n">about</span><span class="m">=</span
-                ><span class="s"
-                  >"Todo application with a simple list and an async list. A small study
-                  project."</span
-                >
-              </p>
-              <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
-              <div class="l" aria-hidden="true"><span class="m">);</span></div>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                <span class="c">// more on</span>
-                <a
-                  href="https://github.com/nazimajumaniyazova"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >github.com/nazimajumaniyazova</a
-                >
-              </p>
-            </div>
-            <div class="file__preview">
-              <p class="preview-label" aria-hidden="true">Preview</p>
-              <div class="project-card">
-                <a
-                  class="window window--link"
-                  href="https://nazimajumaniyazova.github.io/redux-toolkit/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open Advanced Todo app"
-                >
-                  <span class="window__bar" aria-hidden="true"
-                    ><span class="window__dots"><i></i><i></i><i></i></span
-                    ><span class="window__title"
-                      >nazimajumaniyazova.github.io/redux-toolkit</span
-                    ></span
+            <article
+              class="file"
+              id="scolaro"
+              data-name="scolaro.tsx"
+              data-path="projects/scolaro.tsx"
+              data-ext="tsx"
+              data-lang="TypeScript JSX"
+            >
+              <div class="file__source code">
+                <div class="l" aria-hidden="true">
+                  <span class="k">export const</span> <span class="f">Scolaro</span>
+                  <span class="m">= () =&gt; (</span>
+                </div>
+                <div class="l i1" aria-hidden="true">
+                  <span class="m">&lt;</span><span class="t">Project</span>
+                </div>
+                <h2 class="l i2">
+                  <span class="n">name</span><span class="m">=</span
+                  ><span class="s">"Scolaro.uz"</span>
+                </h2>
+                <p class="l i2">
+                  <span class="n">role</span><span class="m">=</span
+                  ><span class="s">"Frontend, at Brain Development"</span>
+                </p>
+                <p class="l i2">
+                  <span class="n">stack</span><span class="m">={[</span
+                  ><span class="s skill">'React'</span><span class="m">,</span>
+                  <span class="s skill">'REST API'</span><span class="m">]}</span>
+                </p>
+                <p class="l i2">
+                  <span class="n">about</span><span class="m">=</span
+                  ><span class="s"
+                    >"A university admissions platform with advanced filtering and reviews."</span
                   >
-                  <img
-                    src="./src/img/project-todo.webp"
-                    width="1280"
-                    height="800"
-                    loading="lazy"
-                    alt="Advanced Todo app with simple and async lists"
-                  />
-                </a>
-                <div class="project-card__actions">
-                  <a
-                    class="btn btn--primary"
+                </p>
+                <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
+                <div class="l" aria-hidden="true"><span class="m">);</span></div>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l"><span class="c">// next:</span> <a href="#minivan">minivan.tsx</a></p>
+              </div>
+            </article>
+
+            <article
+              class="file"
+              id="minivan"
+              data-name="minivan.tsx"
+              data-path="projects/minivan.tsx"
+              data-ext="tsx"
+              data-lang="TypeScript JSX"
+            >
+              <div class="file__source code">
+                <div class="l" aria-hidden="true">
+                  <span class="k">export const</span> <span class="f">Minivan</span>
+                  <span class="m">= () =&gt; (</span>
+                </div>
+                <div class="l i1" aria-hidden="true">
+                  <span class="m">&lt;</span><span class="t">Project</span>
+                </div>
+                <h2 class="l i2">
+                  <span class="n">name</span><span class="m">=</span
+                  ><span class="s">"Minivan.uz"</span>
+                </h2>
+                <p class="l i2">
+                  <span class="n">url</span><span class="m">=</span
+                  ><a href="https://minivan.uz/" target="_blank" rel="noopener noreferrer"
+                    >"https://minivan.uz/"</a
+                  >
+                </p>
+
+                <p class="l i2">
+                  <span class="n">stack</span><span class="m">={[</span
+                  ><span class="s skill">'React 18'</span><span class="m">,</span>
+                  <span class="s skill">'TypeScript'</span><span class="m">,</span>
+                  <span class="s skill">'Vite'</span><span class="m">,</span>
+                  <span class="s skill">'Ant Design'</span><span class="m">,</span>
+                  <span class="s skill">'Tailwind CSS'</span><span class="m">,</span>
+                  <span class="s skill">'React Query'</span><span class="m">,</span>
+                  <span class="s skill">'Zustand'</span><span class="m">,</span>
+                  <span class="s skill">'i18next'</span><span class="m">]}</span>
+                </p>
+                <p class="l i2">
+                  <span class="n">about</span><span class="m">=</span
+                  ><span class="s"
+                    >"A transport rental platform offering minivans and minibuses for city
+                    transfers, tours, business trips, and events with or without a driver."</span
+                  >
+                </p>
+                <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
+                <div class="l" aria-hidden="true"><span class="m">);</span></div>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  <span class="c">// next:</span> <a href="#mymehmon">mymehmon.tsx</a>
+                </p>
+              </div>
+            </article>
+
+            <article
+              class="file"
+              id="mymehmon"
+              data-name="mymehmon.tsx"
+              data-path="projects/mymehmon.tsx"
+              data-ext="tsx"
+              data-lang="TypeScript JSX"
+            >
+              <div class="file__source code">
+                <div class="l" aria-hidden="true">
+                  <span class="k">export const</span> <span class="f">MyMehmon</span>
+                  <span class="m">= () =&gt; (</span>
+                </div>
+                <div class="l i1" aria-hidden="true">
+                  <span class="m">&lt;</span><span class="t">Project</span>
+                </div>
+                <h2 class="l i2">
+                  <span class="n">name</span><span class="m">=</span
+                  ><span class="s">"MyMehmon.uz partner panel"</span>
+                </h2>
+
+                <p class="l i2">
+                  <span class="n">stack</span><span class="m">={[</span
+                  ><span class="s skill">'React 19'</span><span class="m">,</span>
+                  <span class="s skill">'TypeScript'</span><span class="m">,</span>
+                  <span class="s skill">'Vite'</span><span class="m">,</span>
+                  <span class="s skill">'React Hook Form'</span><span class="m">,</span>
+                  <span class="s skill">'React Query'</span><span class="m">,</span>
+                  <span class="s skill">'Yup'</span><span class="m">,</span>
+                  <span class="s skill">'Tailwind CSS'</span><span class="m">,</span>
+                  <span class="s skill">'i18next'</span><span class="m">]}</span>
+                </p>
+                <p class="l i2">
+                  <span class="n">about</span><span class="m">=</span
+                  ><span class="s"
+                    >"An admin panel for a hospitality booking platform that allows hotel owners to
+                    manage listings, rooms, bookings, and services."</span
+                  >
+                </p>
+                <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
+                <div class="l" aria-hidden="true"><span class="m">);</span></div>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  <span class="c">// next:</span> <a href="#todo-app">todo-app.tsx</a>
+                </p>
+              </div>
+            </article>
+
+            <article
+              class="file file--split"
+              id="todo-app"
+              data-name="todo-app.tsx"
+              data-path="projects/todo-app.tsx"
+              data-ext="tsx"
+              data-lang="TypeScript JSX"
+            >
+              <div class="file__source code">
+                <div class="l" aria-hidden="true">
+                  <span class="k">export const</span> <span class="f">TodoApp</span>
+                  <span class="m">= () =&gt; (</span>
+                </div>
+                <div class="l i1" aria-hidden="true">
+                  <span class="m">&lt;</span><span class="t">Project</span>
+                </div>
+                <h2 class="l i2">
+                  <span class="n">name</span><span class="m">=</span
+                  ><span class="s">"Advanced Todo app"</span>
+                </h2>
+                <p class="l i2">
+                  <span class="n">url</span><span class="m">=</span
+                  ><a
                     href="https://nazimajumaniyazova.github.io/redux-toolkit/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >Open live site</a
+                    >"https://nazimajumaniyazova.github.io/redux-toolkit/"</a
                   >
-                  <a
-                    class="btn"
+                </p>
+                <p class="l i2">
+                  <span class="n">code</span><span class="m">=</span
+                  ><a
                     href="https://github.com/nazimajumaniyazova/redux-toolkit"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >View code</a
+                    >"https://github.com/nazimajumaniyazova/redux-toolkit"</a
                   >
-                </div>
-              </div>
-            </div>
-          </article>
+                </p>
 
-          <!-- mentoring.md -->
-
-          <article
-            class="file"
-            id="mentoring"
-            data-name="mentoring.md"
-            data-path="mentoring.md"
-            data-ext="md"
-            data-lang="Markdown"
-          >
-            <div class="file__source code">
-              <h2 class="l"><span class="h"># Mentoring</span></h2>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                <strong>**Frontend Mentor, The Rolling Scopes School**</strong>
-                <span class="c">Dec 2025 – present</span>
-              </p>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                I mentor groups of 2–6 aspiring frontend developers through an intensive 11–13 week
-                program at RS School, a free community-driven coding school with 1,500+ graduates
-                worldwide.
-              </p>
-              <div class="l" aria-hidden="true"></div>
-              <ul>
-                <li class="l">
-                  <span class="m">-</span> Conduct technical screening interviews on HTML, CSS and
-                  JavaScript fundamentals
-                </li>
-                <li class="l">
-                  <span class="m">-</span> Review student pull requests weekly: code quality,
-                  architecture, DRY/KISS, semantic HTML, CSS structure and JS patterns
-                </li>
-                <li class="l">
-                  <span class="m">-</span> Run weekly 60–90 minute sessions on curriculum topics
-                </li>
-                <li class="l">
-                  <span class="m">-</span> Grade assignments against defined criteria and guide
-                  students from beginners to job-ready junior developers
-                </li>
-              </ul>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                <span class="m">&gt;</span> Teaching others is one of the most powerful ways to grow
-                as a developer yourself.
-              </p>
-            </div>
-          </article>
-
-          <!-- education.md -->
-
-          <article
-            class="file"
-            id="education"
-            data-name="education.md"
-            data-path="education.md"
-            data-ext="md"
-            data-lang="Markdown"
-          >
-            <div class="file__source code">
-              <h2 class="l"><span class="h"># Education</span></h2>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l"><strong>**Lomonosov Moscow State University (MSU)**</strong></p>
-              <p class="l">Bachelor's degree, Applied Mathematics and Computer Science</p>
-              <p class="l"><span class="c">graduated in 2017</span></p>
-              <div class="l" aria-hidden="true"></div>
-              <p class="l">
-                <span class="c">&lt;!-- see also:</span>
-                <a href="#certificates">certificates.json</a> <span class="c">--&gt;</span>
-              </p>
-            </div>
-          </article>
-
-          <!-- certificates.json -->
-
-          <article
-            class="file"
-            id="certificates"
-            data-name="certificates.json"
-            data-path="certificates.json"
-            data-ext="json"
-            data-lang="JSON"
-          >
-            <div class="file__source code">
-              <h2 class="visually-hidden">Certificates</h2>
-              <div class="l" aria-hidden="true"><span class="m">[</span></div>
-              <ul>
-                <li class="l i1">
-                  <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
-                  <span class="s">"Meta Front-End Developer"</span><span class="m">,</span>
-                  <span class="n">"by"</span><span class="m">:</span> <span class="s">"Meta"</span
-                  ><span class="m">,</span> <span class="n">"issued"</span><span class="m">:</span>
-                  <span class="s">"May 2026"</span> <span class="m">},</span>
-                </li>
-                <li class="l i1">
-                  <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
-                  <span class="s">"Meta React Specialization"</span><span class="m">,</span>
-                  <span class="n">"by"</span><span class="m">:</span> <span class="s">"Meta"</span
-                  ><span class="m">,</span> <span class="n">"issued"</span><span class="m">:</span>
-                  <span class="s">"Mar 2026"</span><span class="m">,</span>
-                  <span class="n">"verify"</span><span class="m">:</span>
-                  <a
-                    href="https://coursera.org/verify/specialization/HO2YYW0CWJW5"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >"coursera.org/verify/specialization/HO2YYW0CWJW5"</a
+                <p class="l i2">
+                  <span class="n">stack</span><span class="m">={[</span
+                  ><span class="s skill">'React'</span><span class="m">,</span>
+                  <span class="s skill">'Redux Toolkit'</span><span class="m">]}</span>
+                </p>
+                <p class="l i2">
+                  <span class="n">about</span><span class="m">=</span
+                  ><span class="s"
+                    >"Todo application with a simple list and an async list. A small study
+                    project."</span
                   >
-                  <span class="m">},</span>
-                </li>
-                <li class="l i1">
-                  <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
-                  <span class="s">"Principles of UX/UI Design"</span><span class="m">,</span>
-                  <span class="n">"by"</span><span class="m">:</span> <span class="s">"Meta"</span
-                  ><span class="m">,</span> <span class="n">"issued"</span><span class="m">:</span>
-                  <span class="s">"Mar 2026"</span> <span class="m">},</span>
-                </li>
-                <li class="l i1">
-                  <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
-                  <span class="s">"Version Control"</span><span class="m">,</span>
-                  <span class="n">"by"</span><span class="m">:</span> <span class="s">"Meta"</span
-                  ><span class="m">,</span> <span class="n">"issued"</span><span class="m">:</span>
-                  <span class="s">"Jun 2025"</span> <span class="m">},</span>
-                </li>
-                <li class="l i1">
-                  <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
-                  <span class="s">"Programming with JavaScript"</span><span class="m">,</span>
-                  <span class="n">"by"</span><span class="m">:</span> <span class="s">"Meta"</span
-                  ><span class="m">,</span> <span class="n">"issued"</span><span class="m">:</span>
-                  <span class="s">"May 2025"</span> <span class="m">},</span>
-                </li>
-                <li class="l i1">
-                  <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
-                  <span class="s">"Introduction to Front-End Development"</span
-                  ><span class="m">,</span> <span class="n">"by"</span><span class="m">:</span>
-                  <span class="s">"Meta"</span><span class="m">,</span>
-                  <span class="n">"issued"</span><span class="m">:</span>
-                  <span class="s">"Nov 2023"</span> <span class="m">},</span>
-                </li>
-                <li class="l i1">
-                  <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
-                  <span class="s">"JavaScript / Front-end"</span><span class="m">,</span>
-                  <span class="n">"by"</span><span class="m">:</span>
-                  <span class="s">"The Rolling Scopes School"</span><span class="m">,</span>
-                  <span class="n">"issued"</span><span class="m">:</span>
-                  <span class="s">"2023"</span><span class="m">,</span>
-                  <span class="n">"verify"</span><span class="m">:</span>
-                  <a
-                    href="https://app.rs.school/certificate/deja5sdc"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >"app.rs.school/certificate/deja5sdc"</a
-                  >
-                  <span class="m">}</span>
-                </li>
-              </ul>
-              <div class="l" aria-hidden="true"><span class="m">]</span></div>
-            </div>
-          </article>
-
-          <!-- languages.yml -->
-          <article
-            class="file"
-            id="languages"
-            data-name="languages.yml"
-            data-path="languages.yml"
-            data-ext="yml"
-            data-lang="YAML"
-          >
-            <div class="file__source code">
-              <h2 class="l"><span class="n">languages</span><span class="m">:</span></h2>
-              <ul>
-                <li class="l i1">
-                  <span class="m">-</span> <span class="n">Russian</span><span class="m">:</span>
-                  <span class="s">Native</span>
-                </li>
-                <li class="l i1">
-                  <span class="m">-</span> <span class="n">Uzbek</span><span class="m">:</span>
-                  <span class="s">Native</span>
-                </li>
-                <li class="l i1">
-                  <span class="m">-</span> <span class="n">English</span><span class="m">:</span>
-                  <span class="s">B2, Upper Intermediate</span>
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- contact.ts -->
-
-          <article
-            class="file"
-            id="contact"
-            data-name="contact.ts"
-            data-path="contact.ts"
-            data-ext="ts"
-            data-lang="TypeScript"
-          >
-            <div class="file__source code">
-              <h2 class="l"><span class="c">// Let's get in touch.</span></h2>
-              <div class="l" aria-hidden="true"></div>
-              <p class="lens">
-                <a href="mailto:nazima.jumaniyazova.95@gmail.com">▶ Write an email</a>
-                <span aria-hidden="true">|</span>
-                <button type="button" data-copy="nazima.jumaniyazova.95@gmail.com">
-                  Copy email
-                </button>
-              </p>
-              <div class="l" aria-hidden="true">
-                <span class="k">export const</span> <span class="f">contact</span>
-                <span class="m">= {</span>
-              </div>
-              <ul>
-                <li class="l i1">
-                  <span class="n">email</span><span class="m">:</span>
-                  <a href="mailto:nazima.jumaniyazova.95@gmail.com"
-                    >'nazima.jumaniyazova.95@gmail.com'</a
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">linkedin</span><span class="m">:</span>
-                  <a
-                    href="https://www.linkedin.com/in/nazima-jumaniyazova-7708a5269/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >'in/nazima-jumaniyazova'</a
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">telegram</span><span class="m">:</span>
-                  <a href="https://t.me/nazima_jm" target="_blank" rel="noopener noreferrer"
-                    >'@nazima_jm'</a
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">github</span><span class="m">:</span>
+                </p>
+                <div class="l i1" aria-hidden="true"><span class="m">/&gt;</span></div>
+                <div class="l" aria-hidden="true"><span class="m">);</span></div>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  <span class="c">// more on</span>
                   <a
                     href="https://github.com/nazimajumaniyazova"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >'nazimajumaniyazova'</a
-                  ><span class="m">,</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">location</span><span class="m">:</span>
-                  <span class="s">'Tashkent, Uzbekistan'</span><span class="m">,</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">relocation</span><span class="m">:</span>
-                  <span class="k">true</span><span class="m">,</span>
-                </li>
-                <li class="l i1">
-                  <span class="n">businessTrips</span><span class="m">:</span>
-                  <span class="k">true</span><span class="m">,</span>
-                </li>
-              </ul>
-              <div class="l" aria-hidden="true"><span class="m">};</span></div>
-            </div>
-          </article>
+                    >github.com/nazimajumaniyazova</a
+                  >
+                </p>
+              </div>
+              <div class="file__preview">
+                <p class="preview-label" aria-hidden="true">Preview</p>
+                <div class="project-card">
+                  <a
+                    class="window window--link"
+                    href="https://nazimajumaniyazova.github.io/redux-toolkit/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Open Advanced Todo app"
+                  >
+                    <span class="window__bar" aria-hidden="true"
+                      ><span class="window__dots"><i></i><i></i><i></i></span
+                      ><span class="window__title"
+                        >nazimajumaniyazova.github.io/redux-toolkit</span
+                      ></span
+                    >
+                    <img
+                      src="./src/img/project-todo.webp"
+                      width="1280"
+                      height="800"
+                      loading="lazy"
+                      alt="Advanced Todo app with simple and async lists"
+                    />
+                  </a>
+                  <div class="project-card__actions">
+                    <a
+                      class="btn btn--primary"
+                      href="https://nazimajumaniyazova.github.io/redux-toolkit/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Open live site</a
+                    >
+                    <a
+                      class="btn"
+                      href="https://github.com/nazimajumaniyazova/redux-toolkit"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >View code</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </article>
 
-          <!-- Shown when every tab is closed -->
-          <div class="empty" id="empty" hidden>
-            <p class="empty__logo" aria-hidden="true">&lt;NJ /&gt;</p>
-            <p>No file is open.</p>
-            <ul class="empty__keys">
-              <li><a href="#readme">Open README.md</a></li>
-              <li><kbd>Ctrl K</kbd> search files and commands</li>
-              <li><kbd>Ctrl J</kbd> toggle the terminal</li>
-            </ul>
+            <!-- mentoring.md -->
+
+            <article
+              class="file"
+              id="mentoring"
+              data-name="mentoring.md"
+              data-path="mentoring.md"
+              data-ext="md"
+              data-lang="Markdown"
+            >
+              <div class="file__source code">
+                <h2 class="l"><span class="h"># Mentoring</span></h2>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  <strong>**Frontend Mentor, The Rolling Scopes School**</strong>
+                  <span class="c">Dec 2025 – present</span>
+                </p>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  I mentor groups of 2–6 aspiring frontend developers through an intensive 11–13
+                  week program at RS School, a free community-driven coding school with 1,500+
+                  graduates worldwide.
+                </p>
+                <div class="l" aria-hidden="true"></div>
+                <ul>
+                  <li class="l">
+                    <span class="m">-</span> Conduct technical screening interviews on HTML, CSS and
+                    JavaScript fundamentals
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> Review student pull requests weekly: code quality,
+                    architecture, DRY/KISS, semantic HTML, CSS structure and JS patterns
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> Run weekly 60–90 minute sessions on curriculum topics
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> Grade assignments against defined criteria and guide
+                    students from beginners to job-ready junior developers
+                  </li>
+                </ul>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  <span class="m">&gt;</span> Teaching others is one of the most powerful ways to
+                  grow as a developer yourself.
+                </p>
+              </div>
+            </article>
+
+            <!-- education.md -->
+
+            <article
+              class="file"
+              id="education"
+              data-name="education.md"
+              data-path="education.md"
+              data-ext="md"
+              data-lang="Markdown"
+            >
+              <div class="file__source code">
+                <h2 class="l"><span class="h"># Education</span></h2>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l"><strong>**Lomonosov Moscow State University (MSU)**</strong></p>
+                <p class="l">Bachelor's degree, Applied Mathematics and Computer Science</p>
+                <p class="l"><span class="c">graduated in 2017</span></p>
+                <div class="l" aria-hidden="true"></div>
+                <p class="l">
+                  <span class="c">&lt;!-- see also:</span>
+                  <a href="#certificates">certificates.json</a> <span class="c">--&gt;</span>
+                </p>
+              </div>
+            </article>
+
+            <!-- certificates.json -->
+
+            <article
+              class="file"
+              id="certificates"
+              data-name="certificates.json"
+              data-path="certificates.json"
+              data-ext="json"
+              data-lang="JSON"
+            >
+              <div class="file__source code">
+                <h2 class="visually-hidden">Certificates</h2>
+                <div class="l" aria-hidden="true"><span class="m">[</span></div>
+                <ul>
+                  <li class="l i1">
+                    <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
+                    <span class="s">"Meta Front-End Developer"</span><span class="m">,</span>
+                    <span class="n">"by"</span><span class="m">:</span> <span class="s">"Meta"</span
+                    ><span class="m">,</span> <span class="n">"issued"</span
+                    ><span class="m">:</span> <span class="s">"May 2026"</span>
+                    <span class="m">},</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
+                    <span class="s">"Meta React Specialization"</span><span class="m">,</span>
+                    <span class="n">"by"</span><span class="m">:</span> <span class="s">"Meta"</span
+                    ><span class="m">,</span> <span class="n">"issued"</span
+                    ><span class="m">:</span> <span class="s">"Mar 2026"</span
+                    ><span class="m">,</span> <span class="n">"verify"</span
+                    ><span class="m">:</span>
+                    <a
+                      href="https://coursera.org/verify/specialization/HO2YYW0CWJW5"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >"coursera.org/verify/specialization/HO2YYW0CWJW5"</a
+                    >
+                    <span class="m">},</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
+                    <span class="s">"Principles of UX/UI Design"</span><span class="m">,</span>
+                    <span class="n">"by"</span><span class="m">:</span> <span class="s">"Meta"</span
+                    ><span class="m">,</span> <span class="n">"issued"</span
+                    ><span class="m">:</span> <span class="s">"Mar 2026"</span>
+                    <span class="m">},</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
+                    <span class="s">"Version Control"</span><span class="m">,</span>
+                    <span class="n">"by"</span><span class="m">:</span> <span class="s">"Meta"</span
+                    ><span class="m">,</span> <span class="n">"issued"</span
+                    ><span class="m">:</span> <span class="s">"Jun 2025"</span>
+                    <span class="m">},</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
+                    <span class="s">"Programming with JavaScript"</span><span class="m">,</span>
+                    <span class="n">"by"</span><span class="m">:</span> <span class="s">"Meta"</span
+                    ><span class="m">,</span> <span class="n">"issued"</span
+                    ><span class="m">:</span> <span class="s">"May 2025"</span>
+                    <span class="m">},</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
+                    <span class="s">"Introduction to Front-End Development"</span
+                    ><span class="m">,</span> <span class="n">"by"</span><span class="m">:</span>
+                    <span class="s">"Meta"</span><span class="m">,</span>
+                    <span class="n">"issued"</span><span class="m">:</span>
+                    <span class="s">"Nov 2023"</span> <span class="m">},</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="m">{</span> <span class="n">"name"</span><span class="m">:</span>
+                    <span class="s">"JavaScript / Front-end"</span><span class="m">,</span>
+                    <span class="n">"by"</span><span class="m">:</span>
+                    <span class="s">"The Rolling Scopes School"</span><span class="m">,</span>
+                    <span class="n">"issued"</span><span class="m">:</span>
+                    <span class="s">"2023"</span><span class="m">,</span>
+                    <span class="n">"verify"</span><span class="m">:</span>
+                    <a
+                      href="https://app.rs.school/certificate/deja5sdc"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >"app.rs.school/certificate/deja5sdc"</a
+                    >
+                    <span class="m">}</span>
+                  </li>
+                </ul>
+                <div class="l" aria-hidden="true"><span class="m">]</span></div>
+              </div>
+            </article>
+
+            <!-- languages.yml -->
+            <article
+              class="file"
+              id="languages"
+              data-name="languages.yml"
+              data-path="languages.yml"
+              data-ext="yml"
+              data-lang="YAML"
+            >
+              <div class="file__source code">
+                <h2 class="l"><span class="n">languages</span><span class="m">:</span></h2>
+                <ul>
+                  <li class="l i1">
+                    <span class="m">-</span> <span class="n">Russian</span><span class="m">:</span>
+                    <span class="s">Native</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="m">-</span> <span class="n">Uzbek</span><span class="m">:</span>
+                    <span class="s">Native</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="m">-</span> <span class="n">English</span><span class="m">:</span>
+                    <span class="s">B2, Upper Intermediate</span>
+                  </li>
+                </ul>
+              </div>
+            </article>
+
+            <!-- contact.ts -->
+
+            <article
+              class="file"
+              id="contact"
+              data-name="contact.ts"
+              data-path="contact.ts"
+              data-ext="ts"
+              data-lang="TypeScript"
+            >
+              <div class="file__source code">
+                <h2 class="l"><span class="c">// Let's get in touch.</span></h2>
+                <div class="l" aria-hidden="true"></div>
+                <p class="lens">
+                  <a href="mailto:nazima.jumaniyazova.95@gmail.com">▶ Write an email</a>
+                  <span aria-hidden="true">|</span>
+                  <button type="button" data-copy="nazima.jumaniyazova.95@gmail.com">
+                    Copy email
+                  </button>
+                </p>
+                <div class="l" aria-hidden="true">
+                  <span class="k">export const</span> <span class="f">contact</span>
+                  <span class="m">= {</span>
+                </div>
+                <ul>
+                  <li class="l i1">
+                    <span class="n">email</span><span class="m">:</span>
+                    <a href="mailto:nazima.jumaniyazova.95@gmail.com"
+                      >'nazima.jumaniyazova.95@gmail.com'</a
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">linkedin</span><span class="m">:</span>
+                    <a
+                      href="https://www.linkedin.com/in/nazima-jumaniyazova-7708a5269/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >'in/nazima-jumaniyazova'</a
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">telegram</span><span class="m">:</span>
+                    <a href="https://t.me/nazima_jm" target="_blank" rel="noopener noreferrer"
+                      >'@nazima_jm'</a
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">github</span><span class="m">:</span>
+                    <a
+                      href="https://github.com/nazimajumaniyazova"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >'nazimajumaniyazova'</a
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">location</span><span class="m">:</span>
+                    <span class="s">'Tashkent, Uzbekistan'</span><span class="m">,</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">relocation</span><span class="m">:</span>
+                    <span class="k">true</span><span class="m">,</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">businessTrips</span><span class="m">:</span>
+                    <span class="k">true</span><span class="m">,</span>
+                  </li>
+                </ul>
+                <div class="l" aria-hidden="true"><span class="m">};</span></div>
+              </div>
+            </article>
+
+            <!-- Shown when every tab is closed -->
+            <div class="empty" id="empty" hidden>
+              <p class="empty__logo" aria-hidden="true">&lt;NJ /&gt;</p>
+              <p>No file is open.</p>
+              <ul class="empty__keys">
+                <li><a href="#readme">Open README.md</a></li>
+                <li><kbd>Ctrl K</kbd> search files and commands</li>
+                <li><kbd>Ctrl J</kbd> toggle the terminal</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Overview of the open file, drawn by src/js/minimap.js -->
+          <div class="minimap" id="minimap" aria-hidden="true">
+            <canvas class="minimap__canvas"></canvas>
+            <div class="minimap__view"></div>
           </div>
         </div>
       </main>

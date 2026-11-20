@@ -114,7 +114,7 @@
       : 'nazima-portfolio';
     statusLang.textContent = active ? active.lang : 'Plain Text';
     statusLine.textContent = 'Ln 1';
-    // The source control view follows the active file.
+    // The minimap and the source control view follow the active file.
     document.dispatchEvent(new CustomEvent('portfolio:open', { detail: activeId }));
   }
 
@@ -213,6 +213,7 @@
     } catch (e) {
       // Private mode: the theme simply resets on the next visit.
     }
+    document.dispatchEvent(new CustomEvent('portfolio:theme', { detail: theme }));
     return true;
   }
 
