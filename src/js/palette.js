@@ -10,6 +10,11 @@
 
   const openUrl = (url) => () => window.open(url, '_blank', 'noopener');
 
+  function terminal(command) {
+    P.toggleTerminal(true);
+    P.runCommand(command);
+  }
+
   const items = P.files
     .map((file) => ({
       label: file.path,
@@ -36,6 +41,8 @@
         { label: 'Settings', hint: 'Ctrl ,', run: () => P.openFile('settings') },
         { label: 'Split editor right', hint: 'wide screens', run: () => P.splitRight() },
         { label: 'Close the second editor', hint: 'split', run: () => P.closeSide() },
+        { label: 'Run tests', hint: 'npm test', run: () => terminal('npm test') },
+        { label: 'Play snake', hint: 'terminal game', run: () => terminal('snake') },
         { label: 'Toggle terminal', hint: 'Ctrl J', run: () => P.toggleTerminal() },
         { label: 'Toggle explorer', hint: 'Ctrl B', run: () => P.toggleExplorer() },
         {

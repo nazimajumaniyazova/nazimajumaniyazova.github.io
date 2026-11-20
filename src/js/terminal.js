@@ -438,14 +438,18 @@
     exit: { run: () => 'There is nothing outside. Try ' + run('help') + '.' },
     hello: { run: () => 'Hello! Nice to meet you. ' + run('contact') + ' if you want to talk.' },
     npm: {
-      run: (args) =>
-        /^(run )?(dev|start)$/.test(args.join(' '))
-          ? COMMANDS.run.run([])
-          : 'Try ' + run('npm run dev') + ' while a project file is open.',
+      run: (args) => {
+        const script = args.join(' ');
+        if (/^(run )?(dev|start)$/.test(script)) return COMMANDS.run.run([]);
+        if (/^(run )?test$|^t$/.test(script) && COMMANDS.test) return COMMANDS.test.run([]);
+        return (
+          'Try ' + run('npm test') + ', or ' + run('npm run dev') + ' while a project file is open.'
+        );
+      },
     },
   };
   COMMANDS.hi = COMMANDS.hello;
-  COMMANDS.code = COMMANDS.open;
+  COMMANDS.code = { run: COMMANDS.open.run }; // an alias, so not listed in help
 
   function execute(raw) {
     const line = raw.trim();
@@ -524,7 +528,7 @@
       execute(button.dataset.run);
       return;
     }
-    if (event.target.closest('a, button')) return;
+    if (event.target.closest('a, button, .snake')) return;
     if (String(window.getSelection())) return;
     input.focus();
   });
@@ -565,4 +569,15 @@
 
   P.runCommand = execute;
   P.runProject = (id) => execute('run ' + id);
+
+  // games.js and other add-ons register commands and print through this.
+  P.terminal = {
+    print,
+    esc,
+    out,
+    body,
+    input,
+    button: run,
+    addCommand: (name, command) => (COMMANDS[name] = command),
+  };
 })();

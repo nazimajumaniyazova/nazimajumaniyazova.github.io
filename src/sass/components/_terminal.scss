@@ -84,6 +84,15 @@
     color: var(--c-tag);
   }
 
+  // `npm test`
+  .test-badge {
+    padding: 0 0.4em;
+    font-weight: 700;
+    color: var(--c-on-accent);
+    background-color: var(--c-added);
+    border-radius: 0.2rem;
+  }
+
   &__form {
     display: flex;
     gap: 0.6rem;
@@ -105,5 +114,46 @@
     @include up('md') {
       font-size: 1em;
     }
+  }
+}
+
+// `snake`: the board is plain text, two characters per cell, so a cell is
+// about square at this line height.
+.snake {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font: inherit;
+  font-style: normal;
+  line-height: 1.2;
+  white-space: pre;
+  background-color: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: 0.3rem;
+  touch-action: none;
+  user-select: none;
+
+  i {
+    font-style: normal;
+  }
+
+  &__head {
+    background-color: var(--c-accent);
+    border-radius: 0.2rem;
+  }
+
+  &__body {
+    background-color: color-mix(in srgb, var(--c-accent) 55%, transparent);
+  }
+
+  &__food {
+    font-weight: 700;
+    color: var(--c-on-accent);
+    background-color: var(--c-heading);
+    border-radius: 0.2rem;
+  }
+
+  &__status {
+    margin: 0.2rem 0 0.4rem;
+    color: var(--c-muted);
   }
 }
