@@ -48,6 +48,13 @@
         if (settings.lineNumbers === 'off') root.classList.add('no-line-numbers');
         if (settings.minimap === false) root.classList.add('no-minimap');
         if (settings.animations === false) root.classList.add('no-motion');
+        // Side bar width and terminal height set by dragging (src/js/layout.js).
+        var layout = {};
+        try {
+          layout = JSON.parse(localStorage.getItem('layout')) || {};
+        } catch (e) {}
+        if (layout.sidebar) root.style.setProperty('--sidebar-w', layout.sidebar + 'px');
+        if (layout.terminal) root.style.setProperty('--terminal-h', layout.terminal + 'px');
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -62,6 +69,7 @@
     <script src="./src/js/scm.js" defer></script>
     <script src="./src/js/settings.js" defer></script>
     <script src="./src/js/split.js" defer></script>
+    <script src="./src/js/layout.js" defer></script>
     <script src="./src/js/minimap.js" defer></script>
     <script src="./src/js/contact.js" defer></script>
     <script src="./src/js/terminal.js" defer></script>
@@ -290,6 +298,17 @@
         </div>
       </aside>
       <div class="scrim" data-action="explorer" aria-hidden="true"></div>
+      <!-- Drag to resize the side bar, double-click to reset (src/js/layout.js) -->
+      <div
+        class="sash sash--sidebar"
+        role="separator"
+        aria-orientation="vertical"
+        aria-controls="explorer"
+        aria-label="Resize the side bar"
+        title="Drag to resize, double-click to reset"
+        tabindex="0"
+        data-sash="sidebar"
+      ></div>
 
       <!-- Editor -->
       <main class="editor" id="main">
@@ -452,6 +471,10 @@
                   </li>
                   <li class="l">
                     <span class="m">-</span> drag a tab to the right to open two files side by side
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> drag the edge of the side bar or the terminal to resize
+                    them
                   </li>
                   <li class="l">
                     <span class="m">-</span> <a href="#settings">settings.json</a> font size, word
@@ -1630,6 +1653,16 @@
 
       <!-- Terminal -->
       <section class="terminal" id="terminal" aria-label="Terminal">
+        <div
+          class="sash sash--terminal"
+          role="separator"
+          aria-orientation="horizontal"
+          aria-controls="terminal-body"
+          aria-label="Resize the terminal"
+          title="Drag to resize, double-click to reset"
+          tabindex="0"
+          data-sash="terminal"
+        ></div>
         <div class="terminal__bar">
           <button
             class="terminal__tab"

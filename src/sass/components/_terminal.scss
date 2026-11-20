@@ -1,6 +1,7 @@
 @use '../abstracts/mixins' as *;
 
 .terminal {
+  position: relative;
   grid-area: terminal;
   display: flex;
   flex-direction: column;
@@ -54,7 +55,10 @@
   }
 
   &__body {
-    height: clamp(8rem, 26vh, 15rem);
+    // --terminal-h is set by dragging the sash (src/js/layout.js).
+    height: var(--terminal-h, clamp(8rem, 26vh, 15rem));
+    max-height: calc(100vh - 12rem);
+    max-height: calc(100dvh - 12rem);
     padding: 0.25rem 1rem 0.6rem;
     overflow-y: auto;
     cursor: text;

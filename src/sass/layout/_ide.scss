@@ -48,6 +48,7 @@ html:not(.js) {
   .side,
   .dropzone,
   .commit,
+  .sash,
   #settings {
     display: none;
   }
@@ -209,7 +210,9 @@ html:not(.js) {
   @include up('md') {
     position: static;
     grid-area: sidebar;
-    width: 15rem;
+    // --sidebar-w is set by dragging the sash (src/js/layout.js).
+    width: var(--sidebar-w, 15rem);
+    max-width: 45vw;
     visibility: visible;
     transform: none;
     transition: none;
@@ -261,6 +264,96 @@ html:not(.js) {
     font-size: var(--fs-small);
     line-height: 1.8;
     color: var(--c-muted);
+  }
+}
+
+// Sashes: thin draggable edges that resize the side bar and the terminal.
+.sash {
+  position: relative;
+  z-index: 6;
+  touch-action: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: var(--c-accent);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    transition-delay: 0.25s;
+  }
+
+  &.is-dragging::after,
+  &:focus-visible::after {
+    opacity: 1;
+    transition-delay: 0s;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &--sidebar {
+    display: none;
+    grid-area: sidebar;
+    justify-self: end;
+    width: 8px;
+    margin-right: -4px;
+    cursor: col-resize;
+
+    @include up('md') {
+      display: block;
+    }
+
+    .explorer-collapsed & {
+      display: none;
+    }
+
+    &::after {
+      top: 0;
+      bottom: 0;
+      left: 3px;
+      width: 2px;
+    }
+  }
+
+  &--terminal {
+    position: absolute;
+    top: -4px;
+    right: 0;
+    left: 0;
+    height: 8px;
+    cursor: row-resize;
+
+    // A wider grip for fingers.
+    @media (pointer: coarse) {
+      top: -10px;
+      height: 20px;
+    }
+
+    &::after {
+      top: calc(50% - 1px);
+      right: 0;
+      left: 0;
+      height: 2px;
+    }
+  }
+}
+
+// While dragging, the cursor stays the same everywhere and text is not selected.
+.is-resizing {
+  cursor: col-resize;
+  user-select: none;
+
+  * {
+    cursor: inherit !important;
+  }
+
+  &--row {
+    cursor: row-resize;
   }
 }
 
