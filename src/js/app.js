@@ -368,6 +368,9 @@
     } else if (key === 'g' && event.shiftKey) {
       event.preventDefault();
       showView('scm');
+    } else if (key === ',') {
+      event.preventDefault();
+      openFile('settings');
     } else if (key === 'k' || key === 'p') {
       event.preventDefault();
       actions.palette();
@@ -402,7 +405,8 @@
     flash,
     copyText,
     lightSkills,
-    reducedMotion,
+    // settings.js turns this on when "workbench.animations" is false.
+    reducedMotion: reducedMotion || root.classList.contains('no-motion'),
   };
   window.Portfolio = api;
 

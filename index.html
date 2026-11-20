@@ -38,6 +38,16 @@
         } catch (e) {}
         if (!theme && window.matchMedia('(prefers-color-scheme: light)').matches) theme = 'paper';
         if (theme) root.setAttribute('data-theme', theme);
+        // Editor settings from .vscode/settings.json (see src/js/settings.js).
+        var settings = {};
+        try {
+          settings = JSON.parse(localStorage.getItem('settings')) || {};
+        } catch (e) {}
+        if (settings.fontSize) root.style.setProperty('--fs-code', settings.fontSize + 'px');
+        if (settings.wordWrap === 'off') root.classList.add('no-wrap');
+        if (settings.lineNumbers === 'off') root.classList.add('no-line-numbers');
+        if (settings.minimap === false) root.classList.add('no-minimap');
+        if (settings.animations === false) root.classList.add('no-motion');
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -50,6 +60,7 @@
     <script src="./src/js/app.js" defer></script>
     <script src="./src/js/search.js" defer></script>
     <script src="./src/js/scm.js" defer></script>
+    <script src="./src/js/settings.js" defer></script>
     <script src="./src/js/split.js" defer></script>
     <script src="./src/js/minimap.js" defer></script>
     <script src="./src/js/terminal.js" defer></script>
@@ -161,8 +172,21 @@
         >
           <span class="mask-icon mask-icon--telegram"></span>
         </a>
-        <button
+        <a
           class="icon-btn activity__bottom"
+          href="#settings"
+          aria-label="Settings (Ctrl ,)"
+          title="Settings (Ctrl ,)"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"
+            />
+          </svg>
+        </a>
+        <button
+          class="icon-btn"
           type="button"
           aria-label="Change color theme"
           title="Change color theme"
@@ -216,6 +240,14 @@
           <nav class="tree" aria-label="Files">
             <p class="tree__root">nazima-portfolio</p>
             <ul class="tree__list">
+              <li>
+                <p class="tree__folder">.vscode</p>
+                <ul class="tree__list tree__list--nested">
+                  <li>
+                    <a class="tree__file" href="#settings" data-ext="json">settings.json</a>
+                  </li>
+                </ul>
+              </li>
               <li><a class="tree__file" href="#readme" data-ext="md">README.md</a></li>
               <li><a class="tree__file" href="#about" data-ext="md">about.md</a></li>
               <li><a class="tree__file" href="#skills" data-ext="json">skills.json</a></li>
@@ -278,6 +310,79 @@
 
         <div class="editor__body" id="editor-body">
           <div class="panes" id="panes">
+            <!-- .vscode/settings.json. The values are controls, see src/js/settings.js -->
+
+            <article
+              class="file"
+              id="settings"
+              data-name="settings.json"
+              data-path=".vscode/settings.json"
+              data-ext="json"
+              data-lang="JSON with Comments"
+            >
+              <div class="file__source code">
+                <h2 class="visually-hidden">Editor settings</h2>
+                <p class="lens">
+                  <button type="button" data-setting-reset>↺ Reset to defaults</button>
+                </p>
+                <div class="l" aria-hidden="true"><span class="m">{</span></div>
+                <p class="l i1">
+                  <span class="c">// Click a value to change it. The editor reacts right away</span>
+                </p>
+                <p class="l i1">
+                  <span class="c">// and remembers your choice in this browser.</span>
+                </p>
+                <ul>
+                  <li class="l i1">
+                    <span class="n">"workbench.colorTheme"</span><span class="m">:</span>
+                    <button class="setting s" type="button" data-setting="theme">"Midnight"</button
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"editor.fontSize"</span><span class="m">:</span>
+                    <input
+                      class="setting setting--num"
+                      type="number"
+                      min="11"
+                      max="22"
+                      step="1"
+                      value="15"
+                      inputmode="numeric"
+                      data-setting="fontSize"
+                      aria-label="editor.fontSize in pixels"
+                    /><span class="m">,</span>
+                    <span class="setting__step"
+                      ><button type="button" data-setting-step="-1" aria-label="Smaller font">
+                        −</button
+                      ><button type="button" data-setting-step="1" aria-label="Bigger font">
+                        +
+                      </button></span
+                    >
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"editor.wordWrap"</span><span class="m">:</span>
+                    <button class="setting s" type="button" data-setting="wordWrap">"on"</button
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"editor.lineNumbers"</span><span class="m">:</span>
+                    <button class="setting s" type="button" data-setting="lineNumbers">"on"</button
+                    ><span class="m">,</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"editor.minimap.enabled"</span><span class="m">:</span>
+                    <button class="setting k" type="button" data-setting="minimap">true</button
+                    ><span class="m">,</span> <span class="c">// wide screens</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"workbench.animations"</span><span class="m">:</span>
+                    <button class="setting k" type="button" data-setting="animations">true</button>
+                  </li>
+                </ul>
+                <div class="l" aria-hidden="true"><span class="m">}</span></div>
+              </div>
+            </article>
+
             <!-- README.md -->
 
             <article
@@ -345,6 +450,10 @@
                   </li>
                   <li class="l">
                     <span class="m">-</span> drag a tab to the right to open two files side by side
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> <a href="#settings">settings.json</a> font size, word
+                    wrap and more
                   </li>
                   <li class="l">
                     <span class="m">-</span> type <kbd>help</kbd> in the terminal to see what it can

@@ -46,7 +46,8 @@ html:not(.js) {
   .editor__split,
   .minimap,
   .side,
-  .dropzone {
+  .dropzone,
+  #settings {
     display: none;
   }
 }

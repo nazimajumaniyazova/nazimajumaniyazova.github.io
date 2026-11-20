@@ -1,0 +1,69 @@
+@use '../abstracts/mixins' as *;
+
+// Values in .vscode/settings.json that can be clicked or typed into.
+.setting {
+  padding: 0 0.15em;
+  font: inherit;
+  border-bottom: 1px dashed color-mix(in srgb, currentColor 55%, transparent);
+  border-radius: 0.2rem 0.2rem 0 0;
+  transition: background-color 0.15s;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--c-line);
+  }
+
+  &.is-changed {
+    animation: setting-changed 0.9s var(--ease-out);
+  }
+
+  &--num {
+    width: calc(2ch + 0.3em);
+    color: var(--c-heading);
+    text-align: center;
+    background-color: transparent;
+    outline-offset: 2px;
+    appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      margin: 0;
+      appearance: none;
+    }
+
+    // 16px keeps iOS from zooming the page when the field gets focus.
+    @include down('md') {
+      font-size: max(1em, 16px);
+    }
+  }
+
+  &__step {
+    display: inline-flex;
+    gap: 0.3rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+
+    button {
+      display: grid;
+      place-items: center;
+      width: 1.6rem;
+      height: 1.4rem;
+      font-family: var(--ff-ui);
+      line-height: 1;
+      color: var(--c-muted);
+      border: 1px solid var(--c-border);
+      border-radius: 0.3rem;
+
+      &:hover {
+        color: var(--c-strong);
+        border-color: var(--c-accent);
+      }
+    }
+  }
+}
+
+@keyframes setting-changed {
+  from {
+    background-color: color-mix(in srgb, var(--c-accent) 40%, transparent);
+  }
+}
