@@ -1,2 +1,5 @@
 node_modules/
 .DS_Store
+
+# Full-size source of src/img/nazima.webp, too heavy for the site
+src/img/nazima.png
