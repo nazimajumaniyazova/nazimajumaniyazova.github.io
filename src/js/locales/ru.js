@@ -89,8 +89,14 @@
     // ---------- README.md ----------
     '> Frontend Software Engineer, Tashkent':
       '<span class="m">&gt;</span> Frontend-разработчик, Ташкент',
-    '5 years of building large single-page applications with React and TypeScript, including 2 years on banking and financial products. I own features end to end, from design hand-off to production.':
-      '5 лет разрабатываю крупные одностраничные приложения на <code class="s">React</code> и <code class="s">TypeScript</code>, из них 2 года в банковских и финансовых продуктах. Веду задачи от начала до конца: от передачи дизайна до продакшена.',
+    'Frontend Engineer with 5 years of experience building and maintaining scalable web applications using React and TypeScript, including 2 years developing banking and fintech products.':
+      'Frontend-разработчик с 5-летним опытом создания и поддержки масштабируемых веб-приложений на <code class="s">React</code> и <code class="s">TypeScript</code>, из них 2 года в разработке банковских и финтех-продуктов.',
+    'I specialize in building complex, data-intensive interfaces, translating UI/UX designs into responsive applications, and optimizing frontend performance.':
+      'Специализируюсь на сложных интерфейсах с большим объёмом данных: превращаю UI/UX-макеты в адаптивные приложения и оптимизирую производительность фронтенда.',
+    'I take ownership of features end to end — from technical implementation and architecture decisions to testing and production delivery.':
+      'Веду фичи от начала до конца — от технической реализации и архитектурных решений до тестирования и выкладки в продакшен.',
+    'Beyond development, I actively participate in code reviews, maintain technical documentation, and mentor fellow frontend engineers. Experienced in collaborating with cross-functional, distributed, and remote-first teams.':
+      'Помимо разработки, активно участвую в код-ревью, веду техническую документацию и менторю других фронтенд-разработчиков. Есть опыт работы в кросс-функциональных, распределённых и удалённых командах.',
     '## Start here': '## С чего начать',
     'what I have built': 'что я сделала',
     'where I have worked': 'где я работала',
