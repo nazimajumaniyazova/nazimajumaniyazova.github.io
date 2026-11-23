@@ -1,0 +1,494 @@
+@use '../abstracts/mixins' as *;
+
+// Simple view: the resume as a regular page (src/js/plain.js). It replaces
+// the editor while html has the .plain-view class.
+.plain {
+  display: none;
+}
+
+html.plain-view {
+  background-color: var(--c-bg);
+
+  body {
+    overflow: auto;
+  }
+
+  .ide,
+  .notice {
+    display: none;
+  }
+
+  .plain {
+    display: block;
+    min-height: 100vh;
+    font-family: var(--ff-ui);
+    font-size: 1rem;
+    line-height: 1.6;
+    background-color: var(--c-bg);
+  }
+}
+
+.plain {
+  a {
+    color: var(--c-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    text-underline-offset: 0.2em;
+
+    &:hover {
+      text-decoration-color: currentColor;
+    }
+  }
+
+  // Sticky top bar with the way back and the main actions.
+  &__bar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 3.25rem;
+    padding: 0.4rem max(1rem, calc((100% - 56rem) / 2));
+    font-size: var(--fs-ui);
+    background-color: color-mix(in srgb, var(--c-bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.25rem;
+    padding: 0 0.75rem;
+    color: var(--c-text);
+    border: 1px solid var(--c-border);
+    border-radius: 0.5rem;
+
+    span {
+      font-family: var(--ff-mono);
+      font-weight: 700;
+      color: var(--c-accent);
+    }
+
+    &:hover {
+      border-color: var(--c-accent);
+    }
+  }
+
+  &__spacer {
+    flex: 1;
+  }
+
+  &__tools {
+    display: contents;
+  }
+
+  &__cv {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.25rem;
+    padding: 0 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    border-radius: 0.5rem;
+
+    .plain & {
+      color: var(--c-on-accent);
+      text-decoration: none;
+      background-color: var(--c-accent);
+    }
+  }
+
+  &__page {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 2rem 1rem 3rem;
+
+    @include up('md') {
+      padding: 3rem 2rem 4rem;
+    }
+  }
+
+  &__hero {
+    display: grid;
+    gap: 1.5rem;
+    align-items: center;
+
+    @include up('md') {
+      grid-template-columns: 12rem minmax(0, 1fr);
+      gap: 2.5rem;
+    }
+  }
+
+  &__photo {
+    width: 9rem;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border: 1px solid var(--c-border);
+    border-radius: 1rem;
+
+    @include up('md') {
+      width: 100%;
+    }
+  }
+
+  &__name {
+    font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--c-strong);
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__role {
+    margin-top: 0.4rem;
+    font-size: 1.125rem;
+    color: var(--c-accent);
+  }
+
+  &__summary {
+    margin-top: 0.9rem;
+    max-width: 40rem;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.1rem;
+    margin-top: 1rem;
+    font-size: var(--fs-ui);
+  }
+
+  &__toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 2rem 0 0.5rem;
+    padding-bottom: 1.25rem;
+    font-size: var(--fs-ui);
+    border-bottom: 1px solid var(--c-border);
+
+    .plain & a {
+      padding: 0.2rem 0.65rem;
+      color: var(--c-text);
+      text-decoration: none;
+      border: 1px solid var(--c-border);
+      border-radius: 999px;
+
+      &:hover {
+        color: var(--c-strong);
+        border-color: var(--c-accent);
+      }
+    }
+  }
+
+  &__section {
+    padding-top: 2.25rem;
+    scroll-margin-top: 3.5rem;
+
+    p + p {
+      margin-top: 0.75rem;
+    }
+  }
+
+  &__title {
+    margin-bottom: 1rem;
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--c-strong);
+
+    span {
+      font-family: var(--ff-mono);
+      font-size: 0.85em;
+      color: var(--c-heading);
+    }
+  }
+
+  &__sub {
+    margin: 1.25rem 0 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--c-strong);
+  }
+
+  &__list {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.6rem;
+    padding-left: 1.1rem;
+    list-style: disc;
+
+    li::marker {
+      color: var(--c-muted);
+    }
+
+    &--loose {
+      gap: 0.6rem;
+    }
+
+    &--contact {
+      padding-left: 0;
+      list-style: none;
+    }
+  }
+
+  // A job, mentoring or school: dates on the left, details on the right.
+  &__item {
+    display: grid;
+    gap: 0.25rem 2rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--c-border);
+
+    &:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    @include up('md') {
+      grid-template-columns: 10rem minmax(0, 1fr);
+    }
+  }
+
+  &__when {
+    font-size: var(--fs-ui);
+    color: var(--c-muted);
+
+    span {
+      display: block;
+    }
+  }
+
+  &__head {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--c-strong);
+  }
+
+  &__at {
+    color: var(--c-accent);
+
+    &::before {
+      content: '· ';
+      color: var(--c-muted);
+    }
+  }
+
+  &__meta {
+    font-size: var(--fs-ui);
+    color: var(--c-muted);
+  }
+
+  &__key {
+    display: inline-block;
+    min-width: 6rem;
+    color: var(--c-muted);
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.75rem;
+
+    li {
+      padding: 0.1rem 0.55rem;
+      font-size: var(--fs-small);
+      color: var(--c-text);
+      background-color: var(--c-line);
+      border: 1px solid var(--c-border);
+      border-radius: 999px;
+    }
+  }
+
+  &__cards {
+    display: grid;
+    gap: 1rem;
+
+    @include up('md') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1rem;
+    background-color: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: 0.75rem;
+    scroll-margin-top: 4rem;
+
+    img {
+      margin-bottom: 0.4rem;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top;
+      border: 1px solid var(--c-border);
+      border-radius: 0.5rem;
+    }
+
+    .plain__tags {
+      padding-top: 0.4rem;
+    }
+  }
+
+  &__more {
+    font-size: var(--fs-ui);
+  }
+
+  &__skills {
+    display: grid;
+    gap: 0.75rem;
+
+    > div {
+      display: grid;
+      gap: 0.25rem 1.5rem;
+
+      @include up('md') {
+        grid-template-columns: 10rem minmax(0, 1fr);
+      }
+    }
+
+    dt {
+      font-weight: 600;
+      color: var(--c-strong);
+    }
+
+    .plain__tags {
+      margin-top: 0;
+    }
+  }
+
+  &__verify {
+    font-size: var(--fs-small);
+  }
+
+  blockquote {
+    margin-top: 0.9rem;
+    padding-left: 0.9rem;
+    font-style: italic;
+    color: var(--c-muted);
+    border-left: 3px solid var(--c-accent);
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    margin-top: 1.25rem;
+    padding: 0 1.2rem;
+    font-weight: 700;
+    border-radius: 0.5rem;
+
+    .plain & {
+      color: var(--c-on-accent);
+      text-decoration: none;
+      background-color: var(--c-accent);
+    }
+  }
+
+  &__footer {
+    margin-top: 3rem;
+    padding-top: 1.25rem;
+    font-size: var(--fs-ui);
+    color: var(--c-muted);
+    border-top: 1px solid var(--c-border);
+
+    button {
+      color: var(--c-accent);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+  }
+}
+
+// Printing the simple view gives a clean resume.
+@media print {
+  html.plain-view .plain {
+    &__bar,
+    &__toc,
+    &__footer,
+    &__button {
+      display: none;
+    }
+
+    &__page {
+      padding: 0;
+    }
+  }
+}
+
+// One-time hint in the corner, like editor notifications.
+.notice {
+  position: fixed;
+  right: 0.75rem;
+  bottom: 2.5rem;
+  left: 0.75rem;
+  z-index: calc(var(--z-palette) - 1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  padding: 0.75rem 0.9rem;
+  font-family: var(--ff-ui);
+  font-size: var(--fs-ui);
+  color: var(--c-text);
+  background-color: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-accent);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.35);
+  animation: notice-in 0.35s var(--ease-out);
+
+  @include up('md') {
+    left: auto;
+    max-width: 26rem;
+  }
+
+  &__text {
+    flex: 1 1 14rem;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  &__primary {
+    min-height: 2rem;
+    padding: 0 0.8rem;
+    font-weight: 600;
+    color: var(--c-on-accent);
+    background-color: var(--c-accent);
+    border-radius: 0.375rem;
+  }
+
+  &__close {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    color: var(--c-muted);
+    border-radius: 0.375rem;
+
+    &:hover {
+      color: var(--c-strong);
+      background-color: var(--c-line);
+    }
+  }
+}
+
+@keyframes notice-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}

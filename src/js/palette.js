@@ -43,6 +43,11 @@
           run: () => P.runProject(file.id),
         })),
       [
+        {
+          label: 'Simple view: my resume as a regular page',
+          hint: 'view',
+          run: () => P.setPlain && P.setPlain(true),
+        },
         { label: 'Search in files', hint: 'Ctrl Shift F', run: () => P.showView('search') },
         { label: 'Source control: my path', hint: 'Ctrl Shift G', run: () => P.showView('scm') },
         { label: 'Settings', hint: 'Ctrl ,', run: () => P.openFile('settings') },

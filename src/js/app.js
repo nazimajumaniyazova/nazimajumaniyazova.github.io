@@ -294,6 +294,7 @@
     palette: () => api.openPalette && api.openPalette(),
     split: () => api.splitRight && api.splitRight(),
     unsplit: () => api.closeSide && api.closeSide(),
+    plain: () => api.togglePlain && api.togglePlain(),
   };
 
   document.addEventListener('click', (event) => {
