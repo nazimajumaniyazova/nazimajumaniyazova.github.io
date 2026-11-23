@@ -18,6 +18,13 @@ Live: https://nazimajumaniyazova.github.io/portfolio/
 - `contact.ts` has a "git commit" box: Push opens the visitor's mail app with the message.
 - Terminal extras: `npm test`, `snake`, `git log`, `git commit -m "..."` and `git push`.
 - Three color themes: Midnight, Paper, Sunset. The choice is remembered.
+- "Simple view" in the title bar shows everything as a regular one-page resume, built from the
+  same files. A `?view=plain` link opens it directly; it prints cleanly.
+- English and Russian: the RU/EN button in the status bar, `"locale"` in settings.json or a
+  `?lang=ru` link. The browser language picks the first one.
+- `github/repos.json` loads my public repositories live from the GitHub API (`gh repo list` in
+  the terminal).
+- `F5` debugs my career: breakpoints on every stage, variables and call stack from the files.
 
 ## Stack
 
@@ -48,7 +55,8 @@ src/
     base/             reset, global styles, syntax colors
     layout/_ide       title bar, activity bar, explorer, status bar
     components/       editor, preview, terminal, palette, search, hover cards,
-                      scm (commit graph), controls (settings values, commit box)
+                      scm (commit graph), controls (settings values, commit box),
+                      plain (simple view), github (repo cards), debug (Run and Debug)
   js/
     app.js            files and tabs, side bar views, themes, status bar
     search.js         Ctrl Shift F search in all files
@@ -62,6 +70,11 @@ src/
     games.js          `npm test` and `snake`
     palette.js        Ctrl K search
     hover.js          skill hover cards ("Used at")
+    github.js         github/repos.json from the GitHub API, `gh` command
+    debug.js          Run and Debug (F5) through my career
+    plain.js          simple view: the resume as a regular page
+    i18n.js           language switch, applies src/js/locales/*.js
+    locales/ru.js     Russian texts, keyed by the English text
   img/  files/
 ```
 
@@ -98,3 +111,21 @@ a `match` in certificates.json, or a whole `file`. `git log` in the terminal rea
 
 The inline script in the `<head>` of `index.html` applies saved settings before the first paint,
 and `src/js/settings.js` handles changes. Keep the two in sync when adding a setting.
+
+## Translating
+
+English is the text in `index.html`. Russian lives in `src/js/locales/ru.js`: each key is the
+English text of an element (or of an `aria-label`, `title`, `placeholder` or `alt`) exactly as
+it reads, with spaces collapsed, and the value replaces it. A value may contain the same markup
+as the English element, for example `<kbd>` or a link.
+
+When you change an English text, change its key in `ru.js` too. A text without a key simply
+stays in English, nothing breaks. Code, skill names, terminal commands and terminal output stay
+in English on purpose. Scripts that build text themselves use `Portfolio.t()` and redraw on the
+`portfolio:content` event.
+
+## Debugging the career
+
+`src/js/debug.js` puts a breakpoint on the education line, on the `company` line of every job in
+`experience.ts` and on the mentoring line, then walks them oldest first. The variables are read
+from those files at every stop, so editing a job updates the debugger too.
