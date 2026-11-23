@@ -95,6 +95,7 @@
     'what I work with': 'с чем я работаю',
     'teaching at The Rolling Scopes School': 'преподаю в The Rolling Scopes School',
     'how to reach me': 'как со мной связаться',
+    'my public repositories, live from GitHub': 'мои публичные репозитории прямо с GitHub',
     '## Shortcuts': '## Горячие клавиши',
     '- Simple view in the title bar shows all of this as a regular resume':
       '<span class="m">-</span> <kbd>Простой вид</kbd> в верхней панели показывает всё это обычным резюме',
@@ -213,6 +214,25 @@
       'Главная страница Videohub.uz со списком курсов по программированию',
     'Advanced Todo app with simple and async lists':
       'Todo-приложение с обычным и асинхронным списками',
+
+    // ---------- github/repos.json (src/js/github.js) ----------
+    'GitHub repositories': 'Репозитории на GitHub',
+    '↻ Refresh': '↻ Обновить',
+    'Open on GitHub': 'Открыть на GitHub',
+    '// My public repositories, live from the GitHub API.':
+      '// Мои публичные репозитории, напрямую из GitHub API.',
+    '// Opening the file loads them.': '// Они загружаются при открытии файла.',
+    '// Loading…': '// Загрузка…',
+    '// GitHub is not answering right now (offline or rate limit).':
+      '// GitHub сейчас не отвечает (нет сети или исчерпан лимит запросов).',
+    'Try again': 'Повторить',
+    '// {count} repositories, forks left out. Fetched at {time}.':
+      '// Репозиториев: {count}, без форков. Загружено в {time}.',
+    '// {count} more.': '// Ещё {count}.',
+    'Show all': 'Показать все',
+    'Could not load the repositories.': 'Не удалось загрузить репозитории.',
+    'Loading…': 'Загрузка…',
+    Live: 'Сайт',
 
     // ---------- mentoring.md, education.md, certificates.json, languages.yml ----------
     '# Mentoring': '# Менторство',

@@ -53,6 +53,7 @@
           hint: 'lang',
           run: () => P.toggleLocale && P.toggleLocale(),
         },
+        { label: 'GitHub: my repositories', hint: 'repos.json', run: () => P.openFile('github') },
         { label: 'Search in files', hint: 'Ctrl Shift F', run: () => P.showView('search') },
         { label: 'Source control: my path', hint: 'Ctrl Shift G', run: () => P.showView('scm') },
         { label: 'Settings', hint: 'Ctrl ,', run: () => P.openFile('settings') },

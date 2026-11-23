@@ -50,7 +50,8 @@ html:not(.js) {
   .commit,
   .sash,
   .titlebar__plain,
-  #settings {
+  #settings,
+  #github {
     display: none;
   }
 }

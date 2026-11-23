@@ -17,7 +17,8 @@
   // Output, user input and lists that are rebuilt by their own scripts.
   const SKIP =
     'script, style, svg, textarea, [translate="no"], #plain, .terminal__out, ' +
-    '.palette__list > *, #search-results, .scm__list, .hover-card';
+    '.palette__list > *, #search-results, .scm__list, .hover-card, ' +
+    '#github .file__source, #github .repos';
 
   const norm = (text) => text.replace(/\s+/g, ' ').trim();
   const dict = () => (P.locales && P.locales[locale]) || null;

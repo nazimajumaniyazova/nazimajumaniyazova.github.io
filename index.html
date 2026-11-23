@@ -96,6 +96,7 @@
     <script src="./src/js/games.js" defer></script>
     <script src="./src/js/palette.js" defer></script>
     <script src="./src/js/hover.js" defer></script>
+    <script src="./src/js/github.js" defer></script>
     <script src="./src/js/plain.js" defer></script>
     <script src="./src/js/locales/ru.js" defer></script>
     <script src="./src/js/i18n.js" defer></script>
@@ -309,6 +310,12 @@
                   <li><a class="tree__file" href="#todo-app" data-ext="tsx">todo-app.tsx</a></li>
                 </ul>
               </li>
+              <li>
+                <p class="tree__folder">github</p>
+                <ul class="tree__list tree__list--nested">
+                  <li><a class="tree__file" href="#github" data-ext="json">repos.json</a></li>
+                </ul>
+              </li>
               <li><a class="tree__file" href="#mentoring" data-ext="md">mentoring.md</a></li>
               <li><a class="tree__file" href="#education" data-ext="md">education.md</a></li>
               <li>
@@ -486,6 +493,10 @@
                   <li class="l">
                     <span class="m">-</span> <a href="#mentoring">mentoring.md</a>
                     <span class="c">teaching at The Rolling Scopes School</span>
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> <a href="#github">github/repos.json</a>
+                    <span class="c">my public repositories, live from GitHub</span>
                   </li>
                   <li class="l">
                     <span class="m">-</span> <a href="#contact">contact.ts</a>
@@ -1360,6 +1371,29 @@
                     >
                   </div>
                 </div>
+              </div>
+            </article>
+
+            <!-- github/repos.json: filled from the GitHub API by src/js/github.js -->
+
+            <article
+              class="file file--split"
+              id="github"
+              data-name="repos.json"
+              data-path="github/repos.json"
+              data-ext="json"
+              data-lang="JSON"
+            >
+              <div class="file__source code">
+                <h2 class="visually-hidden">GitHub repositories</h2>
+                <p class="l">
+                  <span class="c">// My public repositories, live from the GitHub API.</span>
+                </p>
+                <p class="l"><span class="c">// Opening the file loads them.</span></p>
+              </div>
+              <div class="file__preview">
+                <p class="preview-label" aria-hidden="true">Preview</p>
+                <div class="repos"></div>
               </div>
             </article>
 
