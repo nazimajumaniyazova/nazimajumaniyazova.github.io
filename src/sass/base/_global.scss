@@ -197,3 +197,19 @@ kbd {
     transition-duration: 0.01ms !important;
   }
 }
+
+// Russian is applied by src/js/i18n.js after the scripts load. Until then the
+// English text stays hidden, and shows anyway if the script never runs.
+.i18n-pending {
+  .ide,
+  .plain {
+    visibility: hidden;
+    animation: i18n-reveal 0s 1.5s forwards;
+  }
+}
+
+@keyframes i18n-reveal {
+  to {
+    visibility: visible;
+  }
+}

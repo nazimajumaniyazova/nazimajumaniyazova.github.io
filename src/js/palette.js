@@ -48,6 +48,11 @@
           hint: 'view',
           run: () => P.setPlain && P.setPlain(true),
         },
+        {
+          label: 'Language: English / Русский',
+          hint: 'lang',
+          run: () => P.toggleLocale && P.toggleLocale(),
+        },
         { label: 'Search in files', hint: 'Ctrl Shift F', run: () => P.showView('search') },
         { label: 'Source control: my path', hint: 'Ctrl Shift G', run: () => P.showView('scm') },
         { label: 'Settings', hint: 'Ctrl ,', run: () => P.openFile('settings') },

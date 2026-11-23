@@ -437,7 +437,13 @@
       esc(t('Editor view')) +
       '</button>' +
       '<span class="plain__spacer"></span>' +
-      '<span class="plain__tools"></span>' +
+      '<span class="plain__tools">' +
+      (P.getLocale
+        ? '<button class="plain__lang" type="button" data-action="locale" translate="no" lang="' +
+          (P.getLocale() === 'ru' ? 'en">English' : 'ru">Русский') +
+          '</button>'
+        : '') +
+      '</span>' +
       '<button class="icon-btn" type="button" data-action="theme" aria-label="' +
       esc(t('Change color theme')) +
       '" title="' +

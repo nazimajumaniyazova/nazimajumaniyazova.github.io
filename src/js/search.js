@@ -15,14 +15,18 @@
   const canHighlight = typeof Highlight === 'function' && 'highlights' in CSS;
 
   // Every source line of every file, with its text flattened to one line.
-  const lines = P.files.flatMap((file) =>
-    Array.from(file.el.querySelectorAll('.file__source .l')).map((el) => ({
-      file,
-      el,
-      n: el.dataset.n,
-      text: el.textContent.replace(/\s+/g, ' ').trim(),
-    })),
-  );
+  // Read again when the content changes (another language, loaded data).
+  const read = () =>
+    P.files.flatMap((file) =>
+      Array.from(file.el.querySelectorAll('.file__source .l')).map((el) => ({
+        file,
+        el,
+        n: el.dataset.n,
+        text: el.textContent.replace(/\s+/g, ' ').trim(),
+      })),
+    );
+  let lines = read();
+  document.addEventListener('portfolio:content', () => (lines = read()));
 
   const escapeRegExp = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 

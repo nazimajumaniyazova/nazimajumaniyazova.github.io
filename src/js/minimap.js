@@ -99,6 +99,7 @@
 
   document.addEventListener('portfolio:open', schedule);
   document.addEventListener('portfolio:split', schedule);
+  document.addEventListener('portfolio:content', later);
   document.addEventListener('portfolio:settings', later);
   document.addEventListener('portfolio:theme', later);
   new ResizeObserver(schedule).observe(panes);

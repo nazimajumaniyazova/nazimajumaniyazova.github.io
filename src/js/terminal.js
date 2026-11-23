@@ -334,15 +334,22 @@
         );
       },
     },
+    // The greeting is the first thing a visitor reads, so it follows the
+    // language of the page (src/js/i18n.js); other output stays in English.
     whoami: {
       about: 'who is behind this site',
-      run: () =>
-        'Nazima Jumaniyazova, frontend software engineer from Tashkent.\n' +
-        '5 years with React and TypeScript, 2 of them in banking.\n' +
-        'Open to relocation and business trips.\n' +
-        'Type ' +
-        run('help') +
-        ' to see what this terminal can do.',
+      run: () => {
+        const t = P.t || ((text) => text);
+        return [
+          'Nazima Jumaniyazova, frontend software engineer from Tashkent.',
+          '5 years with React and TypeScript, 2 of them in banking.',
+          'Open to relocation and business trips.',
+          'Type {help} to see what this terminal can do.',
+        ]
+          .map((line) => esc(t(line)))
+          .join('\n')
+          .replace('{help}', run('help'));
+      },
     },
     skills: {
       about: 'open and highlight my skills',

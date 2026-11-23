@@ -63,6 +63,18 @@
         if (view === 'plain' || /[?&]view=plain/.test(location.search)) {
           root.classList.add('plain-view');
         }
+        // Language: saved choice, a ?lang= link or the browser language (src/js/i18n.js).
+        var locale = null;
+        try {
+          locale = localStorage.getItem('locale');
+        } catch (e) {}
+        var param = location.search.match(/[?&]lang=(en|ru)\b/);
+        if (param) locale = param[1];
+        if (!locale) locale = /^ru\b/i.test(navigator.language || '') ? 'ru' : 'en';
+        if (locale === 'ru') {
+          root.lang = 'ru';
+          root.classList.add('i18n-pending');
+        }
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -85,6 +97,8 @@
     <script src="./src/js/palette.js" defer></script>
     <script src="./src/js/hover.js" defer></script>
     <script src="./src/js/plain.js" defer></script>
+    <script src="./src/js/locales/ru.js" defer></script>
+    <script src="./src/js/i18n.js" defer></script>
   </head>
 
   <body>
@@ -380,6 +394,12 @@
                     <span class="n">"workbench.colorTheme"</span><span class="m">:</span>
                     <button class="setting s" type="button" data-setting="theme">"Midnight"</button
                     ><span class="m">,</span>
+                  </li>
+                  <li class="l i1">
+                    <span class="n">"locale"</span><span class="m">:</span>
+                    <button class="setting s" type="button" data-setting="locale" translate="no">
+                      "en"</button
+                    ><span class="m">,</span> <span class="c">// "en" or "ru"</span>
                   </li>
                   <li class="l i1">
                     <span class="n">"editor.fontSize"</span><span class="m">:</span>
@@ -1757,6 +1777,19 @@
         <span class="statusbar__item statusbar__item--wide" id="status-line">Ln 1</span>
         <span class="statusbar__item statusbar__item--wide" id="status-lang">Markdown</span>
         <span class="statusbar__item" id="status-clock" title="Local time in Tashkent"></span>
+        <button
+          class="statusbar__item statusbar__btn"
+          type="button"
+          data-action="locale"
+          title="Language / Язык"
+          translate="no"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="8" />
+            <path d="M4 12h16M12 4c2.5 2.5 2.5 13.5 0 16M12 4c-2.5 2.5-2.5 13.5 0 16" />
+          </svg>
+          <span id="status-locale">EN</span>
+        </button>
         <button class="statusbar__item statusbar__btn" type="button" data-action="theme">
           <span id="status-theme">Midnight</span>
         </button>

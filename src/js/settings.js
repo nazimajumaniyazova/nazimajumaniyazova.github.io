@@ -20,6 +20,7 @@
   };
   const NAMES = {
     theme: 'workbench.colorTheme',
+    locale: 'locale',
     fontSize: 'editor.fontSize',
     wordWrap: 'editor.wordWrap',
     lineNumbers: 'editor.lineNumbers',
@@ -62,6 +63,8 @@
       const theme = P.themes.find((item) => item.id === root.getAttribute('data-theme'));
       return '"' + (theme ? theme.label : '') + '"';
     }
+    // The language lives in src/js/i18n.js; this file only shows and switches it.
+    if (name === 'locale') return '"' + (P.getLocale ? P.getLocale() : root.lang || 'en') + '"';
     if (name === 'fontSize') return String(state.fontSize || defaultFont);
     if (name === 'wordWrap' || name === 'lineNumbers') return '"' + state[name] + '"';
     return String(state[name]);
@@ -106,6 +109,10 @@
   }
 
   function change(name, value, skip) {
+    if (name === 'locale') {
+      if (P.setLocale && P.setLocale(value)) pulse(name);
+      return;
+    }
     if (name === 'fontSize') {
       const size = Math.min(FONT_MAX, Math.max(FONT_MIN, Math.round(Number(value))));
       if (!size) return;
@@ -122,6 +129,11 @@
   function toggle(name) {
     if (name === 'theme') {
       P.cycleTheme();
+      pulse(name);
+      return;
+    }
+    if (name === 'locale') {
+      if (P.toggleLocale) P.toggleLocale();
       pulse(name);
       return;
     }
@@ -176,6 +188,7 @@
   });
 
   document.addEventListener('portfolio:theme', () => render());
+  document.addEventListener('portfolio:content', () => render());
 
   apply();
 

@@ -19,7 +19,7 @@
   let sideId = null;
   let dragging = null;
 
-  function openSide(id) {
+  function openSide(id, quiet) {
     const file = P.resolve(id);
     if (!file) return false;
     if (!wide.matches) {
@@ -46,9 +46,18 @@
     root.classList.add('is-split');
     if (P.syncSettings) P.syncSettings();
     document.dispatchEvent(new CustomEvent('portfolio:split', { detail: sideId }));
-    P.flash(file.name + ' opened to the side');
+    if (!quiet) P.flash(file.name + ' opened to the side');
     return true;
   }
+
+  // The copy shows the file as it was; take a new one when the text changes.
+  document.addEventListener('portfolio:content', () => {
+    if (sideId) {
+      const top = scroll.scrollTop;
+      openSide(sideId, true);
+      scroll.scrollTop = top;
+    }
+  });
 
   function closeSide() {
     if (!sideId) return;

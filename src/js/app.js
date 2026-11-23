@@ -234,7 +234,7 @@
         minute: '2-digit',
         timeZone: 'Asia/Tashkent',
       }).format(new Date());
-      statusClock.textContent = 'Tashkent ' + time;
+      statusClock.textContent = (api.t ? api.t('Tashkent') : 'Tashkent') + ' ' + time;
     } catch (e) {
       statusClock.hidden = true;
     }
@@ -295,6 +295,7 @@
     split: () => api.splitRight && api.splitRight(),
     unsplit: () => api.closeSide && api.closeSide(),
     plain: () => api.togglePlain && api.togglePlain(),
+    locale: () => api.toggleLocale && api.toggleLocale(),
   };
 
   document.addEventListener('click', (event) => {
@@ -422,5 +423,6 @@
 
   tickClock();
   setInterval(tickClock, 30000);
+  document.addEventListener('portfolio:content', tickClock);
   $$('.typed').forEach(startTyping);
 })();
