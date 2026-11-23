@@ -1,0 +1,292 @@
+@use '../abstracts/mixins' as *;
+
+// Run and Debug (src/js/debug.js): the side bar view, breakpoints in the
+// gutter, the paused line, the floating toolbar and the orange status bar.
+$breakpoint: #e51400;
+$paused: #f5c518;
+
+.debug {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  padding-bottom: 1rem;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__heading {
+    padding: 0 1rem 0.5rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+
+  &__start {
+    display: grid;
+    gap: 0.6rem;
+    padding: 0 1rem 0.75rem;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.25rem;
+    padding: 0 0.75rem;
+    font-weight: 600;
+    color: var(--c-on-accent);
+    background-color: var(--c-accent);
+    border-radius: 0.375rem;
+
+    kbd {
+      color: inherit;
+      background-color: transparent;
+      border-color: currentColor;
+      opacity: 0.75;
+    }
+
+    &--stop {
+      color: #fff;
+      background-color: var(--c-debug);
+    }
+  }
+
+  &__intro,
+  &__empty {
+    font-size: var(--fs-small);
+    line-height: 1.5;
+    color: var(--c-muted);
+  }
+
+  &__empty {
+    padding: 0 1rem;
+  }
+
+  &__section {
+    padding: 0.35rem 0 0.5rem;
+    border-top: 1px solid var(--c-border);
+  }
+
+  &__title {
+    padding: 0.35rem 1rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-text);
+  }
+
+  &__vars {
+    padding: 0 0.75rem 0 1rem;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+
+    ul {
+      padding-left: 1.1rem;
+    }
+  }
+
+  &__var {
+    overflow-wrap: anywhere;
+
+    summary {
+      cursor: pointer;
+
+      &::marker {
+        color: var(--c-muted);
+      }
+    }
+  }
+
+  &__frames {
+    font-size: var(--fs-small);
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.2rem 1rem;
+      font-family: var(--ff-mono);
+
+      &.is-top {
+        background-color: color-mix(in srgb, #{$paused} 14%, transparent);
+      }
+    }
+  }
+
+  &__where {
+    font-family: var(--ff-ui);
+    color: var(--c-muted);
+    white-space: nowrap;
+  }
+
+  &__bps button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    font-family: var(--ff-mono);
+    font-size: var(--fs-small);
+    text-align: left;
+    color: var(--c-text);
+
+    &:hover {
+      background-color: var(--c-line);
+    }
+
+    &[aria-current='true'] {
+      background-color: color-mix(in srgb, #{$paused} 14%, transparent);
+    }
+
+    span:nth-child(2) {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__dot {
+    flex: none;
+    width: 0.6rem;
+    height: 0.6rem;
+    background-color: $breakpoint;
+    border-radius: 50%;
+  }
+}
+
+// Breakpoint dots in the gutter, and the line the debugger stopped on.
+.l.has-bp::after {
+  content: '';
+  position: absolute;
+  top: 0.6em;
+  left: 0.2rem;
+  width: 0.55em;
+  height: 0.55em;
+  background-color: $breakpoint;
+  border-radius: 50%;
+}
+
+.l.is-paused {
+  background-color: color-mix(in srgb, #{$paused} 16%, transparent);
+  box-shadow: inset 3px 0 0 $paused;
+
+  &::after {
+    top: 0.5em;
+    width: 0.65em;
+    height: 0.75em;
+    background-color: $paused;
+    border-radius: 0;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+  }
+}
+
+// Floating toolbar at the top of the editor.
+.debugbar {
+  position: absolute;
+  top: 0.4rem;
+  left: 50%;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.15rem 0.35rem;
+  font-family: var(--ff-ui);
+  font-size: var(--fs-small);
+  color: var(--c-muted);
+  background-color: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: 0.45rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
+  transform: translateX(-50%);
+  animation: debugbar-in 0.25s var(--ease-out);
+
+  &:empty {
+    display: none;
+  }
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    color: var(--c-func);
+    border-radius: 0.3rem;
+
+    &:hover {
+      background-color: var(--c-line);
+    }
+
+    &[data-debug='continue'] {
+      color: var(--c-added);
+    }
+
+    &[data-debug='stop'] {
+      color: $breakpoint;
+    }
+  }
+
+  &__grip {
+    padding: 0 0.2rem;
+    letter-spacing: -0.2em;
+    opacity: 0.5;
+  }
+
+  &__count {
+    padding: 0 0.35rem 0 0.25rem;
+    white-space: nowrap;
+  }
+}
+
+@keyframes debugbar-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -0.5rem);
+  }
+}
+
+// Variables under the paused line. On wider screens they are in the side bar.
+.debug-peek {
+  margin: 0.25rem 1rem 0.6rem var(--gutter);
+  padding: 0.5rem 0.25rem 0.5rem 0;
+  background-color: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-left: 3px solid $paused;
+  border-radius: 0.375rem;
+
+  &__head {
+    padding: 0 0.75rem 0.25rem 1rem;
+    font-size: var(--fs-small);
+  }
+
+  @include up('md') {
+    display: none;
+  }
+}
+
+// The status bar turns orange while debugging, as in VS Code.
+.is-debugging .statusbar {
+  color: #fff;
+  background-color: var(--c-debug);
+  border-top-color: var(--c-debug);
+
+  .statusbar__item--accent {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .statusbar__msg {
+    color: #fff;
+  }
+}
+
+.debug-log {
+  color: var(--c-debug);
+  font-weight: 700;
+}

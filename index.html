@@ -97,6 +97,7 @@
     <script src="./src/js/palette.js" defer></script>
     <script src="./src/js/hover.js" defer></script>
     <script src="./src/js/github.js" defer></script>
+    <script src="./src/js/debug.js" defer></script>
     <script src="./src/js/plain.js" defer></script>
     <script src="./src/js/locales/ru.js" defer></script>
     <script src="./src/js/i18n.js" defer></script>
@@ -190,6 +191,18 @@
         <button
           class="icon-btn"
           type="button"
+          aria-label="Run and debug (F5)"
+          title="Run and debug (F5)"
+          data-action="view-debug"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 5l9 6-9 6z" />
+            <circle cx="17.5" cy="16.5" r="3.5" />
+          </svg>
+        </button>
+        <button
+          class="icon-btn"
+          type="button"
           aria-label="Toggle terminal (Ctrl J)"
           title="Terminal (Ctrl J)"
           data-action="terminal"
@@ -258,7 +271,13 @@
           <button class="sidebar__view" type="button" data-view="scm" aria-pressed="false">
             Git
           </button>
+          <button class="sidebar__view" type="button" data-view="debug" aria-pressed="false">
+            Run
+          </button>
         </div>
+
+        <!-- Run and Debug: my career as a program with breakpoints. Filled by src/js/debug.js -->
+        <div class="debug" id="debug-panel" data-panel="debug" hidden></div>
 
         <!-- Source control: my career as a commit graph. Filled by src/js/scm.js -->
         <div class="scm" data-panel="scm" hidden>
@@ -525,6 +544,9 @@
                   <li class="l"><span class="m">-</span> hover a skill to see where I used it</li>
                   <li class="l">
                     <span class="m">-</span> <kbd>Ctrl Shift G</kbd> my path as a commit graph
+                  </li>
+                  <li class="l">
+                    <span class="m">-</span> <kbd>F5</kbd> step through my career in the debugger
                   </li>
                   <li class="l">
                     <span class="m">-</span> drag a tab to the right to open two files side by side

@@ -289,6 +289,7 @@
     'view-explorer': () => toggleView('explorer'),
     'view-search': () => toggleView('search'),
     'view-scm': () => toggleView('scm'),
+    'view-debug': () => toggleView('debug'),
     terminal: () => toggleTerminal(),
     theme: cycleTheme,
     palette: () => api.openPalette && api.openPalette(),

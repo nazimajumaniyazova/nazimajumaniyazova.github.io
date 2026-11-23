@@ -259,12 +259,19 @@ html:not(.js) {
   &__views {
     display: flex;
     flex: none;
-    gap: 1rem;
+    gap: 0.9rem;
     padding: 0 1rem;
     margin-bottom: 0.4rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   &__view {
+    flex: none;
     padding: 0.75rem 0 0.4rem;
     font-size: 0.6875rem;
     letter-spacing: 0.12em;

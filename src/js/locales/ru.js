@@ -22,6 +22,8 @@
     'Explorer (Ctrl B)': 'Проводник (Ctrl B)',
     'Search in files (Ctrl Shift F)': 'Поиск по файлам (Ctrl Shift F)',
     'Source control (Ctrl Shift G)': 'Контроль версий (Ctrl Shift G)',
+    'Run and debug (F5)': 'Запуск и отладка (F5)',
+    Run: 'Запуск',
     'Toggle terminal (Ctrl J)': 'Показать или скрыть терминал (Ctrl J)',
     'Terminal (Ctrl J)': 'Терминал (Ctrl J)',
     'Settings (Ctrl ,)': 'Настройки (Ctrl ,)',
@@ -113,6 +115,8 @@
       '<span class="m">-</span> наведите на навык, чтобы увидеть, где я его применяла',
     '- Ctrl Shift G my path as a commit graph':
       '<span class="m">-</span> <kbd>Ctrl Shift G</kbd> мой путь в виде графа коммитов',
+    '- F5 step through my career in the debugger':
+      '<span class="m">-</span> <kbd>F5</kbd> пройти по моей карьере в отладчике',
     '- drag a tab to the right to open two files side by side':
       '<span class="m">-</span> перетащите вкладку вправо, чтобы открыть два файла рядом',
     '- drag the edge of the side bar or the terminal to resize them':
@@ -233,6 +237,25 @@
     'Could not load the repositories.': 'Не удалось загрузить репозитории.',
     'Loading…': 'Загрузка…',
     Live: 'Сайт',
+
+    // ---------- Run and Debug (src/js/debug.js) ----------
+    '▶ Debug my career': '▶ Отладить мою карьеру',
+    'Run and Debug': 'Запуск и отладка',
+    'Start debugging': 'Начать отладку',
+    Stop: 'Остановить',
+    'Steps through my career like a program. Every stage is a breakpoint, the variables come from the files.':
+      'Проходит по моей карьере, как по программе. Каждый этап это точка останова, а переменные берутся из файлов.',
+    Variables: 'Переменные',
+    'Call stack': 'Стек вызовов',
+    Breakpoints: 'Точки останова',
+    'Not running.': 'Отладка не запущена.',
+    Debug: 'Отладка',
+    'Continue (F5)': 'Продолжить (F5)',
+    'Step over (F10)': 'Шаг с обходом (F10)',
+    'Restart (Ctrl Shift F5)': 'Перезапустить (Ctrl Shift F5)',
+    'Stop (Shift F5)': 'Остановить (Shift F5)',
+    'Paused on': 'Пауза:',
+    'Debugging finished': 'Отладка завершена',
 
     // ---------- mentoring.md, education.md, certificates.json, languages.yml ----------
     '# Mentoring': '# Менторство',
