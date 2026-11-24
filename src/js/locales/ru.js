@@ -67,8 +67,8 @@
     'no public link': 'нет публичной ссылки',
     'Nazima Jumaniyazova, frontend software engineer from Tashkent.':
       'Nazima Jumaniyazova, frontend-разработчик из Ташкента.',
-    '5 years with React and TypeScript, 2 of them in banking.':
-      '5 лет с React и TypeScript, из них 2 года в банковской сфере.',
+    '5 years with React and TypeScript, 3 of them in banking and fintech.':
+      '5 лет с React и TypeScript, из них 3 года в банкинге и финтехе.',
     'Open to relocation and business trips.': 'Готова к переезду и командировкам.',
     'Type {help} to see what this terminal can do.':
       'Наберите {help}, чтобы узнать, что умеет этот терминал.',
@@ -89,8 +89,8 @@
     // ---------- README.md ----------
     '> Frontend Software Engineer, Tashkent':
       '<span class="m">&gt;</span> Frontend-разработчик, Ташкент',
-    'Frontend Engineer with 5 years of experience building and maintaining scalable web applications using React and TypeScript, including 2 years developing banking and fintech products.':
-      'Frontend-разработчик с 5-летним опытом создания и поддержки масштабируемых веб-приложений на <code class="s">React</code> и <code class="s">TypeScript</code>, из них 2 года в разработке банковских и финтех-продуктов.',
+    'Frontend Engineer with 5 years of experience building and maintaining scalable web applications using React and TypeScript, including 3 years developing banking and fintech products.':
+      'Frontend-разработчик с 5-летним опытом создания и поддержки масштабируемых веб-приложений на <code class="s">React</code> и <code class="s">TypeScript</code>, из них 3 года в разработке банковских и финтех-продуктов.',
     'I specialize in building complex, data-intensive interfaces, translating UI/UX designs into responsive applications, and optimizing frontend performance.':
       'Специализируюсь на сложных интерфейсах с большим объёмом данных: превращаю UI/UX-макеты в адаптивные приложения и оптимизирую производительность фронтенда.',
     'I take ownership of features end to end — from technical implementation and architecture decisions to testing and production delivery.':

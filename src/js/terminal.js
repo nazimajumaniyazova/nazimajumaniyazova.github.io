@@ -342,7 +342,7 @@
         const t = P.t || ((text) => text);
         return [
           'Nazima Jumaniyazova, frontend software engineer from Tashkent.',
-          '5 years with React and TypeScript, 2 of them in banking.',
+          '5 years with React and TypeScript, 3 of them in banking and fintech.',
           'Open to relocation and business trips.',
           'Type {help} to see what this terminal can do.',
         ]
