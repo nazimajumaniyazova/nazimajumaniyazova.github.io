@@ -57,7 +57,7 @@ sites, GitHub, LinkedIn, Telegram and email are real.
 ## Structure
 
 ```
-index.html            all content: each <article class="file"> is one file
+index.html            all content: each <section class="file"> is one file
 src/
   css/main.css        compiled styles, do not edit by hand
   sass/
@@ -97,7 +97,7 @@ line numbers are added by CSS. Indent with `i1` to `i4`. Syntax colors are short
 
 ## Adding a project
 
-1. Copy an `<article class="file file--split">` block in `index.html` and give it a new `id`,
+1. Copy a `<section class="file file--split">` block in `index.html` and give it a new `id`,
    `data-name` and `data-path`.
 2. Change the name, links, description and the screenshot (960x600, WebP) in the preview.
 3. Add a link with the same `#id` to the `projects` folder in the explorer.

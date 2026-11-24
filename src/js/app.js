@@ -91,15 +91,18 @@
       open.setAttribute('aria-controls', id);
       // Roving tabindex: Tab enters the tab list once, arrows move inside it.
       open.tabIndex = id === activeId ? 0 : -1;
+      open.setAttribute('aria-keyshortcuts', 'Delete');
       open.textContent = file.name;
 
+      // A tab list may only contain tabs, so the × is a mouse shortcut hidden
+      // from assistive tech; keyboard and screen reader users press Delete.
       const close = document.createElement('button');
       close.className = 'tab__close';
       close.type = 'button';
       close.dataset.close = id;
-      // Keyboard users close the focused tab with Delete instead.
       close.tabIndex = -1;
-      close.setAttribute('aria-label', 'Close ' + file.name);
+      close.setAttribute('aria-hidden', 'true');
+      close.title = 'Close ' + file.name;
       close.textContent = '×';
 
       tab.append(open, close);
