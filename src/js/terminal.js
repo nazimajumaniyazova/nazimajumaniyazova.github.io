@@ -138,6 +138,8 @@
     const time = 320 + ((info.name.length * 97) % 480);
     const steps = [
       '<span class="c">&gt; ' + file.id + '@1.0.0 dev</span>',
+      // Said plainly, so nobody thinks a real build ran in their browser.
+      '<span class="c">  # simulated build output, a demo of this portfolio</span>',
       ' ',
       info.stack.length
         ? '  resolving  <span class="s">' + info.stack.map(esc).join(' · ') + '</span>'
@@ -282,7 +284,7 @@
       },
     },
     run: {
-      about: 'start a project: run dachatop',
+      about: 'start a project (a simulated build): run dachatop',
       run: (args) => {
         const file = args[0] ? findFile(args[0]) : P.getActive();
         if (isProject(file)) return runProject(file);

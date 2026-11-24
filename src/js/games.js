@@ -58,6 +58,7 @@
     const lines = [
       '<span class="c">&gt; nazima@5.0.0 test</span>',
       '<span class="c">&gt; jest</span>',
+      '<span class="c"># simulated run: every test is a fact from this site</span>',
       ' ',
       '<span class="test-badge">PASS</span> src/nazima.test.ts',
     ];
