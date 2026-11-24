@@ -213,3 +213,10 @@ kbd {
     visibility: visible;
   }
 }
+
+// That reveal is a timeout, not motion: the reduced motion rules above must
+// not cut its delay, or English flashes before the Russian text.
+html.i18n-pending .ide,
+html.i18n-pending .plain {
+  animation-delay: 1.5s !important;
+}
