@@ -48,6 +48,7 @@
     data: 'Data and APIs',
     tooling: 'Tooling',
     practices: 'Practices',
+    learning: 'Learning now',
   };
 
   // ---------- Reading the files ----------

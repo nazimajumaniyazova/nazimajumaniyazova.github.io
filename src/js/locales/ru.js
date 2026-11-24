@@ -335,5 +335,7 @@
     'Data and APIs': 'Данные и API',
     Tooling: 'Инструменты',
     Practices: 'Практики',
+    'Learning now': 'Изучаю сейчас',
+    '// hands-on, in progress': '// на практике, в процессе',
   };
 })();

@@ -135,6 +135,8 @@
           )
           .join('') +
         '</ul>';
+    } else if (kind === 'learning') {
+      html += '<p class="hover-card__none">Learning it hands-on right now.</p>';
     } else {
       html += '<p class="hover-card__none">Part of my everyday toolkit.</p>';
     }
