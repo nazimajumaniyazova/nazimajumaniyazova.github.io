@@ -35,14 +35,30 @@
       /[&<>"]/g,
       (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[char],
     );
-  const link = (url, label, className) =>
-    '<a' +
-    (className ? ' class="' + className + '"' : '') +
-    ' href="' +
-    esc(url) +
-    '" target="_blank" rel="noopener noreferrer">' +
-    label +
-    '</a>';
+  // URLs come from the API (a repo's homepage is free text) or from the
+  // cache, so only http and https become links; anything else stays text.
+  const safeUrl = (url) => {
+    try {
+      const parsed = new URL(String(url));
+      return parsed.protocol === 'https:' || parsed.protocol === 'http:' ? parsed.href : '';
+    } catch (e) {
+      return '';
+    }
+  };
+  const link = (url, label, className) => {
+    const href = safeUrl(url);
+    if (!href)
+      return '<span' + (className ? ' class="' + className + '"' : '') + '>' + label + '</span>';
+    return (
+      '<a' +
+      (className ? ' class="' + className + '"' : '') +
+      ' href="' +
+      esc(href) +
+      '" target="_blank" rel="noopener noreferrer">' +
+      label +
+      '</a>'
+    );
+  };
 
   let state = 'idle'; // idle | loading | ready | error
   let repos = [];
@@ -265,7 +281,7 @@
               }),
             ) +
             '</span>' +
-            (repo.live ? link(repo.live, esc(t('Live'))) : '') +
+            (safeUrl(repo.live) ? link(repo.live, esc(t('Live'))) : '') +
             '</p></article>',
         )
         .join('');
