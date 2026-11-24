@@ -2,7 +2,7 @@
 
 Personal portfolio of Nazima Jumaniyazova, built to look and work like a code editor.
 
-Live: https://nazimajumaniyazova.github.io/portfolio/
+Live: https://nazimajumaniyazova.github.io/
 
 ## What it does
 
