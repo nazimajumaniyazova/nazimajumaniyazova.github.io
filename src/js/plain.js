@@ -475,8 +475,16 @@
       ' <button type="button" data-action="plain">' +
       esc(t('Open the editor view')) +
       '</button></p></footer>' +
-      '</main>';
+      '</main>' +
+      '<button class="plain__top" type="button" data-plain-top aria-label="' +
+      esc(t('Back to top')) +
+      '" title="' +
+      esc(t('Back to top')) +
+      '"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" /></svg>' +
+      '</button>';
     built = true;
+    current = null;
+    update();
     document.dispatchEvent(new CustomEvent('portfolio:plain-render'));
   }
 
@@ -508,9 +516,10 @@
       }
     }
     if (on) {
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, behavior: 'instant' });
       const name = document.getElementById('plain-name');
       if (name) name.focus({ preventScroll: true });
+      update();
     } else {
       document.dispatchEvent(new CustomEvent('portfolio:settings'));
     }
@@ -523,6 +532,74 @@
   document.addEventListener('portfolio:content', () => {
     built = false;
     if (isOn()) render();
+  });
+
+  // ---------- Sticky sections bar and the way back up ----------
+
+  // The sections bar sticks under the top bar and marks the section being
+  // read; the arrow button appears once the hero is out of sight.
+  let current = null;
+  let ticking = false;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function update() {
+    if (!isOn()) return;
+    const nav = $('.plain__toc', page);
+    const bar = $('.plain__bar', page);
+    const up = $('.plain__top', page);
+    if (!nav || !bar) return;
+    const y = window.scrollY;
+    if (up) up.classList.toggle('is-visible', y > window.innerHeight * 0.6);
+
+    const navBox = nav.getBoundingClientRect();
+    const stuck = navBox.top <= bar.offsetHeight + 1 && y > 0;
+    nav.classList.toggle('is-stuck', stuck);
+
+    // Once the bar is stuck, the last section whose title has passed under it
+    // is the one being read. At the very end of the page the last section
+    // counts, even if it is short.
+    const links = $$('a', nav);
+    let active = null;
+    if (stuck) {
+      links.forEach((link) => {
+        const target = document.getElementById(link.hash.slice(1));
+        if (target && target.getBoundingClientRect().top <= navBox.bottom + 24) active = link;
+      });
+      if (window.innerHeight + y >= root.scrollHeight - 2) active = links[links.length - 1];
+    }
+    if (active === current) return;
+    current = active;
+    links.forEach((link) => {
+      if (link === active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    // On phones the bar scrolls sideways: keep the marked section in view.
+    if (active && nav.scrollWidth > nav.clientWidth) {
+      nav.scrollTo({
+        left: active.offsetLeft - (nav.clientWidth - active.offsetWidth) / 2,
+        behavior: reduceMotion.matches ? 'auto' : 'smooth',
+      });
+    }
+  }
+
+  function onScroll() {
+    if (ticking || !isOn()) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      update();
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+
+  page.addEventListener('click', (event) => {
+    if (!event.target.closest('[data-plain-top]')) return;
+    window.scrollTo({ top: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    // Keyboard users land at the start of the page, not on a vanished button.
+    const name = document.getElementById('plain-name');
+    if (name) name.focus({ preventScroll: true });
   });
 
   // ---------- A one-time hint for visitors who are not developers ----------

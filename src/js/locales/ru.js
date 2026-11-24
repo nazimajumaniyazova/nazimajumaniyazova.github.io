@@ -317,6 +317,7 @@
     Location: 'Город',
     'Write me an email': 'Написать мне письмо',
     'Editor view': 'Вид редактора',
+    'Back to top': 'Наверх',
     'This is the simple view of a portfolio built like a code editor.':
       'Это простой вид портфолио, сделанного в виде редактора кода.',
     'Open the editor view': 'Открыть вид редактора',

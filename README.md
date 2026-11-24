@@ -19,7 +19,8 @@ Live: https://nazimajumaniyazova.github.io/portfolio/
 - Terminal extras: `npm test`, `snake`, `git log`, `git commit -m "..."` and `git push`.
 - Three color themes: Midnight, Paper, Sunset. The choice is remembered.
 - "Simple view" in the title bar shows everything as a regular one-page resume, built from the
-  same files. A `?view=plain` link opens it directly; it prints cleanly.
+  same files. A `?view=plain` link opens it directly; it prints cleanly. The sections bar sticks
+  to the top and marks the section being read, and an arrow button brings the reader back up.
 - English and Russian: the RU/EN button in the status bar, `"locale"` in settings.json or a
   `?lang=ru` link. The browser language picks the first one.
 - `github/repos.json` loads my public repositories live from the GitHub API (`gh repo list` in
