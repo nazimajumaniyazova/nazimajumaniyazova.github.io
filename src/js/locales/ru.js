@@ -137,12 +137,7 @@
 
     // ---------- about.md ----------
     '# About me': '# Обо мне',
-    'Frontend engineer with 5 years of experience building and maintaining large-scale single-page applications in React and TypeScript, including 2 years on banking and financial products.':
-      'Frontend-разработчик с 5 годами опыта создания и поддержки крупных одностраничных приложений на React и TypeScript, из них 2 года в банковских и финансовых продуктах.',
-    'I own features end to end, from design hand-off to production, with a focus on performance optimization, clean architecture and test coverage.':
-      'Веду задачи от начала до конца, от передачи дизайна до продакшена, с упором на производительность, чистую архитектуру и покрытие тестами.',
-    'I review code daily, maintain technical documentation, and mentor other frontend developers. Experienced in distributed, remote-first teams.':
-      'Каждый день провожу код-ревью, веду техническую документацию и менторю других frontend-разработчиков. Есть опыт работы в распределённых удалённых командах.',
+    // The about.md paragraphs are the same as the README ones above.
     '## Right now': '## Сейчас',
     '- Building product interfaces at PLATMA, remotely':
       '<span class="m">-</span> Разрабатываю интерфейсы продукта в <a href="#experience">PLATMA</a>, удалённо',

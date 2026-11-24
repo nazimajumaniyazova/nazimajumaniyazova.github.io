@@ -251,9 +251,10 @@
       '<p class="plain__role">' +
       esc(me.role) +
       '</p>' +
-      '<p class="plain__summary">' +
-      esc(me.summary) +
-      '</p>' +
+      // About opens with the same text as README, so the hero skips it then.
+      (about().text.includes(me.summary)
+        ? ''
+        : '<p class="plain__summary">' + esc(me.summary) + '</p>') +
       list(links, 'plain__links') +
       '</div></header>' +
       '<nav class="plain__toc" aria-label="' +
