@@ -89,12 +89,16 @@
       open.setAttribute('role', 'tab');
       open.setAttribute('aria-selected', String(id === activeId));
       open.setAttribute('aria-controls', id);
+      // Roving tabindex: Tab enters the tab list once, arrows move inside it.
+      open.tabIndex = id === activeId ? 0 : -1;
       open.textContent = file.name;
 
       const close = document.createElement('button');
       close.className = 'tab__close';
       close.type = 'button';
       close.dataset.close = id;
+      // Keyboard users close the focused tab with Delete instead.
+      close.tabIndex = -1;
       close.setAttribute('aria-label', 'Close ' + file.name);
       close.textContent = '×';
 
@@ -347,6 +351,40 @@
   tabs.addEventListener('auxclick', (event) => {
     const tab = event.target.closest('.tab');
     if (event.button === 1 && tab) closeFile($('[data-close]', tab).dataset.close);
+  });
+
+  // Keyboard in the tab list (ARIA tabs pattern): arrows, Home and End move
+  // to another tab and open it, Delete closes the focused tab.
+  const focusActiveTab = () => {
+    const tab = activeId && $('[data-open="' + activeId + '"]', tabs);
+    if (tab) tab.focus();
+  };
+
+  tabs.addEventListener('keydown', (event) => {
+    const current = event.target.closest('[data-open]');
+    if (!current || event.ctrlKey || event.metaKey || event.altKey) return;
+    const index = openIds.indexOf(current.dataset.open);
+    const last = openIds.length - 1;
+    const next = {
+      ArrowLeft: index > 0 ? index - 1 : last,
+      ArrowRight: index < last ? index + 1 : 0,
+      Home: 0,
+      End: last,
+    }[event.key];
+    if (next !== undefined) {
+      event.preventDefault();
+      openFile(openIds[next]);
+      focusActiveTab();
+    } else if (event.key === 'Delete') {
+      event.preventDefault();
+      closeFile(current.dataset.open);
+      if (activeId) focusActiveTab();
+      else {
+        // No tabs left: move focus to the first link of the empty editor.
+        const link = $('a, button', empty);
+        if (link) link.focus();
+      }
+    }
   });
 
   panes.addEventListener('mouseover', (event) => {
