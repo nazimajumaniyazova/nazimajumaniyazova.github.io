@@ -55,7 +55,7 @@
     });
   });
 
-  let openIds = [];
+  const openIds = [];
   let activeId = null;
 
   const getFile = (id) => files.find((file) => file.id === id) || null;

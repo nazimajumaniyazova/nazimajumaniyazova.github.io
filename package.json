@@ -6,9 +6,16 @@
   "scripts": {
     "build": "sass src/sass/main.scss src/css/main.css --style=compressed --no-source-map",
     "dev": "sass --watch src/sass/main.scss src/css/main.css --no-source-map",
-    "format": "prettier --write \"index.html\" \"src/js/**/*.js\" \"src/sass/**/*.scss\""
+    "format": "prettier --write \"index.html\" \"src/js/**/*.js\" \"src/sass/**/*.scss\" \"*.{js,cjs,json,md}\" \".github/**/*.yml\"",
+    "format:check": "prettier --check \"index.html\" \"src/js/**/*.js\" \"src/sass/**/*.scss\" \"*.{js,cjs,json,md}\" \".github/**/*.yml\"",
+    "lint": "eslint src/js eslint.config.js .htmlvalidate.cjs && html-validate index.html",
+    "check": "npm run format:check && npm run lint && npm run build"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^17.14.0",
+    "html-validate": "^11.21.1",
     "prettier": "^3.3.0",
     "sass": "^1.77.0"
   }

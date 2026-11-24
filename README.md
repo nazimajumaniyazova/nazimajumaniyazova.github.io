@@ -38,12 +38,21 @@ npm install
 npm run dev      # watch Sass and rebuild src/css/main.css
 npm run build    # one-off compressed build
 npm run format   # Prettier for HTML, JS and SCSS
+npm run check    # format check, ESLint, html-validate and the Sass build
 ```
 
 Open `index.html` with any static server, for example the Live Server extension.
 
 GitHub Pages serves the repository as is, so `src/css/main.css` is committed.
 Run `npm run build` before every commit that touches `src/sass`.
+
+The `Check` workflow (`.github/workflows/check.yml`) runs `npm run check` on every push and
+pull request, and fails if the committed CSS does not match the Sass source. The rules switched
+off in `.htmlvalidate.cjs` are explained there.
+
+Some terminal output is a simulation and says so: `run <project>` prints a made-up build log
+before showing the preview, and `npm test` lists facts from this site as tests. Links to live
+sites, GitHub, LinkedIn, Telegram and email are real.
 
 ## Structure
 
