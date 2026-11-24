@@ -174,16 +174,16 @@
       "'Ускоряю фронтенд: code splitting, lazy loading, мемоизация и кеширование.'",
     "'Take part in code reviews and keep technical documentation for components and modules up to date.'":
       "'Участвую в код-ревью и поддерживаю техническую документацию по компонентам и модулям в актуальном состоянии.'",
-    "'Improved UX and runtime performance of the internal analytics system by 40%.'":
-      "'Улучшила UX и производительность внутренней аналитической системы на 40%.'",
-    "'Reduced dashboard load time by 30% by introducing WebSocket streaming and lazy-loading with code splitting.'":
-      "'Сократила время загрузки дашбордов на 30% за счёт потоковых данных через WebSocket и lazy loading с code splitting.'",
-    "'Built and documented a shared component library that cut delivery time for new interfaces by 25% and unified the UI across product teams.'":
-      "'Создала и задокументировала общую библиотеку компонентов: новые интерфейсы стали выходить на 25% быстрее, а UI стал единым для всех продуктовых команд.'",
-    "'Implemented dynamic, schema-driven application forms with complex multi-step validation, and real-time financial dashboards with ApexCharts.'":
-      "'Сделала динамические формы заявок на основе схем со сложной многошаговой валидацией и финансовые дашборды в реальном времени на ApexCharts.'",
-    "'Worked in a regulated financial environment with strict requirements for data accuracy, security and accessibility.'":
-      "'Работала в регулируемой финансовой среде со строгими требованиями к точности данных, безопасности и доступности.'",
+    "'Designed the architecture and routing for a full React/TypeScript rewrite of the bank’s risk-management platform. Main contributor (~47% of commits), building 5 core modules.'":
+      "'Спроектировала архитектуру и роутинг для полного переписывания банковской платформы управления рисками на React и TypeScript. Основной контрибьютор (~47% коммитов), сделала 5 ключевых модулей.'",
+    "'Engineered a multi-stage case-management workflow for loan recovery: role-based access control with server-driven permissions, dynamic forms rendered from backend JSON schemas, an approval flow with case locking, and a full audit trail.'":
+      "'Разработала многоэтапный workflow ведения дел по возврату кредитов: ролевой доступ с правами, которые приходят с сервера, динамические формы по JSON-схемам с бэкенда, процесс согласования с блокировкой дела и полный журнал действий.'",
+    "'Improved load performance with route-level code splitting: lazy-loaded modules keep ~45% of the JavaScript out of the initial load. Introduced TanStack Query for request caching on dashboards and debounced search and filters.'":
+      "'Ускорила загрузку за счёт code splitting на уровне маршрутов: лениво загружаемые модули оставляют ~45% JavaScript за пределами первой загрузки. Внедрила TanStack Query для кеширования запросов на дашбордах и debounce для поиска и фильтров.'",
+    "'Refactored legacy code to improve maintainability and reduce technical debt: decomposed a 2,700-line component into custom hooks, utilities and subcomponents (228 lines), enforced type safety by removing @ts-nocheck, and replaced silent failures with user-facing error handling in 100+ files.'":
+      "'Отрефакторила legacy-код, чтобы упростить поддержку и сократить технический долг: разбила компонент на 2700 строк на хуки, утилиты и подкомпоненты (осталось 228 строк), вернула проверку типов, убрав @ts-nocheck, и заменила «тихие» ошибки на понятные пользователю сообщения в 100+ файлах.'",
+    "'Built risk dashboards and regulatory reports with ApexCharts and Ant Design tables, with server-side pagination and Excel/PDF export.'":
+      "'Сделала риск-дашборды и регуляторные отчёты на ApexCharts и таблицах Ant Design с серверной пагинацией и экспортом в Excel и PDF.'",
     "'VideoHub.uz: LMS with progress tracking, role-based access and in-app messaging.'":
       "'VideoHub.uz: LMS с отслеживанием прогресса, ролевым доступом и встроенными сообщениями.'",
     "'DachaTop.uz: real-estate portal with authentication, analytics and listing management.'":

@@ -25,9 +25,9 @@
     [
       'impact',
       [
-        'improved UX and performance of an analytics system by 40%',
-        'cut dashboard load time by 30% with WebSocket and code splitting',
-        'made new interfaces 25% faster to deliver with a shared component library',
+        'keeps ~45% of the JavaScript out of the first load with code splitting',
+        'cut a 2,700-line component down to 228 lines',
+        'added user-facing error handling in 100+ files',
       ],
     ],
     [
