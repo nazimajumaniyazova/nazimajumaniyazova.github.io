@@ -139,8 +139,8 @@
     '# About me': '# Обо мне',
     // The about.md paragraphs are the same as the README ones above.
     '## Right now': '## Сейчас',
-    '- Building product interfaces at PLATMA, remotely':
-      '<span class="m">-</span> Разрабатываю интерфейсы продукта в <a href="#experience">PLATMA</a>, удалённо',
+    '- Building product interfaces at PLATMA as a remote contractor':
+      '<span class="m">-</span> Разрабатываю интерфейсы продукта в <a href="#experience">PLATMA</a> по контракту, удалённо',
     '- Developing banking web applications at Asakabank':
       '<span class="m">-</span> Разрабатываю банковские веб-приложения в <a href="#experience">Asakabank</a>',
     '- Mentoring at The Rolling Scopes School':
@@ -160,7 +160,7 @@
     "'Sep 2023 – present'": "'сен 2023 – сейчас'",
     "'Sep 2021 – Sep 2023'": "'сен 2021 – сен 2023'",
     "'Frontend Software Engineer'": "'Frontend-разработчик'",
-    "'Remote, full-time'": "'Удалённо, полная занятость'",
+    "'Remote, part-time contract'": "'Удалённо, контракт с частичной занятостью'",
     "'Tashkent, Uzbekistan'": "'Ташкент, Узбекистан'",
     "'Deliver core product features in React end to end, from planning and estimation through to production release.'":
       "'Разрабатываю ключевые функции продукта на React от начала до конца: от планирования и оценки до релиза.'",
