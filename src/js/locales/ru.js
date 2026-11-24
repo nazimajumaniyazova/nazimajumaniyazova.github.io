@@ -141,6 +141,8 @@
     '## Right now': '## Сейчас',
     '- Building product interfaces at PLATMA, remotely':
       '<span class="m">-</span> Разрабатываю интерфейсы продукта в <a href="#experience">PLATMA</a>, удалённо',
+    '- Developing banking web applications at Asakabank':
+      '<span class="m">-</span> Разрабатываю банковские веб-приложения в <a href="#experience">Asakabank</a>',
     '- Mentoring at The Rolling Scopes School':
       '<span class="m">-</span> Менторю в <a href="#mentoring">The Rolling Scopes School</a>',
     '- Based in Tashkent, open to relocation and business trips':
@@ -155,7 +157,7 @@
     Skills: 'Навыки',
     Experience: 'Опыт работы',
     "'Sep 2025 – present'": "'сен 2025 – сейчас'",
-    "'Sep 2023 – Aug 2025'": "'сен 2023 – авг 2025'",
+    "'Sep 2023 – present'": "'сен 2023 – сейчас'",
     "'Sep 2021 – Sep 2023'": "'сен 2021 – сен 2023'",
     "'Frontend Software Engineer'": "'Frontend-разработчик'",
     "'Remote, full-time'": "'Удалённо, полная занятость'",

@@ -70,13 +70,28 @@
     return index === -1 ? null : Number(match[2]) * 12 + index;
   }
 
-  // Whole years between the two ends of a period, "present" being today.
-  function years(period) {
+  // Start and end of a period in months, "present" being today.
+  function span(period) {
     const ends = period.split(/\s+[–-]\s+/);
     const now = new Date();
     const start = month(ends[0] || '');
     const end = ends[1] ? month(ends[1]) || now.getFullYear() * 12 + now.getMonth() : null;
-    return start === null || end === null ? null : Math.round((end - start) / 12);
+    return start === null || end === null ? null : [start, end];
+  }
+
+  // Whole years between the two ends of a period.
+  function years(period) {
+    const ends = span(period);
+    return ends ? Math.round((ends[1] - ends[0]) / 12) : null;
+  }
+
+  // Whole years covered by several periods, counting overlapping months once.
+  function totalYears(periods) {
+    const months = new Set();
+    periods.map(span).forEach((ends) => {
+      if (ends) for (let m = ends[0]; m < ends[1]; m++) months.add(m);
+    });
+    return Math.round(months.size / 12);
   }
 
   const lineOf = (file, el) => (el ? Number(el.closest('.l').dataset.n) : 1);
@@ -422,7 +437,8 @@
     }
     // What career() returns: counted from the stops, nothing made up.
     const jobs = done.filter((stop) => stop.file === 'experience');
-    const total = jobs.reduce((sum, stop) => sum + (stop.vars[4][1] || 0), 0);
+    // Jobs can overlap (two at once), so years are counted by calendar months.
+    const total = totalYears(jobs.map((stop) => stop.vars[2][1] || ''));
     const stack = new Set(jobs.flatMap((stop) => stop.vars[6][1]));
     print(
       '<span class="f">career()</span> returned <span class="m">{</span> <span class="n">jobs</span>: <span class="k">' +

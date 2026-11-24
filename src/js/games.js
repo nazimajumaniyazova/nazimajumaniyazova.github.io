@@ -18,7 +18,7 @@
       'experience',
       [
         'has 5 years with React and TypeScript',
-        'spent 2 years on banking products at Asakabank',
+        'has spent 3 years on banking products at Asakabank',
         'builds product features at PLATMA since Sep 2025',
       ],
     ],
