@@ -44,8 +44,8 @@ $paused: #f5c518;
     kbd {
       color: inherit;
       background-color: transparent;
+      // Full strength: faded white on the accent fell below 4.5:1 in Paper.
       border-color: currentColor;
-      opacity: 0.75;
     }
 
     &--stop {

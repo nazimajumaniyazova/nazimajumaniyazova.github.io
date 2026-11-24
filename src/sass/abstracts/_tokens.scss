@@ -47,7 +47,8 @@
   --c-border: #d8d2c4;
   --c-text: #2f3542;
   --c-strong: #11141a;
-  --c-muted: #646873;
+  // 4.8:1 on the chrome (#e9e5dc), the darkest surface it sits on (WCAG AA).
+  --c-muted: #5f636e;
   --c-accent: #2a63cf;
   --c-on-accent: #ffffff;
   --c-line: rgba(0, 0, 0, 0.045);
