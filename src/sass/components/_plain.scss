@@ -241,10 +241,12 @@ html.plain-view {
     }
   }
 
-  // Round arrow in the corner that brings the reader back to the top.
+  // Round arrow that brings the reader back to the top. On wide screens it
+  // sits just right of the text column, where the eyes already are, instead
+  // of the far corner.
   &__top {
     position: fixed;
-    right: max(1rem, env(safe-area-inset-right));
+    right: max(1rem, env(safe-area-inset-right), calc((100vw - 56rem) / 2 - 2.5rem));
     bottom: max(1rem, env(safe-area-inset-bottom));
     z-index: 5;
     display: grid;
