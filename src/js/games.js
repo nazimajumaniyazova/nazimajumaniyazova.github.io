@@ -19,7 +19,7 @@
       [
         'has 5 years with React and TypeScript',
         'has spent 3 years on banking products at Asakabank',
-        'builds product features at PLATMA since Sep 2025',
+        'built the ECharts and Plotly widgets of a low-code builder from scratch',
       ],
     ],
     [

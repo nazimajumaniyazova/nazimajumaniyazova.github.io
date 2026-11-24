@@ -162,18 +162,16 @@
     "'Frontend Software Engineer'": "'Frontend-разработчик'",
     "'Remote, part-time contract'": "'Удалённо, контракт с частичной занятостью'",
     "'Tashkent, Uzbekistan'": "'Ташкент, Узбекистан'",
-    "'Deliver core product features in React end to end, from planning and estimation through to production release.'":
-      "'Разрабатываю ключевые функции продукта на React от начала до конца: от планирования и оценки до релиза.'",
-    "'Build responsive, cross-browser layouts with HTML/CSS, Sass/LESS and UI libraries (MUI, Bootstrap).'":
-      "'Верстаю адаптивные кроссбраузерные интерфейсы на HTML/CSS, Sass/LESS и UI-библиотеках (MUI, Bootstrap).'",
-    "'Manage application state with Redux and integrate with backend services over REST API.'":
-      "'Управляю состоянием приложения через Redux и связываю его с бэкендом по REST API.'",
-    "'Write and maintain automated component tests with Jest and React Testing Library.'":
-      "'Пишу и поддерживаю автотесты компонентов на Jest и React Testing Library.'",
-    "'Optimize frontend performance through code splitting, lazy loading, memoization and caching.'":
-      "'Ускоряю фронтенд: code splitting, lazy loading, мемоизация и кеширование.'",
-    "'Take part in code reviews and keep technical documentation for components and modules up to date.'":
-      "'Участвую в код-ревью и поддерживаю техническую документацию по компонентам и модулям в актуальном состоянии.'",
+    "'Built features in the UI-builder micro-frontend of a Webpack Module Federation platform, where the host app lazy-loads the builder’s Editor and Viewer as remote modules. Shipped fixes in the host shell too.'":
+      "'Разрабатываю функциональность микрофронтенда визуального конструктора на платформе с Webpack Module Federation: хост-приложение лениво подгружает редактор и режим просмотра как удалённые модули. Также исправляю ошибки в хост-приложении.'",
+    "'Implemented nested drag-and-drop on the builder canvas (react-dnd, react-rnd): widgets move into and out of Container, Tabs, List and Form widgets through hit-testing and coordinate conversion, with canvas-boundary clamping and grid-aware sizing.'":
+      "'Сделала вложенный drag-and-drop на холсте конструктора (react-dnd, react-rnd): виджеты переносятся внутрь контейнеров, вкладок, списков и форм и обратно с помощью hit-testing и пересчёта координат, с ограничением по границам холста и размерами по сетке.'",
+    "'Built ECharts and Plotly chart widgets from scratch: 11 chart types configured with JSON in the inspector, with style controls, a dark theme and config validation.'":
+      "'С нуля сделала виджеты графиков на ECharts и Plotly: 11 типов графиков, настройка через JSON в инспекторе, управление стилями, тёмная тема и проверка конфигурации.'",
+    "'Made charts reliable in dynamic layouts: ResizeObserver-based resizing throttled with requestAnimationFrame, clean re-renders when the chart type changes, and guards against invalid configs.'":
+      "'Сделала графики стабильными в динамических раскладках: изменение размера через ResizeObserver с троттлингом на requestAnimationFrame, чистая перерисовка при смене типа графика и защита от некорректных конфигураций.'",
+    "'Extended the Table, Tabs and Icon widgets (persisted resize, auto height, mobile and vertical tabs, dynamic expressions) and kept password-reset tokens out of URLs so they never reach analytics.'":
+      "'Расширила виджеты таблицы, вкладок и иконок (сохранение размеров, автовысота, мобильные и вертикальные вкладки, динамические выражения) и убрала токены сброса пароля из URL, чтобы они не попадали в аналитику.'",
     "'Designed the architecture and routing for a full React/TypeScript rewrite of the bank’s risk-management platform. Main contributor (~47% of commits), building 5 core modules.'":
       "'Спроектировала архитектуру и роутинг для полного переписывания банковской платформы управления рисками на React и TypeScript. Основной контрибьютор (~47% коммитов), сделала 5 ключевых модулей.'",
     "'Engineered a multi-stage case-management workflow for loan recovery: role-based access control with server-driven permissions, dynamic forms rendered from backend JSON schemas, an approval flow with case locking, and a full audit trail.'":
