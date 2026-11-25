@@ -40,6 +40,7 @@
   // Opens the mail app and returns the log lines to print.
   function push(message) {
     const subject = 'Portfolio: ' + firstLine(message);
+    document.dispatchEvent(new CustomEvent('portfolio:contact'));
     location.href =
       'mailto:' +
       EMAIL +

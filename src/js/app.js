@@ -154,7 +154,11 @@
     if (activeId === id) activeId = openIds[Math.min(index, openIds.length - 1)] || null;
     render();
     try {
-      history.replaceState(null, '', activeId ? '#' + activeId : location.pathname);
+      history.replaceState(
+        null,
+        '',
+        activeId ? '#' + activeId : location.pathname + location.search,
+      );
     } catch (e) {
       // see openFile
     }

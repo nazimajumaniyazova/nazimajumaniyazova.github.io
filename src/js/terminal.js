@@ -483,7 +483,8 @@
   COMMANDS.hi = COMMANDS.hello;
   COMMANDS.code = { run: COMMANDS.open.run }; // an alias, so not listed in help
 
-  function execute(raw) {
+  // `auto` marks lines the terminal types by itself (the greeting).
+  function execute(raw, auto) {
     const line = raw.trim();
     print('<span class="m">$</span> <span class="terminal__cmd">' + esc(line) + '</span>');
     if (!line) return;
@@ -503,6 +504,8 @@
       );
       return;
     }
+    // Only the command name is shared (src/js/analytics.js), never what was typed after it.
+    if (!auto) document.dispatchEvent(new CustomEvent('portfolio:command', { detail: name }));
     const result = command.run(args, line);
     if (result) print(result);
   }
@@ -577,14 +580,14 @@
   function greet() {
     const text = 'whoami';
     if (P.reducedMotion || touched) {
-      execute(text);
+      execute(text, true);
       return;
     }
     let index = 0;
     (function type() {
       if (touched) {
         input.value = '';
-        execute(text);
+        execute(text, true);
         return;
       }
       input.value = text.slice(0, ++index);
@@ -592,7 +595,7 @@
       else
         setTimeout(() => {
           if (input.value === text) input.value = '';
-          execute(text);
+          execute(text, true);
         }, 350);
     })();
   }

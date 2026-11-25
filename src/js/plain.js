@@ -508,10 +508,19 @@
     root.classList.toggle('plain-view', on);
     save(on);
     dismissHint();
+    document.dispatchEvent(new CustomEvent('portfolio:plain', { detail: on }));
     // A shared ?view=plain link should not keep forcing the view after a switch.
+    // Other parameters, such as a ?ref= tag, stay in the address.
     if (!on && /[?&]view=plain/.test(location.search)) {
+      const params = new URLSearchParams(location.search);
+      params.delete('view');
+      const query = params.toString();
       try {
-        history.replaceState(null, '', location.pathname + location.hash);
+        history.replaceState(
+          null,
+          '',
+          location.pathname + (query ? '?' + query : '') + location.hash,
+        );
       } catch (e) {
         // file:// pages may refuse history changes.
       }

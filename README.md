@@ -122,6 +122,21 @@ a `match` in certificates.json, or a whole `file`. `git log` in the terminal rea
 The inline script in the `<head>` of `index.html` applies saved settings before the first paint,
 and `src/js/settings.js` handles changes. Keep the two in sync when adding a setting.
 
+## Statistics
+
+Visits are counted with [GoatCounter](https://www.goatcounter.com/), which sets no cookies and
+keeps no personal data. The dashboard is at https://nazima.goatcounter.com/.
+
+- Page views: GoatCounter's script in `index.html`.
+- A `?ref=` tag in a link (for example `?ref=a7`, one code per job application) shows up as the
+  referrer. The tag stays in the address, so a forwarded link counts too.
+- Events from `src/js/analytics.js`: `cv-download`, `simple-view`, `lang-*`, `open-<file>`,
+  `cmd-<command>` (the command name only, never its arguments), `contact-form`, `email` and
+  `out-<site>` for outbound links. Each one counts at most once per visit; what the page does on
+  its own while starting is not counted.
+- Nothing is counted on localhost. To stop counting your own visits, open the site once with
+  `#toggle-goatcounter` at the end of the address in each browser you use.
+
 ## Translating
 
 English is the text in `index.html`. Russian lives in `src/js/locales/ru.js`: each key is the
