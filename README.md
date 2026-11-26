@@ -85,7 +85,9 @@ src/
     plain.js          simple view: the resume as a regular page
     i18n.js           language switch, applies src/js/locales/*.js
     locales/ru.js     Russian texts, keyed by the English text
+    guestbook.js      visit statistics (see Statistics)
   img/  files/
+worker/guestbook.js   Cloudflare Worker that passes visits on to GoatCounter
 ```
 
 ## Editing content
@@ -127,15 +129,35 @@ and `src/js/settings.js` handles changes. Keep the two in sync when adding a set
 Visits are counted with [GoatCounter](https://www.goatcounter.com/), which sets no cookies and
 keeps no personal data. The dashboard is at https://nazima.goatcounter.com/.
 
-- Page views: GoatCounter's script in `index.html`.
+Ad blockers block GoatCounter's own script and address, so the site does not use them.
+`src/js/guestbook.js` sends the page view and the events to a small Cloudflare Worker
+(`worker/guestbook.js`), and the Worker passes them on to GoatCounter's API together with the
+visitor's IP address and User-Agent, which GoatCounter needs to tell unique visitors and
+countries apart. The Worker stores nothing and accepts requests only from the site's origin.
+
+- Page views: sent as soon as the page starts, so a short visit counts too.
 - A `?ref=` tag in a link (for example `?ref=a7`, one code per job application) shows up as the
   referrer. The tag stays in the address, so a forwarded link counts too.
-- Events from `src/js/analytics.js`: `cv-download`, `simple-view`, `lang-*`, `open-<file>`,
+- Events from `src/js/guestbook.js`: `cv-download`, `simple-view`, `lang-*`, `open-<file>`,
   `cmd-<command>` (the command name only, never its arguments), `contact-form`, `email` and
   `out-<site>` for outbound links. Each one counts at most once per visit; what the page does on
   its own while starting is not counted.
 - Nothing is counted on localhost. To stop counting your own visits, open the site once with
-  `#toggle-goatcounter` at the end of the address in each browser you use.
+  `#toggle-goatcounter` at the end of the address in each browser you use. Open it again to
+  undo.
+
+Setting up the Worker (once):
+
+1. In GoatCounter: Settings > API > New API key, with only the "Record pageviews" permission.
+2. In Cloudflare: Workers & Pages > Create application > Start with Hello World!, then Deploy.
+   Open Edit code, replace the code with `worker/guestbook.js` and deploy again.
+3. In the Worker: Settings > Variables and Secrets. Add `GOATCOUNTER_TOKEN` (type Secret, the
+   key from step 1), `GOATCOUNTER_SITE` = `nazima` and
+   `ALLOWED_ORIGIN` = `https://nazimajumaniyazova.github.io`.
+4. Put the Worker's address (`https://<name>.<account>.workers.dev/`) into `ENDPOINT` at the
+   top of `src/js/guestbook.js`. While `ENDPOINT` is empty, nothing is sent.
+
+Failed calls to GoatCounter show up in the Worker's logs (Observability).
 
 ## Translating
 

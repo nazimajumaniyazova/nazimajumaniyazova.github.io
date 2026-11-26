@@ -504,7 +504,7 @@
       );
       return;
     }
-    // Only the command name is shared (src/js/analytics.js), never what was typed after it.
+    // Only the command name is shared (src/js/guestbook.js), never what was typed after it.
     if (!auto) document.dispatchEvent(new CustomEvent('portfolio:command', { detail: name }));
     const result = command.run(args, line);
     if (result) print(result);
