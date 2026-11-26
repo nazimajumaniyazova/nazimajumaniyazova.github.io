@@ -32,10 +32,10 @@ function clean(hit) {
   if (ref) out.ref = ref;
   const language = text(hit.language, 35);
   if (/^[A-Za-z]{2,3}(-[A-Za-z0-9]{1,8})*$/.test(language)) out.language = language;
-  if (Array.isArray(hit.size)) {
-    const size = hit.size.slice(0, 3).map(Number).filter(Number.isFinite);
-    if (size.length) out.size = size;
-  }
+  // GoatCounter's API documents an array, but only accepts "width,height,scale".
+  const parts = Array.isArray(hit.size) ? hit.size : text(hit.size, 40).split(',');
+  const size = parts.slice(0, 3).map(Number).filter(Number.isFinite);
+  if (size.length === 3) out.size = size.join(',');
   if (Number.isInteger(hit.bot) && hit.bot >= 0 && hit.bot < 1000) out.bot = hit.bot;
   return out;
 }
